@@ -23,8 +23,9 @@ Data for the docker applications will be stored at `/srv/<application-name/`.
 ```
 docker pull jenkins
 docker run -p 8080:8080 -v /srv/jenkins:/var/jenkins_home -d jenkins 
-# /srv/jenkins needs to be writable by the user jenkins, see 
 ```
+
+- /srv/jenkins needs to be writable by the user jenkins, see [https://github.com/docker-library/docs/tree/master/jenkins](https://github.com/docker-library/docs/tree/master/jenkins)
 
 ## BaseX
 ```
