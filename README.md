@@ -54,7 +54,7 @@ docker run --detach \
     gitlab/gitlab-ce:latest
 ```
 
-- You can login to the web interface with username root and password 5iveL!fe (per the GitLab docker instructions).
+- You can login to the web interface with username `root` and password `5iveL!fe` (per the GitLab docker instructions).
 - Make sure to change the password; GitLab will prompt you before letting you continue
 - There may be other things, such as SSL, that you'll want to configure for GitLab, see [https://registry.hub.docker.com/u/gitlab/gitlab-ce/](https://registry.hub.docker.com/u/gitlab/gitlab-ce/)
 
