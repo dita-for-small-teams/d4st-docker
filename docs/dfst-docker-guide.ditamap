@@ -5,6 +5,26 @@
       <booklibrary>DITA for Small Teams</booklibrary>
         <mainbooktitle>DFST Docker Usage Guide</mainbooktitle>
     </booktitle>
+  <bookmeta>
+    <author>W. Eliot Kimber</author>
+    <critdates>
+      <created date="2016-01"/>
+    </critdates>
+    <keywords>
+      <keyword>Docker</keyword>
+      <keyword>DITA</keyword>
+      <keyword>DFST</keyword>
+      <keyword>container</keyword>
+      <keyword>content management</keyword>
+      <keyword>component content management</keyword>
+    </keywords>
+    <bookrights>
+      <copyrfirst>
+        <year>2016</year>
+      </copyrfirst>
+      <bookowner><organization>DITA for Small Teams Project</organization></bookowner>      
+    </bookrights>
+  </bookmeta>
   <frontmatter>
     <topicgroup>
       <keydef keys="website-dfst-github-organization" format="html" scope="external"
@@ -19,11 +39,19 @@
     <booklists>
       <toc/>
     </booklists>
+    <topicref href="dfst-docker-guide/frontmatter/about-dfst-docker-guide.dita"/>
   </frontmatter>
   <chapter keys="getting-started" href="dfst-docker-guide/getting-started/getting-started.dita">
     <topicref href="dfst-docker-guide/getting-started/dfst-container-quick-start-01.dita"/>
   </chapter>
-  <chapter href="chapter-docker-container-ref" keys="docker-container-ref">
-    <topicref href="container-ref-gitlab.dita"/>
+  <chapter
+    href="dfst-docker-guide/system-description/chapter-dfst-container-system-description.dita"
+    keys="system-description">
+    <topicref href="dfst-system-overview.dita" keys="dfst-system-overview"/>
+    <topicref href="dfst-docker-guide/system-description/dfst-system-configuration.dita"/>
+  </chapter>
+  <chapter href="dfst-docker-guide/docker-container-ref/chapter-docker-container-ref.dita"
+    keys="docker-container-ref">
+    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-gitlab.dita"/>
   </chapter>
 </bookmap>

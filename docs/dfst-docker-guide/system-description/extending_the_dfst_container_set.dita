@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="extending_the_dfst_container_set">
+ <title>Extending the DFST Container Set</title>
+ <shortdesc>You can use the DFST containers and Composer script as a basis for creating your own
+    containers tailored to your own needs</shortdesc>
+ <conbody>
+  <p>Docker containers use a layered architecture to build up the components of a container. This
+      makes it easy to use an existing container as a base for creating new containers. All of the
+      DFST containers are available from the Docker Hub.</p>
+    <p>Reasons to make your own containers include:<ul id="ul_epp_wld_55">
+        <li>Pre-define the set of git repositories set up under GitLab</li>
+        <li>Pre-define some or all of the GitLab configuration: users and groups, authenticatoin
+          policies, git hooks, etc.</li>
+        <li>Pre-define the GitLab continuous integration jobs</li>
+        <li>Set up your own Open Toolkit configuration with your custom plugins.</li>
+        <li>Control the network configuration details of the containers</li>
+        <li>Manage the containers in a private container repository</li>
+      </ul></p>
+    <p>The DFST containers are defined and managed in GitHub in the DFST <xref
+        keyref="website-dfst-github-containers-project">docker containers project</xref>.</p>
+ </conbody>
+</concept>
