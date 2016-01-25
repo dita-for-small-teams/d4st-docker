@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bookmap PUBLIC "-//OASIS//DTD DITA BookMap//EN" "bookmap.dtd">
+<bookmap>
+    <booktitle>
+      <booklibrary>DITA for Small Teams</booklibrary>
+        <mainbooktitle>DFST Docker Usage Guide</mainbooktitle>
+    </booktitle>
+  <frontmatter>
+    <topicgroup>
+      <keydef keys="website-dfst-github-organization" format="html" scope="external"
+        href="http://github.com/dita-for-small-teams"/>
+      <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox"
+        format="html" scope="external"/>
+      <keydef href="http://doc.gitlab.com/omnibus/docker/"
+        keys="website-gitlab-container-documentation" format="html" scope="external"/>
+      <keydef href="https://hub.docker.com" keys="website-docker-hub" format="html" scope="external"
+        navtitle="Docker Hub Web site"/>
+    </topicgroup>
+    <booklists>
+      <toc/>
+    </booklists>
+  </frontmatter>
+  <chapter keys="getting-started" href="dfst-docker-guide/getting-started/getting-started.dita">
+    <topicref href="dfst-docker-guide/getting-started/dfst-container-quick-start-01.dita"/>
+  </chapter>
+  <chapter href="chapter-docker-container-ref" keys="docker-container-ref">
+    <topicref href="container-ref-gitlab.dita"/>
+  </chapter>
+</bookmap>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="concept_qd2_gt4_t5">
+ <title>Getting Started With DFST Docker</title>
+  <titlealts>
+    <navtitle>Getting Started</navtitle>
+  </titlealts>
+ <shortdesc>The DITA for Small Teams Docker containers make it easy to set up a complete DFST
+    environment on any machine using the Docker container technology.</shortdesc>
+ <conbody>
+  <p>Docker containers are packages that contain software applications that can be run on any
+      machine with a "Docker machine". A Docker machine is a kind of virtual machine that can run
+      Docker containers. Software providers can make pre-configured Docker containers available for
+      others to use. Using the Docker software you can get and run Docker containers with a minimum
+      of effort.</p>
+    <p>The DITA for Small Teams project provides instructions for using a combination of
+      off-the-shelf Docker containers and DFST-provided containers to quickly set up a working DITA
+      for Small Teams environment on any machine, whether it's your personal laptop, a shared server
+      within your office, or on a cloud managed sevice such as Amazon Web Service (AWS) or Microsoft
+      Azure.</p>
+ </conbody>
+</concept>

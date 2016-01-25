@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+<task id="Untitled9">
+    <title>DFST Container Quick Start</title>
+    <shortdesc>If you are familiar with Docker you can follow these instructions to get going as
+    quickly as possible. </shortdesc>
+    <taskbody>
+    <prereq>
+      <ul id="ul_gf1_s54_t5">
+        <li>
+          <p>On Windows and OS X you must have the <xref keyref="website-docker-toolbox">Docker
+              Toolbox</xref> installed and running. See the Docker documentation for details on how
+            to run Docker. All Docker commands are run from the Docker command window or through the
+            Docker Kitematic user interface.</p>
+        </li>
+      </ul>
+    </prereq>
+        <steps>
+            <step>
+        <cmd>Get the GitLab Docker container:</cmd>
+        <info>
+          <codeblock>docker pull gitlab/gitlab-ce</codeblock>
+          <p>See the GitLab Docker documentation: <xref
+              keyref="website-gitlab-container-documentation"
+              >http://doc.gitlab.com/omnibus/docker/</xref> for details.</p>
+        </info>
+        <stepresult>Docker should download and install the container. You should see messages like
+          this when it's
+          done:<codeblock>Status: Downloaded newer image for gitlab/gitlab-ce:latest
+Eliots-MBP:dfst-docker ekimber$</codeblock>
+        </stepresult>
+      </step>
+        </steps>
+    </taskbody>
+</task>
