@@ -14,9 +14,5 @@ RUN unzip develop.zip
 RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm basex/webapp/
 RUN cp -r dfst-linkmgmt-basex-develop/webapp/static/* basex/webapp/static/
 RUN cp -r dfst-linkmgmt-basex-develop/modules/* basex/repo
-# Get rid of unwanted file. This is a hack but easier
-# than figuring out how to exclude from Zip extraction
-# or modifying the github project for now.
-RUN rm basex/webapp/dita-utils-test-ui.xqm
 CMD basex/bin/basexhttp -h 8984
 
