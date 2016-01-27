@@ -14,5 +14,6 @@ RUN unzip develop.zip
 RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm basex/webapp/
 RUN cp -r dfst-linkmgmt-basex-develop/webapp/static/* basex/webapp/static/
 RUN cp -r dfst-linkmgmt-basex-develop/modules/* basex/repo
+ADD basex/dot_basex /home/basex/basex/.basex
 CMD basex/bin/basexhttp -h 8984
 

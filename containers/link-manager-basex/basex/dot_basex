@@ -1,4 +1,21 @@
+# BaseX options for the DFST Link Management 
+# application. Sets up BaseX to enable import
+# of DTD-based DITA documents. Requires
+# a properly-configured DITA Open Toolkit to provide
+# XML catalog resolution.
+#
+# Also sets up a user for HTTP authentication.
+#
 # General Options
+# FIXME: Need to work out how to access file system
+# of OT provided by another Docker container in the
+# same set of coordinated containers.
+CATFILE = /DITA-OT/catalog-dita.xml
+DTD = true
+CHOP = false
+# Options for  BaseX client connection to a local server
+USER = admin
+PASSWORD = admin
 DEBUG = false
 DBPATH = /home/basex/basex/data
 REPOPATH = /home/basex/basex/repo
@@ -10,8 +27,6 @@ GLOBALLOCK = false
 HOST = localhost
 PORT = 1984
 SERVERPORT = 1984
-USER =
-PASSWORD =
 SERVERHOST =
 PROXYHOST =
 PROXYPORT = 0
