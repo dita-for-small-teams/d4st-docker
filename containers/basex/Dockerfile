@@ -1,6 +1,18 @@
 FROM java:8
-RUN useradd -u 5555 -ms /bin/bash basex
+# Make the data, repo, and webapp directories available
+# as volumes. 
+# 
+# In particular this allows the data directory to be stored
+# directly on the host machine so that the link management
+# database is not lost if the container is deleted.
+RUN mkdir -p /opt/basex
+RUN chmod -R a+rwx /opt 
+RUN ln -s /home/basex/basex/data /opt/basex/data && \
+    ln -s /home/basex/basex/repo /opt/basex/repo && \
+    ln -s /home/basex/basex/webapp /opt/basex/webapp
 
+# Set up Basex user
+RUN useradd -u 5555 -ms /bin/bash basex
 ENV HOME /home/basex
 USER 5555
 WORKDIR /home/basex
