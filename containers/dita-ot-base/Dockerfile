@@ -4,7 +4,7 @@ MAINTAINER Eliot Kimber "ekimber@contrext.com"
 ENV OT_VERSION 2.2.2
 ENV CATALOG_DIR /opt/dita-ot/catalogs
 RUN mkdir -p /opt/dita-ot/catalogs
-RUN chmod -R a+rwx $CATALOG_DIR
+RUN chmod -R a+rwx /opt
 
 RUN useradd -u 5555 -ms /bin/bash dita-ot
 
@@ -30,7 +30,13 @@ ENV PATH $HOME/DITA-OT/bin:$PATH
 RUN cp $DITA_HOME/catalog-dita.xml $CATALOG_DIR/catalog-dita.xml 
 RUN ln -s $DITA_HOME/plugins $CATALOG_DIR/plugins 
 # Provide a way for the OT to access user data:
+# (NOTE: This volume is probably obsolete and unnecessary
+#  given the exposure of the whole OT, but I did this one
+#  first)
 VOLUME $CATALOG_DIR
+# Make the whole OT itself available
+RUN ln -s $DITA_HOME /opt/dita-ot/DITA-OT
+VOLUME /opt/dita-ot/DITA-OT
 VOLUME /opt/dita-ot/userdata
 WORKDIR $DITA_HOME
 #
