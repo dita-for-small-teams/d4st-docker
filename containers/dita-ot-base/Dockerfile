@@ -1,5 +1,6 @@
 FROM java:8
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
+LABEL ot-version 2.2.2
 # Make directories for later use
 ENV OT_VERSION 2.2.2
 ENV CATALOG_DIR /opt/dita-ot/catalogs
