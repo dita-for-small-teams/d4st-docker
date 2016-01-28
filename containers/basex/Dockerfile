@@ -10,4 +10,6 @@ RUN unzip basex.zip
 # Expose the ports for the base BaseX server (used by the DFST git commit hooks
 # and the HTTP server, respectively:
 EXPOSE 1984 8984
+# Make it easy to run the basex client:
+ENV PATH /home/basex/bin:$PATH
 CMD basex/bin/basexhttp -h 8984

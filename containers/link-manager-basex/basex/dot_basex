@@ -12,6 +12,7 @@
 # same set of coordinated containers.
 CATFILE = /DITA-OT/catalog-dita.xml
 DTD = true
+SKIPCORRUPT = true
 CHOP = false
 # Options for  BaseX client connection to a local server
 USER = admin
