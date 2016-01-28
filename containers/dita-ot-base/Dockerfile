@@ -1,6 +1,7 @@
 FROM java:8
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 # Make directories for later use
+ENV OT_VERSION 2.2.2
 ENV CATALOG_DIR /opt/dita-ot/catalogs
 RUN mkdir -p /opt/dita-ot/catalogs
 RUN chmod -R a+rwx $CATALOG_DIR
@@ -14,18 +15,15 @@ ENV ANT_HOME $DITA_HOME
 ENV PATH $ANT_HOME/bin:$DITA_HOME:$PATH
 USER 5555
 WORKDIR $HOME
-# This URL does not seem to be reliable.
-#RUN wget -c {put github package URL here}
+RUN wget -c https://github.com/dita-ot/dita-ot/releases/download/${OT_VERSION}/dita-ot-${OT_VERSION}.zip
 # For doing lots of builds to avoid fetching each time.
-COPY dita-ot-2.2.0.zip /home/dita-ot/dita-ot.zip
-RUN unzip dita-ot.zip && \
-    rm dita-ot.zip
+RUN unzip dita-ot-${OT_VERSION}.zip && \
+    rm dita-ot-${OT_VERSION}.zip
 # Use a consistent name for the OT so we don't have to worry about it
-RUN mv dita-ot-2.2.0 DITA-OT
+RUN mv dita-ot-${OT_VERSION} DITA-OT
 # Set execution permissions on ant/bin directory
 RUN chmod a+rwx $DITA_HOME/bin/* 
 # Put the bin directory in the path:
-# For OT 2.x:
 ENV PATH $HOME/DITA-OT/bin:$PATH
 # Copy the catalog and plugins directory to a volume
 # so other containers can use it.
