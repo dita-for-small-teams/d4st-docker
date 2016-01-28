@@ -8,22 +8,22 @@ RUN chmod -R a+rwx $CATALOG_DIR
 RUN useradd -u 5555 -ms /bin/bash dita-ot
 
 ENV HOME /home/dita-ot
-# For OT 1.x:
 ENV DITA_HOME $HOME/DITA-OT
-ENV ANT_HOME $DITA_HOME/tools/ant
+# For OT 2.x the ant script is in the top-level bin/ dir
+ENV ANT_HOME $DITA_HOME
 ENV PATH $ANT_HOME/bin:$DITA_HOME:$PATH
 USER 5555
 WORKDIR $HOME
 # This URL does not seem to be reliable.
-#RUN wget -c http://sourceforge.net/projects/dita-ot/files/DITA-OT%20Stable%20Release/DITA%20Open%20Toolkit%201.8/DITA-OT1.8.5_full_easy_install_bin.zip 
+#RUN wget -c {put github package URL here}
 # For doing lots of builds to avoid fetching each time.
-COPY DITA-OT1.8.5_full_easy_install_bin.zip /home/dita-ot/DITA-OT1.8.5_full_easy_install_bin.zip
-RUN unzip DITA-OT1.8.5_full_easy_install_bin.zip && \
-    rm DITA-OT1.8.5_full_easy_install_bin.zip
+COPY dita-ot-2.2.0.zip /home/dita-ot/dita-ot.zip
+RUN unzip dita-ot.zip && \
+    rm dita-ot.zip
 # Use a consistent name for the OT so we don't have to worry about it
-RUN mv DITA-OT1.8.5 DITA-OT
+RUN mv dita-ot-2.2.0 DITA-OT
 # Set execution permissions on ant/bin directory
-RUN chmod a+rwx $DITA_HOME/startcmd.sh $ANT_HOME/bin/ant 
+RUN chmod a+rwx $DITA_HOME/bin/* 
 # Put the bin directory in the path:
 # For OT 2.x:
 ENV PATH $HOME/DITA-OT/bin:$PATH
@@ -36,16 +36,7 @@ VOLUME $CATALOG_DIR
 VOLUME /opt/dita-ot/userdata
 WORKDIR $DITA_HOME
 #
-# Set up the Java classpath as defined in startcmd.sh:
-ENV CLASSPATH $DITA_HOME/lib/dost.jar:\
-$DITA_HOME/lib:\
-$DITA_HOME/lib/commons-codec-1.4.jar:\
-$DITA_HOME/lib/resolver.jar:\
-$DITA_HOME/lib/icu4j.jar:\
-$DITA_HOME/lib/xercesImpl.jar:\
-$DITA_HOME/lib/xml-apis.jar:\
-$DITA_HOME/lib/saxon/saxon9.jar:\
-$DITA_HOME/lib/saxon/saxon9-dom.jar
+# NOTE For OT 2.x, the dita command manages the Java classpath.
 #
 # End of Dockerfile
 #
