@@ -2,6 +2,9 @@
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
 <reference id="container-ref-gitlab">
   <title>GitLab Community Edition Docker Container</title>
+  <titlealts>
+    <navtitle>gitlab/gitlab-ce</navtitle>
+  </titlealts>
   <shortdesc>The gitlab/gitlab:ce container provides a fully-featured instance of the GitLab git
     server and GitLabl continous Integration (CI) server.</shortdesc>
   <refbody>

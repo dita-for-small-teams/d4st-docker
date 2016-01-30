@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="docker-orientation">
+ <title>Getting Started With Docker</title>
+ <shortdesc>The Docker tool is a powerful way to manage software distribution but like anything it
+    has a few quirks.</shortdesc>
+ <conbody>
+    <p>Docker is a way to package software of any sort into "containers" that can be run on any
+      platform. Containers can be connected to each other and can access data on a local machine.
+      The Docker infrastructure makes it create, share, and manage containers. Basically, anybody
+      can create container images, post them to the public <xref keyref="website-docker-hub">Docker
+        Hub</xref>, and anybody else can then get and run those containers with a minimum of
+      effort.</p>
+    <p>Each Docker container is a separate virtual machine running a version of Linux and whatever
+      additional software has been put into the container. The computer running the containers is
+      called the <term>host</term>, e.g., your laptop or a dedicated server machine, whether within
+      your internal corporate network or on a hosting site like Amazon Web Services or Microsoft
+      Azure.</p>
+    <p>On Linux hosts the containers run more or less directly on top of the host operating system.
+      This makes a few things easier, such as connecting to local file systems and access the
+      container via the network.</p>
+    <p>On Windows and OS X the containers run inside a separate virtual machine, the <term>docker
+        machine</term>, that then runs the containers. This makes things a little more complicated
+      as regards accessing the containers via the network and mounting local file systems but those
+      things can still be done, it must requires a little more effort.</p>
+    <p>See the main Docker documentation for details. This topic is here to get you started quickly
+      and to provide specific guidance for Windows and OS X users since we expect the DFST system to
+      be used mostly by users under Windows or OS X.</p>
+    <p>For OS X and Windows, Docker provides a separate application, Kitematic, that provides a user
+      interface for working with the Docker system. It's main value is under OS X where it provides
+      the service of creating new properly-configured terminal windows. Otherwise it's not that
+      interesting, at least in the context of the DFST Docker containers.</p>
+  </conbody>
+  <concept id="concept_eyr_yg3_v5">
+    <title>Running Docker Containers</title>
+    <conbody>
+      <p>To run a container you use the <codeph>docker run</codeph> command from the command
+        line:<codeblock>$ docker run <varname>container-image-name</varname></codeblock></p>
+      <p>Where <varname>container-image-name</varname> is the name of the container image you want
+        to run, e.g. "dfst/dita-ot". Images have tags, with the default tag being "latest". You can
+        specify the tag as <codeph>:<varname>tagname</varname></codeph> after the image
+        name:<codeblock>$ docker run dfst/dita-ot:1.8.5</codeblock></p>
+      <p>The first time you run a container Docker will look for the image locally and if it doesn't
+        find it will try to download it from the Docker Hub, which is a public repository of Docker
+        images. All the DFST images and the images they depend on are available through the Docker
+        Hub.</p>
+      <p>If you need to get an image directly you use the <codeph>docker pull</codeph>
+        command:<codeblock>$ docker pull <varname>container-image-name</varname></codeblock></p>
+      <p>As for the <codeph>docker run</codeph> command, you can specify a tag if you
+        want:<codeblock>$ docker pull dfst/dita-ot:1.8.5</codeblock></p>
+      <p>The <codeph>docker run</codeph> command has many parameters you can specify the configure
+        the container when you run it. Use <codeph>docker run help</codeph> to get details or see
+        the <xref keyref="website-docker-docs">Docker documentation</xref>.</p>
+      <p>What happens when you run a container depends on how the container is configured and how
+        you run it.</p>
+      <p>If a container is intended to provide a continuously-running server, like the
+        dfst/link-manager-basex or gitlab/gitlab-ce containers, then when you start it the container
+        stays running until you stop it. Internally container is just a normal Linux system running
+        the server, whatever it is. You can use the <codeph>docker exec</codeph> command to access
+        the container and run other commands inside the container or otherwise inspect what's
+        happening inside it.</p>
+      <p>If the container does not provide a server, as is the case with the dfst/dita-ot container,
+        then when you run it it will start and then stop. The container will still be available
+        within the Docker machine but it won't be active. Other containers can use its published
+        volumes (directories) but it won't be doing anything. For these containers you can use the
+          <parmname>-it</parmname> parameters to the <codeph>docker run</codeph> command to start an
+        interactive shell within the container,
+        e.g.:<codeblock>$ docker run -it dfst/dita-ot
+dita-ot@d0a0800202ba:~/DITA-OT$ </codeblock></p>
+      <p>You now have a command shell within the container where you can issue normal Linux
+        commands. The initial environment you find in the container is determined by the container's
+        configuration as determined by whoever set up the container.</p>
+      <p>When you start a container it gets a unique numeric ID assigned to to it, the
+          <term>container ID</term>. You can also give your container a name when you run
+        it:<codeblock>$ docker run <b>--name=dita-ot</b> -it dfst/dita-ot</codeblock></p>
+      <p>You can then use that name anywhere a container ID is
+        expected:<codeblock>$ docker exec -it dita-ot /bin/bash</codeblock></p>
+      <p>This command starts a new bash shell within the dita-ot container. The
+          <parmname>-it</parmname> parameters again create an interactive shell. If you don't
+        specify <parmname>-it</parmname> then the command you specify (<codeph>/bin/bash</codeph> in
+        this case) will run and then the container will stop again.</p>
+    </conbody>
+  </concept>
+  <concept id="concept_qmp_4k3_v5">
+    <title>The Docker Machine</title>
+    <conbody>
+      <p>The thing that manages the running of  Docker containers is the <term>docker
+        machine</term>. It is normally started automatically for you but you may need to start it
+        manually. How you start it depends on your operating system. You sometimes need to interact
+        with the Docker machine to determine what IP address is is using (Windows and OS X) or to
+        see what its status is.</p>
+      <p>Under Windows the Docker engine is started as a Windows service automatically and you
+        shouldn't have to worry about under normal circumstances.</p>
+      <p>Under OS X the engine should be started automatically on system startup but you may need to
+        start it manually, which you do with the <codeph>docker-machine start</codeph>
+        command:<codeblock>$ docker-machine start default
+Starting "default"...
+(default) Waiting for an IP...
+Machine "default" was started.
+Started machines may have new IP addresses. You may need to re-run the `docker-machine env` command.
+$ </codeblock></p>
+      <p>Here the name "<codeph>default</codeph>" refers to the default Docker machine. You can have
+        different Docker machines, although normally you only have one running and it will be known
+        as the default machine.</p>
+      <p>Under Windows and OS X you will need to know what IP address has been assigned to the
+        docker machine so that you can connect to servers runing in containers managed by that
+        machine. You do this with the <codeph>docker-machine ip
+          <varname>machinename</varname></codeph>
+        command:<codeblock>$ docker-machine ip default
+192.168.99.100
+$</codeblock></p>
+      <p>If you need to kill  the Docker machine you use the <codeph>docker-machine kill</codeph>
+        command:<codeblock>$  docker-machine kill default
+Killing "default"...
+Machine "default" was killed.
+$</codeblock></p>
+      <p>Note that killing the Docker machine will kill any containers running in the machine.</p>
+      <p>On OS X and Windows the Docker machine uses a separate virtual machine running Linux to
+        then run the containers. By default it uses the open-source VirtualBox VM but you can also
+        use VMWare if you have it available. VMWare is a little more powerful and can make things
+        like reading and writing to local directories easier.</p>
+      <p>On OS X you need to set some environment variables in the terminal window you're using to
+        run the <codeph>docker</codeph> command so that it knows how to connect to the Docker
+        machine (also known as the Docker daemon).</p>
+      <p>If you use the Kitematic tool to start a Docker terminal window the environment will be set
+        up for you.</p>
+      <p>If you want to use another terminal window you can set the environment using the
+        command:<codeblock>eval $(docker-machine env default)</codeblock></p>
+      <p>This runs the <codeph>docker-machine env default</codeph> command, which generates a set of
+          <codeph>export</codeph> commands and then evaluates those to set your environment
+        directly. You have to use this dynamic way of setting the environment because the details of
+        the Docker daemon may change whenever it's started.</p>
+      <p>You can put this line into your <filepath>~/.bashrc</filepath> file and then it will be run
+        automatically whenever you start a new shell. If for some reason it doesn't run you can
+        force it to run by doing <codeph>source ~/.bashrc</codeph> in your terminal window.</p>
+      <p>If you see a message like "Cannot connect to the Docker daemon. Is the docker daemon
+        running on this host? " it means you need to set up the environment in one of these
+        ways.</p>
+    </conbody>
+  </concept>
+</concept>

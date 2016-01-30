@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+<reference id="container-ref-link-manager-basex">
+  <title>DFST Link Manager BaseX Docker Container</title>
+  <shortdesc>The dfst/link-manager-basex container provides a BaseX HTTP server configured with the
+    DITA for Small Teams Link Manager application.</shortdesc>
+  <refbody>
+    <section>
+      <p>The container runs the BaseX HTTP server with the Link Manager Web application deployed. It
+        depends on the DITA Open Toolkit, provided by a separate container running on the same
+        Docker machine, to provide the XML entity resolution catalogs needed to parse DITA documents
+        added to the database, either manually or through the DFST git hooks.</p>
+      <p>See <xref keyref="container-ref-dfst-dita-ot/container-ref-link-manager-basex"/>.</p>
+    </section>
+    <section spectitle="Container Details">
+      <dl>
+        <dlentry>
+          <dt>URL</dt>
+          <dd><xref href="https://hub.docker.com/r/dfst/link-manager-basex/" format="html"
+              scope="external">https://hub.docker.com/r/dfst/link-manager-basex/</xref></dd>
+        </dlentry>
+        <dlentry>
+          <dt>container name</dt>
+          <dd>dfst/link-manager-basex</dd>
+        </dlentry>
+      </dl>
+    </section>
+    <section spectitle="Usage">
+      <p>To run the container in isolation you must first run the dfst/dita-ot container so that the
+        Link Manager has access to the DITA Open Toolkit's catalogs. You should also mount a local
+        directory as the <filepath>/data</filepath> volume so that data will be saved locally
+        (otherwise your databases will be lost when the container is removed).</p>
+      <p>A typical run command
+        is:<codeblock>run --rm -it -p 8984:8984 \
+    --volumes-from dita-ot \
+    --name=linkmgr \
+    -v /Users/ekimber/temp/data:/data  \
+    dfst/link-manager-basex</codeblock></p>
+      <p>The parameters are:<parml>
+          <plentry>
+            <pt>--rm</pt>
+            <pd>Automatically removes the container when it stops. This is useful for development
+              and testing to avoid having to manually remove the container every time you rebuild
+              it. Omit this parameter if you want the container to be more persistent.</pd>
+          </plentry>
+          <plentry>
+            <pt>-it</pt>
+            <pd>Runs the container in interactive mode and with a terminal. Lets you see the
+              messages the server puts up. Replace this with <parmname>-d</parmname> if you want to
+              run the server in the background.</pd>
+          </plentry>
+          <plentry>
+            <pt>-p 8984:8984</pt>
+            <pd>This maps local (to your machine) port 8984 to container port 8984. The first port
+              number is what you specify to connect to the Web application. If you are running on
+              Windows or OS X then you need the IP address of your docker machine
+                (<codeph>docker-machine ip default</codeph>). If you are running on Linux then you
+              can use localhost and the port. You can use any available port for the first port
+              value if 8984 doesn't work for some reason. If you make the port 80 then you don't
+              have to specify the port when connecting to the server.</pd>
+          </plentry>
+          <plentry>
+            <pt>--volumes-from dita-ot</pt>
+            <pd>This makes the shared volumes from the dita-ot container available to this
+              container. The value "dita-ot" is the name specified on the
+                <parmname>--name</parmname> parameter when you started the dfst/dita-ot
+              container.</pd>
+          </plentry>
+          <plentry>
+            <pt>--name=linkmgr</pt>
+            <pd>The name for the container. You can specify anything. Having set the name you can
+              use it anywhere a container ID is expected, e.g. <codeph>docker exec -it linkmgr
+                /bin/bash</codeph>.</pd>
+          </plentry>
+          <plentry>
+            <pt>-v ...</pt>
+            <pd>Connects a local directory (<filepath>/Users/ekimber/temp/data</filepath>) to the
+                <filepath>/data</filepath> volume in the container. Under OS X and Windows the local
+              directory must be within a user's home directory. Under Linux it can be any directory.
+                <note>There are potential permissions issues with using local directories under OS X
+                and Windows due to the use of an intermediary virtual machine to run the docker
+                machine. Instructions and workarounds TBD.</note><note type="caution">
+                <p>If you don't specify a local directory then the databases will be created within
+                  the container and will go away when the container is removed.</p>
+              </note></pd>
+          </plentry>
+          <plentry>
+            <pt>dfst/link-manager-basex</pt>
+            <pd>This is the name of the container to run. If the container is not already on your
+              system Docker will pull it down from the Docker hub, using the default tag "latest",
+              which is normally what you want. If you want a specific tag you can specify it as
+                  <codeph>:<varname>tagname</varname></codeph> after the container name.<p>If you
+                need to update your local copy you can use <codeph>docker pull
+                  dfst/link-manager-basex</codeph> to get the latest version.</p></pd>
+          </plentry>
+        </parml>
+      </p>
+    </section>
+    <section spectitle="Configuration Details">
+      <p>The Link Manager configuration modifies the base BaseXHTTP configuration to add the
+        following
+        settings:<codeblock>CATFILE = /opt/dita-ot/DITA-OT/catalog-dita.xml
+DTD = true
+SKIPCORRUPT = true
+CHOP = false</codeblock></p>
+      <p>The <parmname>CATFILE</parmname> value refers to the volume used from the dfst/dita-ot
+        container via the <parmname>--volumes-from</parmname> parameter explained above.</p>
+    </section>
+  </refbody>
+</reference>

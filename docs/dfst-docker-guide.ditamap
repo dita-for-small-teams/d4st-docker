@@ -29,6 +29,8 @@
     <topicgroup>
       <keydef keys="website-dfst-github-organization" format="html" scope="external"
         href="http://github.com/dita-for-small-teams"/>
+      <keydef href="https://docs.docker.com" keys="website-docker-docs" scope="external"
+        format="html"/>
       <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox"
         format="html" scope="external"/>
       <keydef href="http://doc.gitlab.com/omnibus/docker/"
@@ -42,16 +44,25 @@
     <topicref href="dfst-docker-guide/frontmatter/about-dfst-docker-guide.dita"/>
   </frontmatter>
   <chapter keys="getting-started" href="dfst-docker-guide/getting-started/getting-started.dita">
-    <topicref href="dfst-docker-guide/getting-started/dfst-container-quick-start-01.dita"/>
+    <topicref href="dfst-docker-guide/getting-started/dfst-container-quick-start-01.dita"
+      keys="dfst-container-quick-start"/>
+    <topicref href="dfst-docker-guide/getting-started/docker-orientation.dita"
+      keys="docker-getting-started"/>
   </chapter>
   <chapter
     href="dfst-docker-guide/system-description/chapter-dfst-container-system-description.dita"
     keys="system-description">
     <topicref href="dfst-system-overview.dita" keys="dfst-system-overview"/>
-    <topicref href="dfst-docker-guide/system-description/dfst-system-configuration.dita"/>
+    <topicref href="dfst-docker-guide/system-description/dfst-system-configuration.dita"
+      keys="dfst-system-config"/>
   </chapter>
   <chapter href="dfst-docker-guide/docker-container-ref/chapter-docker-container-ref.dita"
     keys="docker-container-ref">
-    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-gitlab.dita"/>
+    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-dfst-dita-ot.dita"
+      keys="container-ref-dfst-dita-ot"/>
+    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-link-manager-basex.dita"
+      keys="container-ref-link-manager-basex"/>
+    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-gitlab.dita"
+      keys="container-ref-gitlab-ce"/>
   </chapter>
 </bookmap>
