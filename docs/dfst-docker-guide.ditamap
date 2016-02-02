@@ -62,7 +62,7 @@
       keys="container-ref-dfst-dita-ot"/>
     <topicref href="dfst-docker-guide/docker-container-ref/container-ref-link-manager-basex.dita"
       keys="container-ref-link-manager-basex"/>
-    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-gitlab.dita"
-      keys="container-ref-gitlab-ce"/>
+    <topicref href="dfst-docker-guide/docker-container-ref/container-ref-dfst-gitlab.dita"
+      keys="container-ref-dfst-gitlab"/>
   </chapter>
 </bookmap>
