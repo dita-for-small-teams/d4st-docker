@@ -1,23 +1,85 @@
+#
+# DITA For Small Teams (DFST) Docker compose
+# configuration file. 
+#
+# FIXME: Parameterize all appropriate options
+#        with variables with defaults (defined
+#        in the relevant docker files).
+#
+# It runs the DITA OT container, the gitlab 
+# server (for shared git access and continuous
+# integration), and the DFST Link Manager application.
+#
+# Gitlab is exposed on the default ports 80 and 443
+# for HTTP/HTTPS access and 8022 for SSH
+#
+# The Link Manager is exposed on the default ports
+# of 8984 for the Web app and 1984 for the underlying
+# BaseX server (used by the git hooks installed in the
+# GitLab repositories).
+# 
+# Placeholder for now, will add appropriate
+# variables later (e.g., ports for Web services,
+# host-side mount points).
+
+#
+# DITA OT
+#
+# This container provides access to a DITA Open Toolkit
+# instace. GitLab uses it to run the OT, BaseX uses
+# it for access to DTDs. 
+#
 dita-ot:
 
   image: dfst/dita-ot
   container_name: dita-ot-dfst
-  
+ 
+#
+# GitLab
+#
+# The GitLab server provides two services:
+#
+# - Shared git access
+# - Continuous integration for automating 
+#   builds (e.g., HTML and PDF generation)
+#   
 gitlab:
 
   image: dfst/gitlab
   container_name: gitlab-dfst
+#  environment:
   ports: 
    - "80:80"
    - "443:443"
    - "8022:22"
+  volumes_from:
+   - dita-ot
+#  volumes:
+# Volumes TBD   
   
+#
+# DFST Link Manager
+#
+# The Link Manager provides link-related information
+# for use by authors via an interactive Web app
+# or other applications via REST API.
+#
+# It gets files from the git server and depends on
+# the DITA Open Toolkit to resolve references to 
+# DTDs or other grammar files.
+#  
 linkmgr:
 
   image: dfst/link-manager-basex
   container_name: linkmgr-dfst
+#  environment:
   ports: 
    - "1984:1984"
    - "8984:8984"
-  
-
+  volumes_from:
+   - dita-ot
+#  volumes:
+# Volumes TBD   
+#  
+# End of compose file.
+#
