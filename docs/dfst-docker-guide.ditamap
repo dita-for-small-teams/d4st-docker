@@ -37,6 +37,10 @@
         keys="website-gitlab-container-documentation" format="html" scope="external"/>
       <keydef href="https://hub.docker.com" keys="website-docker-hub" format="html" scope="external"
         navtitle="Docker Hub Web site"/>
+      <keydef href="https://www.virtualbox.org" keys="website-virtualbox" scope="external"
+        format="html"/>
+      <keydef href="https://www.virtualbox.org/wiki/Documentation" keys="website-virtualbox-docs"
+        scope="external" format="html"/>
     </topicgroup>
     <booklists>
       <toc/>
@@ -48,6 +52,7 @@
       keys="dfst-container-quick-start"/>
     <topicref href="dfst-docker-guide/getting-started/docker-orientation.dita"
       keys="docker-getting-started"/>
+    <topicref href="dfst-docker-guide/getting-started/virtual-box.dita" keys="virtual-box"/>
   </chapter>
   <chapter
     href="dfst-docker-guide/system-description/chapter-dfst-container-system-description.dita"
