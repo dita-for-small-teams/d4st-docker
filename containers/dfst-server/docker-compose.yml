@@ -1,0 +1,23 @@
+dita-ot:
+
+  image: dfst/dita-ot
+  container_name: dita-ot-dfst
+  
+gitlab:
+
+  image: dfst/gitlab
+  container_name: gitlab-dfst
+  ports: 
+   - "80:80"
+   - "443:443"
+   - "8022:22"
+  
+linkmgr:
+
+  image: dfst/link-manager-basex
+  container_name: linkmgr-dfst
+  ports: 
+   - "1984:1984"
+   - "8984:8984"
+  
+
