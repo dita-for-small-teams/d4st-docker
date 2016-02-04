@@ -48,6 +48,7 @@ gitlab:
   image: dfst/gitlab
   container_name: gitlab-dfst
 #  environment:
+  hostname: ${HOSTNAME}
   ports: 
    - "80:80"
    - "443:443"
