@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="building_the_dfst_containers">
+ <title>Building the DFST Containers</title>
+ <shortdesc>You can use the <cmdname>docker-compose</cmdname> command to build all the DFST
+    containers in one go.</shortdesc>
+ <conbody>
+  <p>The <cmdname>docker-compose</cmdname> command runs against a <term keyref="gloss-yaml"
+        >YAML</term> file and builds or runs the containers defined in the YAML file. By default the
+      file is named <filepath>docker-compose.yml</filepath> and is expected to be in the directory
+      you run the <cmdname>docker-compose</cmdname> command in. </p>
+    <p>You must define the environment variable <varname>HOSTNAME</varname> with the IP address or
+      host name you will use to connect to the running containers. Under OS X and Windows this is
+      the IP address of the Docker machine that will run the containers. You can get the IP address
+      using the <codeph>docker-machine ip default</codeph>
+      command:<codeblock>$ docker-machine ip default
+192.168.99.100
+$_</codeblock></p>
+    <p>On OS X you can set the environment variable dynamically like
+      so:<codeblock>$ export HOSTNAME=$(docker-machine ip default)
+$ echo $HOSTNAME
+192.168.99.100
+$ _</codeblock></p>
+    <p>For the DFST project there are two top-level <filepath>docker-compose.yml</filepath>
+        files:<ul id="ul_wpr_sby_w5">
+        <li><filepath>./docker-compose/dfst-build/docker-compose.yml</filepath><p>Manages building
+            the DFST containers using the YAML files in each container's directory</p></li>
+        <li><filepath>./docker-compose/dfst-server/docker-compose.yml</filepath><p>Runs the DFST
+            containers using container images. If the images have not been built locally then
+            they'll be fetched from the Docker hub.</p></li>
+      </ul></p>
+    <p>To build the images, simply navigate to the
+        <filepath>./docker-compose/dfst-build/docker-compose.yml</filepath> directory and run the
+      command <codeph>docker-compose
+      build</codeph>:<codeblock>$ cd ~/workspace/docker-compose/dfst-build
+$ docker-compose build
+Building dita-ot
+Step 1 : FROM dfst/dita-ot
+ ---> 98b7682e9180
+Successfully built 98b7682e9180
+Building git-server
+Step 1 : FROM gitlab/gitlab-ce
+ ---> ce51895e10d9
+Step 2 : CMD /assets/wrapper
+ ---> Using cache
+ ---> 4f9c9516bb40
+Successfully built 4f9c9516bb40
+$ _</codeblock></p>
+    <p>If the images on which these containers depend have not yet been downloaded you will see
+      additional messages as those images are fetched.</p>
+    <note>As of <cmdname>docker-compose</cmdname> 1.5.2, there is no way to explicitly tag the
+      images. They will be assigned a generated repository and image name based on the service name,
+      so you can't use the <cmdname>docker-compose</cmdname> build process to directly produce
+      images that will be run by the separate dfst-server <filepath>docker-compose.yml</filepath>
+      file (which refers to the images as pushed to the Docker hub).</note>
+    <p>You can also build and run the images immediately by using "<cmdname>up</cmdname>" instead of
+        "<cmdname>build</cmdname>":<codeblock>$ docker-compose up -d
+Starting dfstbuild_dita-ot_1
+Starting dfstbuild_linkmgr_1
+Starting dfstbuild_git-server_1
+$ _</codeblock></p>
+    <p>This starts the link manager and git server in the background. You can use normal Docker
+      commands or Kitematic to manage the running containers or you can use the
+        <codeph>docker-compose stop</codeph> command to stop the
+      containers:<codeblock>$ docker-compose stop
+Stopping dfstbuild_git-server_1 ... done
+Stopping dfstbuild_linkmgr_1 ... done
+$ _</codeblock></p>
+    <p>Note that the DITA OT container doesn't run—it just gets started and immediately exits as it
+      is only there to provide data volumes—so you will only see stop messages for the git server
+      and link manager.</p>
+    <p>After you stop the containers the containers are still there. You can restart them or remove
+      them entirely using the <codeph>docker-compose rm</codeph>
+      command:<codeblock>$ docker-compose rm
+Going to remove dfstbuild_git-server_1, dfstbuild_linkmgr_1, dfstbuild_dita-ot_1
+Are you sure? [yN] y
+Removing dfstbuild_git-server_1 ... done
+Removing dfstbuild_linkmgr_1 ... done
+Removing dfstbuild_dita-ot_1 ... done
+$ _</codeblock></p>
+    <p>You can use the <parmname>-v</parmname> parameter to force
+      removal:<codeblock>$ docker-compose rm -f
+Going to remove dfstbuild_git-server_1, dfstbuild_linkmgr_1, dfstbuild_dita-ot_1
+Removing dfstbuild_git-server_1 ... done
+Removing dfstbuild_linkmgr_1 ... done
+Removing dfstbuild_dita-ot_1 ... done
+$ _</codeblock></p>
+ </conbody>
+</concept>

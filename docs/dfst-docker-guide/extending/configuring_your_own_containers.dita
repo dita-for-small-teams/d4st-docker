@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="configuring_your_own_containers">
+ <title>Configuring Your Own Containers</title>
+ <shortdesc>You can configure your own versions of the DFST containers through custom
+    docker-compose.yml files.</shortdesc>
+ <conbody>
+  <p>Full version of this topic TBD. </p>
+    <p>Short version: <ol id="ol_kls_1jy_w5">
+        <li>If you haven't already, create your own project to manage your custom container
+          definitions and docker-compose files.</li>
+        <li>Copy the <filepath>docker-compose/dfst-build</filepath> and
+            <filepath>docker-compose/dfst-server</filepath> directories into your  project.</li>
+        <li>Copy the directories under <filepath>containers/</filepath> for the containers you want
+          to extend into your own project's <filepath>containers/</filepath> directory.</li>
+        <li>Rename the directories under <filepath>containers/</filepath> appropriately.</li>
+        <li>Edit the <filepath>Dockerfile</filepath> files for the containers to reflect your
+          changes and extensions.</li>
+        <li>Edit the <filepath>docker-compose.yml</filepath> files as needed to reflect your
+          container details.</li>
+        <li>Edit the <filepath>docker-compose/dfst-build</filepath> and
+            <filepath>docker-compose/dfst-server</filepath>
+          <filepath>docker-compose.yml</filepath> files to reflect the locations of the
+            <filepath>docker-compose.yml</filepath> files for each of your containers.</li>
+      </ol></p>
+ </conbody>
+</concept>

@@ -13,8 +13,9 @@
         as the base for a custom container that configures the Open Toolkit to suit your needs.</p>
       <p>The Open Toolkit container is required by the <xref
           keyref="container-ref-link-manager-basex"/> container, which uses its catalogs. It is also
-        required by the <xref keyref="container-ref-dfst-gitlab/container-ref-gitlab"/> container,
+        required by the <xref keyref="container-ref-dfst-gitlab"/> container,
         which uses it for running Open Toolkit build jobs.</p>
+      <p/>
     </section>
     <section spectitle="Container Details">
       <dl>

@@ -1,6 +1,7 @@
 #
 # DITA For Small Teams (DFST) Docker compose
-# configuration file. 
+# run configuration file. Will run all the 
+# containers with appropriate default settings. 
 #
 # FIXME: Parameterize all appropriate options
 #        with variables with defaults (defined

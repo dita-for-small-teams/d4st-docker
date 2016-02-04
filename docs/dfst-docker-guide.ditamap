@@ -29,6 +29,12 @@
     <topicgroup>
       <keydef keys="website-dfst-github-organization" format="html" scope="external"
         href="http://github.com/dita-for-small-teams"/>
+      <keydef href="https://github.com/dita-for-small-teams/dfst-docker"
+        keys="website-dfst-github-dfst-docker-project" scope="external" format="html">
+        <topicmeta>
+          <navtitle>https://github.com/dita-for-small-teams/dfst-docker</navtitle>
+        </topicmeta>
+      </keydef>
       <keydef href="https://docs.docker.com" keys="website-docker-docs" scope="external"
         format="html"/>
       <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox"
@@ -41,6 +47,11 @@
         format="html"/>
       <keydef href="https://www.virtualbox.org/wiki/Documentation" keys="website-virtualbox-docs"
         scope="external" format="html"/>
+      <keydef href="http://yaml.org" keys="website-yaml-org" format="html" scope="external">
+        <topicmeta>
+          <navtitle>http://yaml.org</navtitle>
+        </topicmeta>
+      </keydef>
     </topicgroup>
     <booklists>
       <toc/>
@@ -53,6 +64,13 @@
     <topicref href="dfst-docker-guide/getting-started/docker-orientation.dita"
       keys="docker-getting-started"/>
     <topicref href="dfst-docker-guide/getting-started/virtual-box.dita" keys="virtual-box"/>
+  </chapter>
+  <chapter href="dfst-docker-guide/extending/extending_the_dfst_docker_system.dita"
+    keys="extending-dfst-system">
+    <topicref href="dfst-docker-guide/extending/building_the_dfst_containers.dita"
+      keys="building-dfst-containers"/>
+    <topicref href="dfst-docker-guide/extending/configuring_your_own_containers.dita"
+      keys="configuring-your-own-containers"/>
   </chapter>
   <chapter
     href="dfst-docker-guide/system-description/chapter-dfst-container-system-description.dita"
@@ -70,4 +88,11 @@
     <topicref href="dfst-docker-guide/docker-container-ref/container-ref-dfst-gitlab.dita"
       keys="container-ref-dfst-gitlab"/>
   </chapter>
+  <backmatter>
+    <topicref href="glossary.dita" keys="glossary">
+      <topicref href="glossary/glossgroup-y.dita">
+        <topicref href="glossary/gloss-yaml.dita" keys="gloss-yaml"/>
+      </topicref>
+    </topicref>
+  </backmatter>
 </bookmap>

@@ -1,0 +1,45 @@
+#
+# DITA For Small Teams (DFST) Docker compose
+# build configuration file. This file manages
+# building and running the DFST containers. 
+#
+# Volumes TBD   
+#  
+# End of compose file.
+#
+
+#
+# DITA OT
+#
+# This container provides access to a DITA Open Toolkit
+# instace. GitLab uses it to run the OT, BaseX uses
+# it for access to DTDs. 
+#
+dita-ot:
+  extends:
+     file: ../../containers/dita-ot-dfst/docker-compose.yml
+     service: _dita-ot-dfst
+
+ 
+#
+# Gitlab server
+#
+git-server:
+  extends:
+     file: ../../containers/gitlab-dfst/docker-compose.yml
+     service: _gitlab-dfst
+  volumes_from:
+   - dita-ot
+   
+#
+# Link manager:
+# 
+linkmgr:
+   extends:
+     file: ../../containers/link-manager-basex/docker-compose.yml
+     service: _linkmgr-basex
+   volumes_from:
+     - dita-ot
+#
+# End of YAML file
+#

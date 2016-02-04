@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+<concept id="extending_the_dfst_docker_system">
+ <title>Extending the DFST Docker System</title>
+ <shortdesc>It is easy to extend or modify the DFST system by defining your own containers that
+    build on the base containers.</shortdesc>
+ <conbody>
+  <p>The Docker technology is layered in a way that makes it easy to build on the work of others
+      with a minimum of duplication of code or runtime artifacts. The DFST containers have been
+      setup to make extending them as easy as possible.</p>
+    <p>The DFST containers are organized using the <cmdname>docker-compose</cmdname> facility. See
+      the <xref keyref="website-docker-docs">Docker documentation</xref> for details on how to use
+        <cmdname>docker-compose</cmdname>. This section provides instructions on how to build the
+      out-of-the-box DFST containers using <cmdname>docker-compose</cmdname> and provides guidance
+      on how to set up and use your own containers.</p>
+    <p>These instructions assume that you have a copy of the dfst-docker project from GitHub (<xref
+        keyref="website-dfst-github-dfst-docker-project"/>) in some convenient location, such as
+        <filepath>c:\workspace\dfst-docker</filepath> or similar. In these instructions
+        "<filepath>dfst-docker</filepath>" is used as the root directory for the project. Any
+      relative paths in instructions are relative to the root of the project unless stated
+      otherwise.</p>
+    <p>The instructions use Linux/OS X file path conventions for simplicity but all the instructions
+      should work as-is under Windows (or you can just spin up a Docker image with your favorite
+      Unix distribution and work in there). </p>
+ </conbody>
+</concept>

@@ -4,7 +4,7 @@
   <title>About This Publication</title>
   <body>
     <p>This publication documents the DITA For Small Teams Docker-based system.</p>
-    <p>If you want to jump right in, go to <xref keyref="getting-started/concept_qd2_gt4_t5"/>.</p>
+    <p>If you want to jump right in, go to <xref keyref="getting-started"/>.</p>
     <p>Docker is a relatively new (as of early 2016) for managing software in platform-independent
       "containers" that can be more easily managed than traditional virtual machine images or simply
       installing various software components directly on a host machine.</p>

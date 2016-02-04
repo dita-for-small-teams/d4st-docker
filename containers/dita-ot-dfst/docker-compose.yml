@@ -1,0 +1,15 @@
+#
+# Docker-compose build file for
+# the DITA OT DFST container
+#
+
+_dita-ot-dfst:
+  build: .
+
+
+dita-ot-dfst:
+  extends:
+     service: _dita-ot-dfst
+  container_name: dita-ot-dfst
+  image: dfst/dita-ot-dfst
+  

@@ -10,7 +10,7 @@
         depends on the DITA Open Toolkit, provided by a separate container running on the same
         Docker machine, to provide the XML entity resolution catalogs needed to parse DITA documents
         added to the database, either manually or through the DFST git hooks.</p>
-      <p>See <xref keyref="container-ref-dfst-dita-ot/container-ref-link-manager-basex"/>.</p>
+      <p>See <xref keyref="container-ref-dfst-dita-ot"/>.</p>
     </section>
     <section spectitle="Container Details">
       <dl>
