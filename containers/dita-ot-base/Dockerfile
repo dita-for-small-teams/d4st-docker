@@ -26,20 +26,10 @@ RUN mv dita-ot-${OT_VERSION} DITA-OT
 RUN chmod a+rwx $DITA_HOME/bin/* 
 # Put the bin directory in the path:
 ENV PATH $HOME/DITA-OT/bin:$PATH
-# Copy the catalog and plugins directory to a volume
-# so other containers can use it.
-RUN cp $DITA_HOME/catalog-dita.xml $CATALOG_DIR/catalog-dita.xml 
-RUN ln -s $DITA_HOME/plugins $CATALOG_DIR/plugins 
-# Provide a way for the OT to access user data:
-# (NOTE: This volume is probably obsolete and unnecessary
-#  given the exposure of the whole OT, but I did this one
-#  first)
-VOLUME $CATALOG_DIR
-# Make the whole OT itself available
-RUN ln -s $DITA_HOME /opt/dita-ot/DITA-OT
-VOLUME /opt/dita-ot/DITA-OT
-VOLUME /opt/dita-ot/userdata
 WORKDIR $DITA_HOME
+# Prepare the /opt/dita-ot/DITA-OT directory
+# so it can be used as a volume:
+RUN ln -s $DITA_HOME /opt/dita-ot/DITA-OT
 #
 # NOTE For OT 2.x, the dita command manages the Java classpath.
 #
