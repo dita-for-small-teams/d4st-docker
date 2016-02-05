@@ -1,4 +1,4 @@
-FROM dfst/dita-ot-base
+FROM ditacommunity/dita-ot-base
 #
 # Sets up a DITA-OT container
 # with all of the DITA Community 
