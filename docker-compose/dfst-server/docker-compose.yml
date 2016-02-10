@@ -34,9 +34,9 @@ services:
 # it for access to DTDs. 
 #
   dita-ot:
-  
-    image: dfst/dita-ot
-    container_name: dita-ot
+    extends:
+       file: ../../containers/dita-ot/docker-compose.yml  
+       service: dita-ot-dfst
  
 #
 # GitLab
@@ -49,13 +49,9 @@ services:
 #   
   gitlab:
   
-    image: dfst/gitlab
-    container_name: gitlab-dfst
-    hostname: ${HOSTNAME}
-    ports: 
-     - "80:80"
-     - "443:443"
-     - "8022:22"
+    extends:
+       file: ../../containers/gitlab-dfst/docker-compose.yml
+       service: gitlab-dfst
     volumes_from:
      - dita-ot
   
@@ -71,12 +67,11 @@ services:
 # DTDs or other grammar files.
 #  
   linkmgr:
+
+    extends:
+      file: ../../containers/link-manager-basex/docker-compose.yml
+      service: linkmgr-basex
   
-    image: dfst/link-manager-basex
-    container_name: linkmgr-dfst
-    ports: 
-     - "1984:1984"
-     - "8984:8984"
     volumes_from:
      - dita-ot
  

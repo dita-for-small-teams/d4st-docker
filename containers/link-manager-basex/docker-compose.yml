@@ -1,3 +1,4 @@
+version: "2"
 #
 # DFST Link Manager
 #
@@ -9,16 +10,13 @@
 # the DITA Open Toolkit to resolve references to 
 # DTDs or other grammar files.
 #  
-_linkmgr-basex:
-  build: .
-#  environment:
-  ports: 
-   - "1984:1984"
-   - "8984:8984"
-   
-linkmgr-basex:
-  image: dfst/link-manager-basex
-  container_name: linkmgr-dfst
+services:
+  linkmgr-basex:
+    image: dfst/link-manager-basex
+    container_name: linkmgr-dfst
+    ports: 
+     - "1984:1984"
+     - "8984:8984"
   
 #
 # End of YAML file.

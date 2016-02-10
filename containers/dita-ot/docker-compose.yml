@@ -1,15 +1,12 @@
+version: "2"
 #
-# Docker-compose build file for
-# the DITA OT DFST container
+# Docker-compose  file for
+# the DITA OT DFST container.
+# The container does not run as
+# a persistent server.
 #
-
-_dita-ot-dfst:
-  build: .
-
-
-dita-ot-dfst:
-  extends:
-     service: _dita-ot-dfst
-  container_name: dita-ot-dfst
-  image: dfst/dita-ot
+services:
+  dita-ot-dfst:
+    container_name: dita-ot-dfst
+    image: dfst/dita-ot
   
