@@ -1,3 +1,5 @@
+version: "2"
+
 #
 # DITA For Small Teams (DFST) Docker compose
 # run configuration file. Will run all the 
@@ -23,6 +25,7 @@
 # variables later (e.g., ports for Web services,
 # host-side mount points).
 
+services:
 #
 # DITA OT
 #
@@ -30,10 +33,10 @@
 # instace. GitLab uses it to run the OT, BaseX uses
 # it for access to DTDs. 
 #
-dita-ot:
-
-  image: dfst/dita-ot
-  container_name: dita-ot-dfst
+  dita-ot:
+  
+    image: dfst/dita-ot
+    container_name: dita-ot
  
 #
 # GitLab
@@ -44,20 +47,17 @@ dita-ot:
 # - Continuous integration for automating 
 #   builds (e.g., HTML and PDF generation)
 #   
-gitlab:
-
-  image: dfst/gitlab
-  container_name: gitlab-dfst
-#  environment:
-  hostname: ${HOSTNAME}
-  ports: 
-   - "80:80"
-   - "443:443"
-   - "8022:22"
-  volumes_from:
-   - dita-ot-dfst
-#  volumes:
-# Volumes TBD   
+  gitlab:
+  
+    image: dfst/gitlab
+    container_name: gitlab-dfst
+    hostname: ${HOSTNAME}
+    ports: 
+     - "80:80"
+     - "443:443"
+     - "8022:22"
+    volumes_from:
+     - dita-ot
   
 #
 # DFST Link Manager
@@ -70,18 +70,16 @@ gitlab:
 # the DITA Open Toolkit to resolve references to 
 # DTDs or other grammar files.
 #  
-linkmgr:
-
-  image: dfst/link-manager-basex
-  container_name: linkmgr-dfst
-#  environment:
-  ports: 
-   - "1984:1984"
-   - "8984:8984"
-  volumes_from:
-   - dita-ot-dfst
-#  volumes:
-# Volumes TBD   
+  linkmgr:
+  
+    image: dfst/link-manager-basex
+    container_name: linkmgr-dfst
+    ports: 
+     - "1984:1984"
+     - "8984:8984"
+    volumes_from:
+     - dita-ot
+ 
 #  
 # End of compose file.
 #
