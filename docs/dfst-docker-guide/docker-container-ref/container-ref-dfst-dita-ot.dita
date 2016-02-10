@@ -8,14 +8,17 @@
   <shortdesc>The dfst/dita-ot container provides a generic DITA Open Toolkit image.</shortdesc>
   <refbody>
     <section>
-      <p>The dita-ot container contains DITA Open Toolkit image as distributed by the DITA Open
-        Toolkit team. You can use it directly if you don't need any custom plugins or you can use at
-        as the base for a custom container that configures the Open Toolkit to suit your needs.</p>
+      <p>The dita-ot container contains a DITA Open Toolkit image based on the full DITA for
+        Publishers plugin set. You can use it directly if you don't need any custom plugins. You can
+        use any of the Open Toolkit containers or create your own custom one if you want a different
+        set of plugins. All the DITA OT, DITA Community, and DITA for Publishers containers expose
+        the same volumes you can you use them interchangably with the GitLab and Link Manager
+        containers. See the documentation for the DITA Community Open Toolkit Docker container
+        project (TBD).</p>
       <p>The Open Toolkit container is required by the <xref
           keyref="container-ref-link-manager-basex"/> container, which uses its catalogs. It is also
         required by the <xref keyref="container-ref-dfst-gitlab"/> container,
         which uses it for running Open Toolkit build jobs.</p>
-      <p/>
     </section>
     <section spectitle="Container Details">
       <dl>

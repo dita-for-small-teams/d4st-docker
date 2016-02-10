@@ -75,7 +75,7 @@
   <chapter
     href="dfst-docker-guide/system-description/chapter-dfst-container-system-description.dita"
     keys="system-description">
-    <topicref href="dfst-system-overview.dita" keys="dfst-system-overview"/>
+    <topicref href="dfst-docker-guide/system-description/dfst-system-overview.dita" keys="dfst-system-overview"/>
     <topicref href="dfst-docker-guide/system-description/dfst-system-configuration.dita"
       keys="dfst-system-config"/>
   </chapter>
@@ -89,7 +89,7 @@
       keys="container-ref-dfst-gitlab"/>
   </chapter>
   <backmatter>
-    <topicref href="glossary.dita" keys="glossary">
+    <topicref href="glossary/glossary.dita" keys="glossary">
       <topicref href="glossary/glossgroup-y.dita">
         <topicref href="glossary/gloss-yaml.dita" keys="gloss-yaml"/>
       </topicref>

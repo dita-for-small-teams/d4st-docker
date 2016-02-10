@@ -1,16 +1,16 @@
-FROM ditacommunity/dita-ot-base
+FROM dita4publishers/dita-ot-base
 #
-# Sets up a DITA-OT container
-# with all of the DITA Community 
-# open toolkit plugins integrated.
+# DITA for Small Teams OT container.
+# This is basically an unmodified clone of the
+# DITA for Publishers image so we have access
+# to all the D4P transforms and vocabulary (EPUB,
+# HTML5, etc.).
 #
-# Sample fetch from Git:
-#
-# RUN wget ${DITA_COMM_URL}org.dita-community.media-d.html/archive/${BRANCH}.zip && unzip ${BRANCH}.zip -d ${DITA_HOME}/plugins && rm ${BRANCH}.zip
-#
-# Integrate new plugins
-#
-RUN ant -f integrator.xml
+# You can use this image or any of the other DITA-OT
+# images as your OT image as long as the set of 
+# volumes it exposes is the same. In particular,
+# both the BaseX and GitLab containers need to have
+# an /opt/dita-ot/DITA-OT volume available.
 #
 # End of Dockerfile
 #
