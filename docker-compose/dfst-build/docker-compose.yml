@@ -15,9 +15,9 @@
 # instace. GitLab uses it to run the OT, BaseX uses
 # it for access to DTDs. 
 #
-dita-ot:
+dita-ot-dfst:
   extends:
-     file: ../../containers/dita-ot-dfst/docker-compose.yml
+     file: ../../containers/dita-ot/docker-compose.yml
      service: _dita-ot-dfst
 
  
@@ -29,7 +29,7 @@ git-server:
      file: ../../containers/gitlab-dfst/docker-compose.yml
      service: _gitlab-dfst
   volumes_from:
-   - dita-ot
+   - dita-ot-dfst
    
 #
 # Link manager:
@@ -39,7 +39,7 @@ linkmgr:
      file: ../../containers/link-manager-basex/docker-compose.yml
      service: _linkmgr-basex
    volumes_from:
-     - dita-ot
+     - dita-ot-dfst
 #
 # End of YAML file
 #

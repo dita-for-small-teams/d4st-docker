@@ -1,4 +1,4 @@
-FROM dita4publishers/dita-ot-base
+FROM dita4publishers/dita-ot-base:1.8.5
 #
 # DITA for Small Teams OT container.
 # This is basically an unmodified clone of the

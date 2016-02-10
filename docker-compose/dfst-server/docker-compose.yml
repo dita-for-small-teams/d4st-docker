@@ -55,7 +55,7 @@ gitlab:
    - "443:443"
    - "8022:22"
   volumes_from:
-   - dita-ot
+   - dita-ot-dfst
 #  volumes:
 # Volumes TBD   
   
@@ -79,7 +79,7 @@ linkmgr:
    - "1984:1984"
    - "8984:8984"
   volumes_from:
-   - dita-ot
+   - dita-ot-dfst
 #  volumes:
 # Volumes TBD   
 #  

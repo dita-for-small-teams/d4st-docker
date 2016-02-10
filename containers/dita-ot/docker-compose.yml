@@ -11,5 +11,5 @@ dita-ot-dfst:
   extends:
      service: _dita-ot-dfst
   container_name: dita-ot-dfst
-  image: dfst/dita-ot-dfst
+  image: dfst/dita-ot
   
