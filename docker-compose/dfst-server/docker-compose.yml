@@ -53,7 +53,9 @@ services:
        file: ../../containers/gitlab-dfst/docker-compose.yml
        service: gitlab-dfst
     volumes_from:
-     - dita-ot
+      - dita-ot
+      - linkmgr
+     
   
 #
 # DFST Link Manager

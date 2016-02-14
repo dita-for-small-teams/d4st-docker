@@ -17,6 +17,10 @@ RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
 COPY basex/dot_basex /opt/basex
 RUN cat /opt/basex/dot_basex >> .basex && rm /opt/basex/dot_basex
 #
+# Make the basex executables available to other containers:
+#
+VOLUME /opt/basex/bin
+#
 # End of Dockerfile
 #
 

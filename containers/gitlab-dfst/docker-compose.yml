@@ -7,9 +7,9 @@ services:
   gitlab-dfst:
     hostname: ${HOSTNAME}
     ports: 
-     - "80:80"
-     - "443:443"
-     - "8022:22"
+      - "80:80"
+      - "443:443"
+      - "8022:22"
     container_name: gitlab-dfst
      
     image: dfst/gitlab-dfst
