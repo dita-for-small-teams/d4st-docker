@@ -52,6 +52,7 @@ services:
     extends:
        file: ../../containers/gitlab-dfst/docker-compose.yml
        service: gitlab-dfst
+    hostname: ${HOSTNAME}
     volumes_from:
       - dita-ot
       - linkmgr
