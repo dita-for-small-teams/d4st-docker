@@ -25,6 +25,7 @@ version: "2"
 # variables later (e.g., ports for Web services,
 # host-side mount points).
 
+
 services:
 #
 # DITA OT
@@ -54,6 +55,9 @@ services:
     extends:
       file: ../../containers/link-manager-basex/docker-compose.yml
       service: linkmgr-basex
+
+    volumes:
+       - /Users:/Users
   
     volumes_from:
      - dita-ot
