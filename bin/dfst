@@ -1,0 +1,100 @@
+#!/bin/sh
+#
+# OS X shell script to run the DFST Docker containers via
+# docker-compose.
+#
+# Commands:
+#
+# start (default): Starts the services
+# stop : Stops the services
+# down : Stop containers and remove containers, networks, volumes, and images created by start.
+# kill : Kills the services
+# pause : Pauses the services
+# unpause : Unpauses the services
+# pull : Pull new images
+#
+# Requires that the docker-compose command be in the
+# path. 
+#
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+DOCKER_FILE=$DIR/../docker-compose/dfst-server/docker-compose.yml
+export HOSTNAME=$(docker-machine ip default)
+
+if [ -z $HOSTNAME ] ; then
+   echo "Failed to get IP address for docker machine 'default'. Make sure the docker machine is started."
+   exit 1
+fi
+
+
+ACTION=$1
+if [ -z $1  ] ; then
+  echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
+  # echo docker-compose -f ${DOCKER_FILE}  up -d
+  docker-compose -f ${DOCKER_FILE}  up -d
+  R=$?
+  echo "Docker machine IP address is '$HOSTNAME'"
+elif [ "${ACTION}" == "start"  ] ; then
+  echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
+  # echo docker-compose -f ${DOCKER_FILE}  up -d
+  docker-compose -f ${DOCKER_FILE}  up -d
+  R=$?
+elif [ "${ACTION}" == "up"  ] ; then
+  echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
+  # echo docker-compose -f ${DOCKER_FILE}  up -d
+  docker-compose -f ${DOCKER_FILE}  up -d
+  R=$?
+elif [ "$1" = "stop" ]; then
+  echo "Stopping DFST Docker containers. The containers can be started with the 'start' command."
+  docker-compose -f ${DOCKER_FILE} stop
+  R=$?
+elif [ "$1" = "kill" ]; then
+  echo "Killing the DFST Docker containers. You may need to stop them first."
+  docker-compose -f ${DOCKER_FILE} kill
+  R=$?
+elif [ "$1" = "down" ]; then
+  echo "Downing the DFST Docker containers."
+  docker-compose -f ${DOCKER_FILE} down
+  R=$?
+elif [ "$1" = "pause" ]; then
+  echo "Pausing the DFST Docker containers. You may need to stop them first."
+  docker-compose -f ${DOCKER_FILE} pause
+  R=$?
+elif [ "$1" = "unpause" ]; then
+  echo "Unpausing (resuming) the DFST Docker containers if they were previously paused."
+  docker-compose -f ${DOCKER_FILE} unpause
+  R=$?
+elif [ "$1" = "pull" ]; then
+  echo "Pulling new images..."
+  docker-compose -f ${DOCKER_FILE} pull
+  R=$?
+else
+  echo "Unrecognized command \"$1\". Available commands are:"
+  echo " start - Start the server"  
+  echo " stop - Stop the server"  
+  echo " down : Stop containers and remove containers, networks, volumes, and images created by start."
+  echo " kill - Kill the server"  
+  echo " pause - Pauses the server"  
+  echo " unpause - Resumes the server the server"  
+  echo " pull - Pull new images"  
+  exit 1
+fi
+
+echo ""
+echo "Docker containers:"
+docker ps
+
+if [ $R -ne "0" ]
+  then
+    echo "Error code $R running docker-compose."
+    exit $R
+fi
+#
+# End of script
+#
