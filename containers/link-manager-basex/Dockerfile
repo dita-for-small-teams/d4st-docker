@@ -19,7 +19,7 @@ RUN wget -O bin/BaseXClient.rb https://github.com/BaseXdb/basex/raw/master/basex
 RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
     cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
     cp -r dfst-linkmgmt-basex-develop/modules/* /repo
-COPY basex/dot_basex /opt/basex
+COPY basex/dot_basex /opt/basex/.
 
 RUN cat /opt/basex/dot_basex >> .basex && rm /opt/basex/dot_basex
 #
