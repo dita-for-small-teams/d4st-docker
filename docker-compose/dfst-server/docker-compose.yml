@@ -39,26 +39,6 @@ services:
        service: dita-ot-dfst
  
 #
-# GitLab
-#
-# The GitLab server provides two services:
-#
-# - Shared git access
-# - Continuous integration for automating 
-#   builds (e.g., HTML and PDF generation)
-#   
-  gitlab:
-  
-    extends:
-       file: ../../containers/gitlab-dfst/docker-compose.yml
-       service: gitlab-dfst
-    hostname: ${HOSTNAME}
-    volumes_from:
-      - dita-ot
-      - linkmgr
-     
-  
-#
 # DFST Link Manager
 #
 # The Link Manager provides link-related information
@@ -78,6 +58,24 @@ services:
     volumes_from:
      - dita-ot
  
+#
+# GitLab
+#
+# The GitLab server provides two services:
+#
+# - Shared git access
+# - Continuous integration for automating 
+#   builds (e.g., HTML and PDF generation)
+#   
+  gitlab:
+  
+    extends:
+       file: ../../containers/gitlab-dfst/docker-compose.yml
+       service: gitlab-dfst
+    hostname: ${HOSTNAME}
+    volumes_from:
+      - dita-ot
+      - linkmgr
 #  
 # End of compose file.
 #

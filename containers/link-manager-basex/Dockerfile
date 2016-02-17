@@ -1,4 +1,4 @@
-FROM basex/basexhttp:latest
+FROM dfst/basexhttp-base:latest
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 #
 # The basex/basexhttp setup puts the data, repo.
@@ -23,9 +23,12 @@ COPY basex/dot_basex /opt/basex/dot_basex
 
 RUN cat /opt/basex/dot_basex >> .basex && rm /opt/basex/dot_basex
 #
-# Make the basex executables available to other containers:
+# Define the volumes used by the server and make
+# the executables available to other containers (e.g.,
+# so they can run the basexhttp clients):
 #
-VOLUME /opt/basex/bin
+
+VOLUME ["/opt/basex/bin", "/data", "/repo", "/webapp"]
 #
 # End of Dockerfile
 #
