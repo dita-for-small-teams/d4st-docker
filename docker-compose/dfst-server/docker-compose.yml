@@ -58,6 +58,10 @@ services:
 
     volumes:
        - /Users:/Users
+# Uncomment and adjust these lines in order to have the Link Manager
+# use a local copy of the Web app source for development purposes:       
+#       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
+#       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
   
     volumes_from:
      - dita-ot
