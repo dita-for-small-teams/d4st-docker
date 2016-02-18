@@ -36,7 +36,7 @@ services:
 #
   dita-ot:
     extends:
-       file: ../../containers/dita-ot/docker-compose.yml  
+       file: containers/dita-ot/docker-compose.yml  
        service: dita-ot-dfst
  
 #
@@ -53,7 +53,7 @@ services:
   linkmgr:
 
     extends:
-      file: ../../containers/link-manager-basex/docker-compose.yml
+      file: containers/link-manager-basex/docker-compose.yml
       service: linkmgr-basex
 
     volumes:
@@ -100,7 +100,7 @@ services:
   gitlab:
   
     extends:
-       file: ../../containers/gitlab-dfst/docker-compose.yml
+       file: containers/gitlab-dfst/docker-compose.yml
        service: gitlab-dfst
     hostname: ${HOSTNAME}
     environment:
