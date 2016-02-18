@@ -1,0 +1,31 @@
+#!/bin/sh
+# 
+# GitLab utility script to help configure the GitLab
+# server 
+#
+PRIVATE_TOKEN=${1-gj2su57CuDNTyUtBqxn2}
+DOCKER_HOST=$(docker-machine ip default) || echo "Command 'docker-machine ip default' failed--is Docker running?"
+
+USERNAME=$(whoami)
+echo "username=${USERNAME}"
+echo "GitLab host is at $DOCKER_HOST"
+result=$(curl --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "http://${DOCKER_HOST}/api/v3/users?username=$USERNAME")
+echo "result=\"${result}\""
+if [ "$result" == "[]" ]; then
+   echo "Creating user '${USERNAME}'..."
+   url="http://${DOCKER_HOST}/api/v3/users?username=$USERNAME"
+   url+="&email=$USERNAME@example.com"
+   url+="&password=$USERNAME"
+   url+="&name=$USERNAME"
+   url+="&can_create_groups=true"
+   url+="&confirm=false"
+   echo "url=\"${url}\""
+ 
+   result=$(curl -X PUT --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "${url}")
+   echo "result=\"${result}\""   
+else
+   echo "User ${USERNAME} already defined."
+fi 
+#
+# End of script
+#
