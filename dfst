@@ -17,7 +17,11 @@
 # Requires that the docker-compose command be in the
 # path. 
 #
-dfstBrowser=${DFST_BROWSER:-chrome}
+if [ "$OSTYPE" = "msys" ]; then
+  dfstBrowser=${DFST_BROWSER:-chrome}
+else
+  dfstBrowser=${DFST_BROWSER:-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome}
+fi
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
@@ -81,7 +85,7 @@ elif [ "$1" = "gitlab" ]; then
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} http://$(docker-machine ip default)
   else
-    r=$(/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome http://$(docker-machine ip default))
+    r=$("$dfstBrowser" http://$(docker-machine ip default))
   fi
   exit $?
 else
