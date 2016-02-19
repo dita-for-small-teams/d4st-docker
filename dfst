@@ -13,6 +13,7 @@
 # unpause : Unpauses the services
 # pull : Pull new images
 # gitlab : Open GitLab in chrome
+# getdemo : Get the demo content from the demo content container
 #
 # Requires that the docker-compose command be in the
 # path. 
@@ -100,6 +101,19 @@ elif [ "$1" = "linkmgr" ]; then
     r=$("open" "-b" $browserBundleId "${url}")
   fi
   exit $?
+elif [ "$1" = "xgetdemo" ]; then
+  # FIXME: Need to work out how to call docker command from bash
+  echo "Copy the Thunderbird demo git repository to a local directory."
+  targetDir=${2:-"~"}
+  if [ -e "$targetDir/Thunderbird" ]; then
+     echo "Target directory \"${targetDir}/Thunderbird\" already exists, not copying the data."
+  else
+     imageid=$(docker run -d ditacommunity/demo-content:latest top)
+     $(docker "cp ${imageid}:/opt/dita-community/data/Thunderbird \"${targetDir}\"")
+     $(docker "stop ${imageid}")
+     $(ls "${targetDir}")
+     exit $?
+  fi
 else
   echo "Unrecognized command \"$1\". Available commands are:"
   echo " start - Start the server"  

@@ -81,7 +81,19 @@
             <navtitle>GitLab user icon</navtitle>
           </topicmeta>
         </keydef>
+        <keydef href="dfst-docker-guide/getting-started/media/gitlab-gear-icon-01.png"
+          keys="icon-gitlab-gear-01" format="png">
+          <topicmeta>
+            <navtitle>GitLab gear icon</navtitle>
+          </topicmeta>
+        </keydef>
       </topicgroup>
+      <keydef href="dfst-docker-guide/getting-started/media/gitlab-web-change-username-01.png"
+        keys="screenshot-gitlab-change-username-01" format="png">
+        <topicmeta>
+          <navtitle>GitLab change username</navtitle>
+        </topicmeta>
+      </keydef>
     </topicgroup>
     <booklists>
       <toc/>
