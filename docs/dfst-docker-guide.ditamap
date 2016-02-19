@@ -56,6 +56,12 @@
             <navtitle>http://yaml.org</navtitle>
           </topicmeta>
         </keydef>
+        <keydef href="https://github.com/dita-for-small-teams/dita-for-small-teams/releases"
+          keys="website-dfst-github-project-releases" format="html" scope="external">
+          <topicmeta>
+            <navtitle>https://github.com/dita-for-small-teams/dita-for-small-teams/releases</navtitle>
+          </topicmeta>
+        </keydef>
       </topicgroup>
       <topicgroup>
         <topicmeta>

@@ -44,9 +44,18 @@
       </step>
       <step>
         <cmd>Unzip the DFST release package to somewhere convenient, e.g. <filepath
-            platform="windows">c:\temp\dfst</filepath>.</cmd>
+            platform="windows">c:\temp</filepath>.</cmd>
         <stepresult>
-          <p>(Explain result here)</p>
+          <p>You should get a directory named <filepath>dfst-docker</filepath> with this
+            content:<codeblock>> cd c:\temp\dfst-docker
+> dir
+LICENSE
+README.md
+containers
+dfst</codeblock></p>
+          <p>The <filepath>dfst</filepath> script is the main script for managing the DFST
+            components through Docker. It is a bash shell script intended to be run in a Docker
+            Quickstart Terminal under Windows or OS X.</p>
         </stepresult>
       </step>
       <step>
@@ -55,9 +64,9 @@
           package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
-$ cd temp/dfst
+$ cd temp/dfst-docker
 
-ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst
+ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst-docker
 $ ls
 bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
         </info>
@@ -65,7 +74,7 @@ bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
       <step>
         <cmd>Run the command "<codeph>dfst start</codeph>":</cmd>
         <info>
-          <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst
+          <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst-docker
 $ dfst start
 Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status.
 Pulling redis (sameersbn/redis:latest)...
@@ -249,14 +258,32 @@ $ _</codeblock></p>
           which should then load it into the DFST Link Manager.</p>
       </stepsection>
       <step>
-        <cmd>In a Docker Quickstart Terminal, do the following commands:</cmd>
+        <cmd>In a new Docker Quickstart Terminal, do the following commands:</cmd>
         <info>
           <codeblock>$ cd ~/Thunderbird
 $ git remote add origin http://192.168.99.100/<varname>username</varname>/Thunderbird.git
 $ git push origin master</codeblock>
           <p>Where <varname>username</varname> is the GitLab user name you set up earlier, e.g.
             "ekimber". You can also copy and paste this URL from the GitLab project page.</p>
+          <p>You should be asked to enter your user ID and password. These are the GitLab user ID
+            and password you created earlier.</p>
         </info>
+        <stepresult>
+          <p>Nothing will happen for a few seconds to a minute and then you should see a lot of
+            messages about files being added to the Link Manager.  You may see a few errors as well
+            (still working through some issues with git hooks on the GitLab server and the BaseX
+            Ruby client).</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>In your original Docker Quickstart Terminal enter the command "<cmdname>dfst
+            linkmgr</cmdname>" to open the Link Manager Web application in a new browser
+          window.</cmd>
+        <stepresult>
+          <p>The Link Manager application should open. You should see an entry like
+            "Thunderbird/master" in the list repositories and branches. You can click on the branch
+            to see the files in the branch.</p>
+        </stepresult>
       </step>
     </steps>
     </taskbody>
