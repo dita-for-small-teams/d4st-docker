@@ -14,5 +14,5 @@ Dir['**/*.git'].each do |dir|
     # puts "dir=#{dir}"
     cmd = "ln -s #{masterCustomHooksDir} #{repodir}/#{dir}"
     #puts "cmd=#{cmd}"
-    `#{cmd}`
+    `#{cmd} 2> /dev/null`
 end

@@ -117,6 +117,7 @@ services:
 # Defines volume /opt/dita-community/data/Thunderbird
   demo-content:
     image: ditacommunity/demo-content
+    command: top
       
 #  
 # End of compose file.

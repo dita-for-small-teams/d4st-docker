@@ -167,10 +167,96 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
       </step>
       <stepsection>
         <p>At this point you should be ready to create new projects in GitLab and connect them to
-          your local git repositories on your machine.</p>
+          your local git repositories on your machine. You can use any git repository you have but
+          for demo purposes the DITA Community DITA Demo content collection, the "Thunderbird"
+          document set, has been included to make it easy to get started. To use it you just need to
+          copy it out of it's container to your local machine.</p>
       </stepsection>
       <step>
-        <cmd/>
+        <cmd>In the Docker Quickstart Terminal do the following commands:</cmd>
+        <info>
+          <codeblock>$ docker ps | grep demo</codeblock>
+          <p>This lists details for the demo content container. It should look like this:</p>
+          <p>
+            <codeblock>2c675bf0f308 ditacommunity/demo-content:latest "top" 15 minutes ago Up 15 minutes big_bhaskara</codeblock>
+          </p>
+          <p>But more spread out. The last token on the line is the container name, in this example
+            "big_bhaskara" (yours will likely be different).</p>
+          <p>Now move to the directory you want to add the <filepath>Thunderbird</filepath>
+            directory to:<codeblock>$ cd ~</codeblock></p>
+          <p>Finally, copy the files out of the demo data container:</p>
+          <codeblock>$ docker cp big_bhaskara:/opt/dita-community/data/Thunderbird .</codeblock>
+          <p>This copies the <filepath>Thunderbird</filepath> directory from the container to
+              <filepath>Thunderbird</filepath> under your home directory. You can use any target
+            directory you want.</p>
+          <p>Test the copy:</p>
+          <codeblock>$ ls ~/Thunderbird
+c_about_defining_payload.dita      r_image_warehouse_2.dita
+c_architecture_combined.dita       r_interface_drops.dita
+c_architecture_overview.dita       r_interface-bypass-group-is-in-active-mode.dita
+c_attribute_parameter_syntax.dita  r_jobconf.dita
+… and many more files...</codeblock>
+        </info>
+        <stepresult>
+          <p>You now have a copy of the Thunderbird data ready to push to your GitLab server
+            following three more steps.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>On the GitLab Projects page select the "New projects" button to create a new
+          project.</cmd>
+        <stepresult>The new project page will open.</stepresult>
+      </step>
+      <step>
+        <cmd>In the Project path field type "Thunderbird"</cmd>
+      </step>
+      <step>
+        <cmd>In the Description field type something like "Demo content collection</cmd>
+      </step>
+      <step>
+        <cmd>In the Visibility section select Public</cmd>
+      </step>
+      <step>
+        <cmd>Select "Create project" to create the project</cmd>
+        <stepresult>
+          <p>The new project should be created in GitLab and you should now be at the project's
+            GitLab page.</p>
+          <p>Notice the HTTP field with a URL in it. This is the git URL for this project. You will
+            use this URL to connect your local git repository to this GitLab repository.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>In a Docker Quickstart Terminal type the command:</cmd>
+        <info>
+          <codeblock>$ docker exec gitlab-dfst add-custom-hooks</codeblock>
+        </info>
+        <stepresult>
+          <p>The Thunderbird repository in the GitLab server should now be set up with the DFST
+            custom hooks needed to connect GitLab to the DFST Link Manager.</p>
+          <p>If you want to verify that this happened you can use this
+            command:<codeblock>$ docker exec -i gitlab-dfst ls /var/opt/gitlab/git-data/repositories/<varname>username</varname>/Thunderbird.git/custom_hooks
+BaseXClient.rb
+post-receive
+$ _</codeblock></p>
+          <p>Where <varname>username</varname> is the user name you set up in GitLab. You should see
+            the two files shown.</p>
+          <p>You must run this command any time you set up a new project in GitLab. It is safe to
+            rerun at any time.</p>
+        </stepresult>
+      </step>
+      <stepsection>
+        <p>You can now connect the local Thunderbird git repository to GitLab and push it to GitLab,
+          which should then load it into the DFST Link Manager.</p>
+      </stepsection>
+      <step>
+        <cmd>In a Docker Quickstart Terminal, do the following commands:</cmd>
+        <info>
+          <codeblock>$ cd ~/Thunderbird
+$ git remote add origin http://192.168.99.100/<varname>username</varname>/Thunderbird.git
+$ git push origin master</codeblock>
+          <p>Where <varname>username</varname> is the GitLab user name you set up earlier, e.g.
+            "ekimber". You can also copy and paste this URL from the GitLab project page.</p>
+        </info>
       </step>
     </steps>
     </taskbody>
