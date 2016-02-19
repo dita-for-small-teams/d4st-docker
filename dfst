@@ -81,7 +81,7 @@ elif [ "$1" = "gitlab" ]; then
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} http://$(docker-machine ip default)
   else
-    $(chrome http://$(docker-machine ip default))
+    r=$(/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome http://$(docker-machine ip default))
   fi
   exit $?
 else
