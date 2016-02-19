@@ -20,7 +20,9 @@
 if [ "$OSTYPE" = "msys" ]; then
   dfstBrowser=${DFST_BROWSER:-chrome}
 else
-  dfstBrowser=${DFST_BROWSER:-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome}
+  # For OS X the browser value is the application bundle name, e.g. "Google Chrome" for Chrome.
+  dfstBrowser=${DFST_BROWSER:-Safari}
+  browserBundleId=$(lsappinfo info -only bundleid "${dfstBrowser}" | cut -d '"' -f4)
 fi
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -86,7 +88,7 @@ elif [ "$1" = "gitlab" ]; then
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} "${url}"
   else
-    r=$("$dfstBrowser" "${url}")
+    r=$("open" "-b" $browserBundleId "${url}")
   fi
   exit $?
 elif [ "$1" = "linkmgr" ]; then
@@ -95,7 +97,7 @@ elif [ "$1" = "linkmgr" ]; then
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} "${url}"
   else
-    r=$("$dfstBrowser" "${url}")
+    r=$("open" "-b" $browserBundleId "${url}")
   fi
   exit $?
 else
