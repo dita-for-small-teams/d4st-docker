@@ -82,10 +82,20 @@ elif [ "$1" = "pull" ]; then
   R=$?
 elif [ "$1" = "gitlab" ]; then
   echo "Open GitLab Web application in ${dfstBrowser}"
+  url="http://$(docker-machine ip default):80"
   if [ "$OSTYPE" = "msys" ]; then
-    start ${dfstBrowser} http://$(docker-machine ip default)
+    start ${dfstBrowser} "${url}"
   else
-    r=$("$dfstBrowser" http://$(docker-machine ip default))
+    r=$("$dfstBrowser" "${url}")
+  fi
+  exit $?
+elif [ "$1" = "linkmgr" ]; then
+  echo "Open DFST Link Manager Web application in ${dfstBrowser}"
+  url="http://$(docker-machine ip default):8984"
+  if [ "$OSTYPE" = "msys" ]; then
+    start ${dfstBrowser} "${url}"
+  else
+    r=$("$dfstBrowser" "${url}")
   fi
   exit $?
 else
@@ -97,6 +107,8 @@ else
   echo " pause - Pauses the server"  
   echo " unpause - Resumes the server the server"  
   echo " pull - Pull new images"  
+  echo " gitlab - Open GitLab Web application"  
+  echo " linkmgr - Open DFST Link Manager Web application"  
   exit 1
 fi
 
