@@ -12,7 +12,8 @@
       machine with a "Docker machine". A Docker machine is a kind of virtual machine that can run
       Docker containers. Software providers can make pre-configured Docker containers available for
       others to use. Using the Docker software you can get and run Docker containers with a minimum
-      of effort.</p>
+      of effort. Docker containers may also contain just data to be used by other containers or to
+      be copied to host machines.</p>
     <p>The DITA for Small Teams project provides instructions for using a combination of
       off-the-shelf Docker containers and DFST-provided containers to quickly set up a working DITA
       for Small Teams environment on any machine, whether it's your personal laptop, a shared server

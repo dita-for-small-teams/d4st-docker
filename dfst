@@ -12,10 +12,12 @@
 # pause : Pauses the services
 # unpause : Unpauses the services
 # pull : Pull new images
+# gitlab : Open GitLab in chrome
 #
 # Requires that the docker-compose command be in the
 # path. 
 #
+dfstBrowser=${DFST_BROWSER:-chrome}
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
@@ -24,7 +26,7 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-DOCKER_FILE=$DIR/../docker-compose.yml
+DOCKER_FILE=$DIR/containers/docker-compose.yml
 export HOSTNAME=$(docker-machine ip default)
 
 if [ -z $HOSTNAME ] ; then
@@ -74,6 +76,14 @@ elif [ "$1" = "pull" ]; then
   echo "Pulling new images..."
   docker-compose -f ${DOCKER_FILE} pull
   R=$?
+elif [ "$1" = "gitlab" ]; then
+  echo "Open GitLab Web application in ${dfstBrowser}"
+  if [ "$OSTYPE" = "msys" ]; then
+    start ${dfstBrowser} http://$(docker-machine ip default)
+  else
+    $(chrome http://$(docker-machine ip default))
+  fi
+  exit $?
 else
   echo "Unrecognized command \"$1\". Available commands are:"
   echo " start - Start the server"  

@@ -6,34 +6,89 @@
     quickly as possible. </shortdesc>
     <taskbody>
     <prereq>
-      <ul id="ul_gf1_s54_t5">
-        <li>
-          <p>On Windows and OS X you must have the <xref keyref="website-docker-toolbox">Docker
-              Toolbox</xref> installed and running. See the Docker documentation for details on how
-            to run Docker. All Docker commands are run from the Docker Quickstart window (Windows)
-            or from a terminal window with the Docker environment set (OS X).</p>
-          <p>Under Windows, open a Docker Quickstart shell window </p>
-          <p>Under OS X you can use the Kitematic application to start a new Docker window or you
-            can use the command:<codeblock>eval $(docker-machine env default)</codeblock></p>
-          <p>To set the Docker environment in your current terminal window.</p>
-        </li>
-      </ul>
+      <p>On Windows and OS X you must have the <xref keyref="website-docker-toolbox">Docker
+          Toolbox</xref> installed and running. See the Docker documentation for details on how to
+        run Docker. All Docker commands are run from the Docker Quickstart window (Windows) or from
+        a terminal window with the Docker environment set (OS X).</p>
+      <p platform="windows">Under Windows, open a Docker Quickstart shell window (<image
+          keyref="icon-docker-quickstart" width="50" height="50" id="image_xwr_mpb_bv"/>)</p>
+      <p platform="mac">Under OS X you can use the Kitematic application to start a new Docker
+        window or you can use the
+        command:<codeblock>eval $(docker-machine env default)</codeblock>to set the Docker
+        environment in your current terminal window. You can add this line to your ~/.profile script
+        so that new terminal windows are automatically configured for Docker.</p>
+      <note platform="windows">The Microsoft Edge brower's security settings may not allow you to
+        connect to the Web applications running in the Docker containers. These instructions assume
+        you have the Chrome browser installed and Firefox should work fine as well.</note>
+      <note platform="windows">The Docker environment is Linux-based, so even under Windows you will
+        be using a Linux command line to interact with the Docker system. In this environment all
+        file paths use forward slashes ("/") rather than back slashes ("\"). Absolute paths start
+        with <filepath>/c</filepath> rather than <filepath>c:\</filepath>. For example, if your user
+        directory is <filepath>c:\Users\ekimber</filepath>, in a Docker terminal you would type
+          <filepath>/c/Users/ekimber</filepath>. For OS X users there is no difference.</note>
     </prereq>
         <steps>
-            <step>
-        <cmd>Get the GitLab Docker container:</cmd>
-        <info>
-          <codeblock>docker pull gitlab/gitlab-ce</codeblock>
-          <p>See the GitLab Docker documentation: <xref
-              keyref="website-gitlab-container-documentation"
-              >http://doc.gitlab.com/omnibus/docker/</xref> for details.</p>
-        </info>
-        <stepresult>Docker should download and install the container. You should see messages like
-          this when it's
-          done:<codeblock>Status: Downloaded newer image for gitlab/gitlab-ce:latest
-Eliots-MBP:dfst-docker ekimber$</codeblock>
-        </stepresult>
+      <step>
+        <cmd>Download the DITA for Small Teams <filepath>dfst-docker</filepath> Zip package from the
+          dita-for-small-teams project releases area:</cmd>
+        <info>Go to <xref keyref="website-dfst-github-project-releases"/> and download the latest
+          release. The Zip file will be named
+              <filepath>dfst-docker-<varname>v</varname>-<varname>r</varname>-<varname>m</varname>.zip</filepath>,
+          where <filepath><varname>v</varname>-<varname>r</varname>-<varname>m</varname></filepath>
+          is the version, release, and modification number, e.g. "1-1-0" for release 1.1.0.</info>
       </step>
-        </steps>
+      <step>
+        <cmd>Unzip the DFST release package to somewhere convenient, e.g. <filepath
+            platform="windows">c:\temp\dfst</filepath>.</cmd>
+        <stepresult>(Explain result here)</stepresult>
+      </step>
+      <step>
+        <cmd>Start or go to a Docker shell window and navigate to the directory for the DFST
+          package:</cmd>
+        <info>
+          <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
+$ cd temp/dfst
+
+ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst
+$ ls
+bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
+        </info>
+      </step>
+      <step>
+        <cmd>Run the command "<codeph>dfst start</codeph>":</cmd>
+        <info>
+          <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst
+$ dfst start
+Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status.
+Pulling redis (sameersbn/redis:latest)...
+latest: Pulling from sameersbn/redis
+… lots more messages here ...
+Creating gitlab-dfst
+<b>Docker machine IP address is '192.168.99.100'</b>
+
+Docker containers:
+CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                  PORTS                                                            NAMES
+7971effdd6cb        dfst/gitlab-dfst              "/assets/wrapper"        3 seconds ago       Up Less than a second   0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:8022->22/tcp   gitlab-dfst
+aab650590a70        dfst/link-manager-basex       "/opt/basex/bin/basex"   2 minutes ago       Up 2 minutes            0.0.0.0:1984->1984/tcp, 0.0.0.0:8984->8984/tcp                   linkmgr-dfst
+a280cacb6079        sameersbn/postgresql:9.4-12   "/sbin/entrypoint.sh"    2 minutes ago       Up 2 minutes            5432/tcp                                                         dfstdocker_postgresql_1
+f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 minutes ago       Up 4 minutes            6379/tcp                                                         dfstdocker_redis_1
+</codeblock>
+          <p>The first time you do this Docker has to download all the images for the containers and
+            this can take a while. The next time you run it, it will be quick.</p>
+          <p>Note the highlighted
+            line:<codeblock><b>Docker machine IP address is '192.168.99.100'</b></codeblock></p>
+          <p>This tells you the IP address where the various DFST Web applications can be found. It
+            will probably be 192.168.99.100 but it could be something different.</p>
+        </info>
+        <stepresult>The DFST containers should start. It will take a minute or two for the Web
+          services in the containers to start up completely. You can access the GitLab Web
+          application at <xref href="http://192.168.99.100" format="html" scope="external"
+            >http://192.168.99.100</xref><ph platform="windows"> (see note about Windows Edge
+            above--you may need to use Chrome or Firefox)</ph>.</stepresult>
+      </step>
+      <step>
+        <cmd/>
+      </step>
+    </steps>
     </taskbody>
 </task>
