@@ -8,22 +8,24 @@
     <prereq>
       <p>On Windows and OS X you must have the <xref keyref="website-docker-toolbox">Docker
           Toolbox</xref> installed and running. See the Docker documentation for details on how to
-        run Docker. All Docker commands are run from the Docker Quickstart window (Windows) or from
-        a terminal window with the Docker environment set (OS X).</p>
-      <p platform="windows">Under Windows, open a Docker Quickstart shell window (<image
+        run Docker. All Docker commands are run from the Docker Quickstart Terminal </p>
+      <p platform="windows">Under Windows, open a Docker Quickstart Terminal window (<image
           keyref="icon-docker-quickstart" width="50" height="50" id="image_xwr_mpb_bv"/>)</p>
-      <p platform="mac">Under OS X you can use the Kitematic application to start a new Docker
-        window or you can use the
-        command:<codeblock>eval $(docker-machine env default)</codeblock>to set the Docker
-        environment in your current terminal window. You can add this line to your ~/.profile script
-        so that new terminal windows are automatically configured for Docker.</p>
+      <p platform="mac">Under OS X you can use the Docker Quickstart Terminal shortcut (<image
+          keyref="icon-docker-quickstart" width="50" height="50" id="image_o3t_33c_bv"/>) to start a
+        new Docker terminal session. You can also make any terminal window docker-enabled by using
+        this command from the command
+        line:<codeblock>eval $(docker-machine env default)</codeblock>to set the Docker environment
+        in your current terminal window. You can add this line to your ~/.profile script so that new
+        terminal windows are automatically configured for Docker.</p>
       <note platform="windows">The Microsoft Edge brower's security settings may not allow you to
         connect to the Web applications running in the Docker containers. These instructions assume
         you have the Chrome browser installed and Firefox should work fine as well.</note>
       <note platform="windows">The Docker environment is Linux-based, so even under Windows you will
-        be using a Linux command line to interact with the Docker system. In this environment all
-        file paths use forward slashes ("/") rather than back slashes ("\"). Absolute paths start
-        with <filepath>/c</filepath> rather than <filepath>c:\</filepath>. For example, if your user
+        be using a Linux command line to use the <cmdname>dfst</cmdname> command or use the
+          <cmdname>docker</cmdname> command directly. In this environment all file paths use forward
+        slashes ("/") rather than back slashes ("\"). Absolute paths start with
+          <filepath>/c</filepath> rather than <filepath>c:\</filepath>. For example, if your user
         directory is <filepath>c:\Users\ekimber</filepath>, in a Docker terminal you would type
           <filepath>/c/Users/ekimber</filepath>. For OS X users there is no difference.</note>
     </prereq>
@@ -31,19 +33,25 @@
       <step>
         <cmd>Download the DITA for Small Teams <filepath>dfst-docker</filepath> Zip package from the
           dita-for-small-teams project releases area:</cmd>
-        <info>Go to <xref keyref="website-dfst-github-project-releases"/> and download the latest
-          release. The Zip file will be named
-              <filepath>dfst-docker-<varname>v</varname>-<varname>r</varname>-<varname>m</varname>.zip</filepath>,
-          where <filepath><varname>v</varname>-<varname>r</varname>-<varname>m</varname></filepath>
-          is the version, release, and modification number, e.g. "1-1-0" for release 1.1.0.</info>
+        <info>
+          <p>Go to <xref keyref="website-dfst-github-project-releases"/> and download the latest
+            release. The Zip file will be named
+                <filepath>dfst-docker-<varname>v</varname>-<varname>r</varname>-<varname>m</varname>.zip</filepath>,
+            where
+              <filepath><varname>v</varname>-<varname>r</varname>-<varname>m</varname></filepath> is
+            the version, release, and modification number, e.g. "1-1-0" for release 1.1.0.</p>
+        </info>
       </step>
       <step>
         <cmd>Unzip the DFST release package to somewhere convenient, e.g. <filepath
             platform="windows">c:\temp\dfst</filepath>.</cmd>
-        <stepresult>(Explain result here)</stepresult>
+        <stepresult>
+          <p>(Explain result here)</p>
+        </stepresult>
       </step>
       <step>
-        <cmd>Start or go to a Docker shell window and navigate to the directory for the DFST
+        <cmd>Start a Docker Quickstart Terminal (<image keyref="icon-docker-quickstart" width="50"
+            height="50" id="image_rnl_v3c_bv"/>) and navigate to the directory for the DFST
           package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
@@ -75,17 +83,92 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
 </codeblock>
           <p>The first time you do this Docker has to download all the images for the containers and
             this can take a while. The next time you run it, it will be quick.</p>
-          <p>Note the highlighted
-            line:<codeblock><b>Docker machine IP address is '192.168.99.100'</b></codeblock></p>
-          <p>This tells you the IP address where the various DFST Web applications can be found. It
-            will probably be 192.168.99.100 but it could be something different.</p>
         </info>
-        <stepresult>The DFST containers should start. It will take a minute or two for the Web
-          services in the containers to start up completely. You can access the GitLab Web
-          application at <xref href="http://192.168.99.100" format="html" scope="external"
-            >http://192.168.99.100</xref><ph platform="windows"> (see note about Windows Edge
-            above--you may need to use Chrome or Firefox)</ph>.</stepresult>
+        <stepresult>
+          <p>The DFST containers should start. It will take a minute or two for the Web services in
+            the containers to start up completely.</p>
+        </stepresult>
       </step>
+      <stepsection>
+        <p>To make GitLab ready to use as a remote git repository you have to first set up the
+          GitLab root user to match your user on the machine you're using. These steps should be
+          automatable but so far I haven't been able to work out how to automate this configuration.
+          Because of the way Docker persists (or doesn't persist) data, you may need to repeat these
+          steps if the main Docker machine is reset, for example, if you reboot your machine. I am
+          working hard on automating this configuration.</p>
+      </stepsection>
+      <step>
+        <cmd>In the Docker terminal, type the command "<codeph>dfst gitlab</codeph>" to open the
+          GitLab Web application.</cmd>
+        <stepresult>
+          <p>Your browser should open to the GitLab login page:</p>
+          <fig id="fig_gwz_yjc_bv">
+            <title>GitLab Login Screen</title>
+            <image keyref="screenshot-gitlab-login-01" width="4in" id="image_kkb_bkc_bv"/>
+          </fig>
+          <p>If your browser doesn't open, make sure you have Google Chrome installed.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Log in as root using the password "5iveL!fe"</cmd>
+        <stepresult>
+          <p>You should be taken to the "New password" page.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Enter "5iveL!fe" as the current password and set the new password to whatever you
+          want.</cmd>
+        <info>You will be using this password to authenticate using git so pick a password you can
+          remember. The password will be reasonably secure as stored in the GitLab container so it
+          should be safe to use your regular password.</info>
+        <stepresult>
+          <p>You should be taken back to the login screen so you can log in with your new
+            password.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Log in with the new password.</cmd>
+        <stepresult>
+          <p>You should go to the Projects page:</p>
+          <fig id="fig_kmj_5lc_bv">
+            <title>GitLab Projects Page</title>
+            <image keyref="screenshot-gitlab-projects-01" width="4in" id="image_xcz_vlc_bv">
+              <alt>GitLab projects page</alt>
+            </image>
+          </fig>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Navigate to the Admin user's profile settings:</cmd>
+        <info>
+          <p>Click on the user icon (<image keyref="icon-gitlab-user-01" height="50"
+              id="image_vwq_4mc_bv">
+              <alt>User icon</alt>
+            </image>), then on "account" (<image keyref="icon-gitlab-gear-01" height="50"
+              id="image_zqh_wmc_bv">
+              <alt>Account icon</alt>
+            </image>)</p>
+          <p>Scroll down to reveal the "Change Username" section:</p>
+          <fig id="fig_wvs_hnc_bv">
+            <title>GitLab Change Username field</title>
+            <image keyref="screenshot-gitlab-change-username-01" width="3in" id="image_nq2_mnc_bv"/>
+          </fig>
+        </info>
+      </step>
+      <step>
+        <cmd>Change "root" to whatever user name you use on your machine, e.g. "ekimber" and save
+          the user name.</cmd>
+        <info>
+          <p>You want to use your username so that when you use git commands everything works as you
+            would expect.</p>
+          <p>This renaming of the root user is a workaround for as yet being unable to automatically
+            configure new users in GitLab.</p>
+        </info>
+      </step>
+      <stepsection>
+        <p>At this point you should be ready to create new projects in GitLab and connect them to
+          your local git repositories on your machine.</p>
+      </stepsection>
       <step>
         <cmd/>
       </step>

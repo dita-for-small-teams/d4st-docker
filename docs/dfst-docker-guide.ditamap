@@ -61,8 +61,26 @@
         <topicmeta>
           <navtitle>Media Objects</navtitle>
         </topicmeta>
-        <keydef href="media/docker-quickstart-icon.png" keys="icon-docker-quickstart" format="png"
-          navtitle="Docker Quickstart Icon"/>
+        <keydef href="dfst-docker-guide/getting-started/media/docker-quickstart-icon.png"
+          keys="icon-docker-quickstart" format="png" navtitle="Docker Quickstart Icon"/>
+        <keydef href="dfst-docker-guide/getting-started/media/gitlab-web-login-01.png"
+          keys="screenshot-gitlab-login-01" format="png">
+          <topicmeta>
+            <navtitle>GitLab login page</navtitle>
+          </topicmeta>
+        </keydef>
+        <keydef href="dfst-docker-guide/getting-started/media/gitlab-web-projects-01.png"
+          keys="screenshot-gitlab-projects-01" format="png">
+          <topicmeta>
+            <navtitle>GitLab projects page</navtitle>
+          </topicmeta>
+        </keydef>
+        <keydef href="dfst-docker-guide/getting-started/media/gitlab-user-icon-01.png"
+          keys="icon-gitlab-user-01" format="png">
+          <topicmeta>
+            <navtitle>GitLab user icon</navtitle>
+          </topicmeta>
+        </keydef>
       </topicgroup>
     </topicgroup>
     <booklists>
