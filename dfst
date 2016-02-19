@@ -67,6 +67,19 @@ elif [ "$1" = "kill" ]; then
   echo "Killing the DFST Docker containers. You may need to stop them first."
   docker-compose -f ${DOCKER_FILE} kill
   R=$?
+elif [ "$1" = "cleancontainers" ]; then
+  echo "Remove all containers "
+  docker rm -f $(docker ps -aq)
+  R=$?
+elif [ "$1" = "cleanimages" ]; then
+  echo "Remove all images"
+  docker rmi -f $(docker images -q)
+  R=$?
+elif [ "$1" = "cleanall" ]; then
+  echo "Remove all images and containers"
+  docker rm -f $(docker ps -aq)
+  docker rmi -f $(docker images -q)
+  R=$?
 elif [ "$1" = "down" ]; then
   echo "Downing the DFST Docker containers."
   docker-compose -f ${DOCKER_FILE} down
@@ -120,6 +133,9 @@ else
   echo " stop - Stop the server"  
   echo " down : Stop containers and remove containers, networks, volumes, and images created by start."
   echo " kill - Kill the server"  
+  echo " cleanimages - Remove all Docker images"  
+  echo " cleancontainers - Remove all Docker containers"  
+  echo " cleanall - Remove all Docker containers and images"  
   echo " pause - Pauses the server"  
   echo " unpause - Resumes the server the server"  
   echo " pull - Pull new images"  
