@@ -27,31 +27,43 @@
   </bookmeta>
   <frontmatter>
     <topicgroup>
-      <keydef keys="website-dfst-github-organization" format="html" scope="external"
-        href="http://github.com/dita-for-small-teams"/>
-      <keydef href="https://github.com/dita-for-small-teams/dfst-docker"
-        keys="website-dfst-github-dfst-docker-project" scope="external" format="html">
+      <topicgroup>
         <topicmeta>
-          <navtitle>https://github.com/dita-for-small-teams/dfst-docker</navtitle>
+          <navtitle>External Web Sites</navtitle>
         </topicmeta>
-      </keydef>
-      <keydef href="https://docs.docker.com" keys="website-docker-docs" scope="external"
-        format="html"/>
-      <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox"
-        format="html" scope="external"/>
-      <keydef href="http://doc.gitlab.com/omnibus/docker/"
-        keys="website-gitlab-container-documentation" format="html" scope="external"/>
-      <keydef href="https://hub.docker.com" keys="website-docker-hub" format="html" scope="external"
-        navtitle="Docker Hub Web site"/>
-      <keydef href="https://www.virtualbox.org" keys="website-virtualbox" scope="external"
-        format="html"/>
-      <keydef href="https://www.virtualbox.org/wiki/Documentation" keys="website-virtualbox-docs"
-        scope="external" format="html"/>
-      <keydef href="http://yaml.org" keys="website-yaml-org" format="html" scope="external">
+        <keydef keys="website-dfst-github-organization" format="html" scope="external"
+          href="http://github.com/dita-for-small-teams"/>
+        <keydef href="https://github.com/dita-for-small-teams/dfst-docker"
+          keys="website-dfst-github-dfst-docker-project" scope="external" format="html">
+          <topicmeta>
+            <navtitle>https://github.com/dita-for-small-teams/dfst-docker</navtitle>
+          </topicmeta>
+        </keydef>
+        <keydef href="https://docs.docker.com" keys="website-docker-docs" scope="external"
+          format="html"/>
+        <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox"
+          format="html" scope="external"/>
+        <keydef href="http://doc.gitlab.com/omnibus/docker/"
+          keys="website-gitlab-container-documentation" format="html" scope="external"/>
+        <keydef href="https://hub.docker.com" keys="website-docker-hub" format="html"
+          scope="external" navtitle="Docker Hub Web site"/>
+        <keydef href="https://www.virtualbox.org" keys="website-virtualbox" scope="external"
+          format="html"/>
+        <keydef href="https://www.virtualbox.org/wiki/Documentation" keys="website-virtualbox-docs"
+          scope="external" format="html"/>
+        <keydef href="http://yaml.org" keys="website-yaml-org" format="html" scope="external">
+          <topicmeta>
+            <navtitle>http://yaml.org</navtitle>
+          </topicmeta>
+        </keydef>
+      </topicgroup>
+      <topicgroup>
         <topicmeta>
-          <navtitle>http://yaml.org</navtitle>
+          <navtitle>Media Objects</navtitle>
         </topicmeta>
-      </keydef>
+        <keydef href="media/docker-quickstart-icon.png" keys="icon-docker-quickstart" format="png"
+          navtitle="Docker Quickstart Icon"/>
+      </topicgroup>
     </topicgroup>
     <booklists>
       <toc/>
