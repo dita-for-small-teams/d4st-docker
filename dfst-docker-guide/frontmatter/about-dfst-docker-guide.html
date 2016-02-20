@@ -1,0 +1,45 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>About This Publication</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="schema.DC" href="http://purl.org/dc/terms/"><meta name="DC.Type" content="topic"><meta name="DC.Format" content="XHTML"><meta name="DC.Identifier" content="Untitled10"><script type="text/javascript">var d4p = {"relativePath":"..\/..\/","dev":false,"debug":false,"draft":false,"nextTopicHref":"dfst-docker-guide\/getting-started\/getting-started.html","previousTopicHref":"","ext":".html","root":false,"topic":{"chunked":""},"map":{"title":"\n      DITA for Small Teams\n        DFST Docker Usage Guide\n    ","chunked":false},"search":{"minlength":2},"l":{"searchPageHeading":"Search Results","close":"Close"}}</script><link rel="stylesheet" type="text/css" media="screen, projection" href="../../themes/dita-d4p-classic/css/style.css"><link rel="stylesheet" type="text/css" media="screen, projection, print" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><script type="text/javascript">
+      
+        d4p.cssGridPath = d4p.dev ? 'html5-themes/modules/960-Responsive-Grid/css/' : 'themes/dita-d4p-classic/css/';
+        var ADAPT_CONFIG = {
+          // Where is your CSS?
+          path: d4p.relativePath + d4p.cssGridPath,
+          
+          // false = Only run once, when page first loads.
+          // true = Change on window resize and page tilt.
+          dynamic: true,
+          
+          // Optional callback... myCallback(i, width)
+          callback: doc_resize,
+          
+          // First range entry is the minimum.
+          // Last range entry is the maximum.
+          // Separate ranges by "to" keyword.
+          range: [
+             // small (size-0)
+            '0px    to 760px  = mobile.css',
+             // medium (size-1, size-2)
+            '760px  to 980px  = 720.css',
+            '980px  to 1270px = 960.css',
+             // large (size-3, size-5)
+            '1270px to 1600px = 1200.css',
+            '1600px to 1940px = 1560.css',
+             // extra large (size-6)
+            '1940px to 2540px = 1920.css',
+            '2540px           = 2520.css'
+          ]
+        };
+
+        function doc_resize(i, width)
+        {
+          d4p.setBodyClassfunction(i, width);
+        }
+
+
+        
+      </script><script type="text/javascript" src="../../themes/dita-d4p-classic/js/script.js"></script></head><body class="en-us dita-d4p-classic centered navigation-default"><div id="d4h5-main-container" class="container_12" role="application"><header role="banner" aria-labelledby="publication-title" class="hide-for-small"><div class="grid_8"><h1 id="publication-title">
+      DITA for Small Teams
+        DFST Docker Usage Guide
+    </h1></div><section class="grid_4 search-box"><form id="search" role="search"><div class="form-group"><input id="search-text" type="text" autocomplete="off" class="form-control" placeholder="Search"></div></form></section><secion class="clearfix"></secion></header><div id="d4h5-section-container" class="grid_12"><nav id="local-navigation" class="grid_4 alpha omega" role="navigation" aria-label="Main navigation"><div id="nav-content"><ul><li><a href="../../index.html">Table of Contents</a></li><li class=" active"><a href="about-dfst-docker-guide.html" class=" selected">About This Publication</a></li><li class="collapsible collapsed"><a href="../getting-started/getting-started.html"><span class="enumeration enumeration0">Chapter 1. </span>Getting Started</a><ul><li><a href="../getting-started/dfst-container-quick-start-01.html">DFST Container Quick Start</a></li><li><a href="../getting-started/docker-orientation.html">Getting Started With Docker</a></li><li><a href="../getting-started/virtual-box.html">VirtualBox Notes and Details</a></li></ul></li><li class="collapsible collapsed"><a href="../extending/extending_the_dfst_docker_system.html"><span class="enumeration enumeration0">Chapter 2. </span>Extending the DFST Docker System</a><ul><li><a href="../extending/building_the_dfst_containers.html">Building the DFST Containers</a></li><li><a href="../extending/configuring_your_own_containers.html">Configuring Your Own Containers</a></li></ul></li><li class="collapsible collapsed"><a href="../system-description/chapter-dfst-container-system-description.html"><span class="enumeration enumeration0">Chapter 3. </span>DFST Container System Description</a><ul><li><a href="../system-description/dfst-system-overview.html">DFST System Overview</a></li><li><a href="../system-description/dfst-system-configuration.html">DFST System Configuration</a></li></ul></li><li class="collapsible collapsed"><a href="../docker-container-ref/chapter-docker-container-ref.html"><span class="enumeration enumeration0">Chapter 4. </span>Docker Container Reference</a><ul><li><a href="../docker-container-ref/container-ref-dfst-dita-ot.html">dfst/dita-ot</a></li><li><a href="../docker-container-ref/container-ref-link-manager-basex.html">DFST Link Manager BaseX Docker Container</a></li><li><a href="../docker-container-ref/container-ref-dfst-gitlab.html">dfst/gitlab</a></li></ul></li><li class="collapsible collapsed"><a href="../../glossary/glossary.html">Glossary</a><ul><li class="collapsible collapsed"><a href="../../glossary/glossgroup-y.html">Y</a><ul><li><a href="../../glossary/gloss-yaml.html">YAML</a></li></ul></li></ul></li></ul></div></nav><div id="d4h5-main-content" class="grid_8 alpha omega"><article><nav id="content-toolbar" class="toolbar hide-for-small"></nav><section id="page"><div><a id="Untitled10" class="anchor"></a> <h1 class="title topictitle1">About This Publication</h1> <div class="body"> <p class="p">This publication documents the DITA For Small Teams Docker-based system.</p> <p class="p">If you want to jump right in, go to <a data-keyref="getting-started" class="xref" href="../getting-started/getting-started.html">../getting-started/getting-started.html</a>.</p> <p class="p">Docker is a relatively new (as of early 2016) for managing software in platform-independent "containers" that can be more easily managed than traditional virtual machine images or simply installing various software components directly on a host machine.</p> <p class="p">The goal of the DFST container approach is to provide a easy-to-provision, easy-to-update, easy-to-use instance of a DITA for Small Teams collection of system components. The container approach allows the same set of components to be used by a single user on a single machine or by multiple users with access to a shared server somewhere (within an enterprise or in the cloud).</p> <p class="p">This publication is intended both for people who just want to the use the DFST components and people who want to contribute to this project or use the DFST components as a base for their own custom solution.</p> <p class="p">This publication does not cover the details of the Docker technology. Please see the Docker documentation for instructions on installing the Docker tools needed to get and run containers. Docker is supported on all modern operating systems.</p> </div> <footer id="topicsNPLinks"><div id="footer_previous"></div><div id="footer_next"><a href="../../dfst-docker-guide/getting-started/getting-started.html" class="next" rel="internal">Getting Started</a></div></footer></div></section></article><div class="clear"></div></div><div class="clearfix"></div></div><div class="clearfix"></div><div id="footer-container" class="grid_12"></div></div></body></html>
