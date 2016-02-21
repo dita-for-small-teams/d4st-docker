@@ -1,0 +1,22 @@
+version: "2"
+#
+# DFST Link Manager
+#
+# The Link Manager provides link-related information
+# for use by authors via an interactive Web app
+# or other applications via REST API.
+#
+# It gets files from the git server and depends on
+# the DITA Open Toolkit to resolve references to 
+# DTDs or other grammar files.
+#  
+services:
+  linkmgr-basex-webapp:
+    image: dfst/link-manager-webapp
+    container_name: linkmgr-dfst-webapp
+#
+# Defines volumes /repo and /webapp which should
+# replace those from the base DFST Link Manager container.  
+#
+# End of YAML file.
+#

@@ -49,6 +49,12 @@ services:
 # the DITA Open Toolkit to resolve references to 
 # DTDs or other grammar files.
 #  
+  linkmgr-webapp:
+     extends:
+       file: link-manager-webapp/docker-compose.yml
+       service: linkmgr-basex-webapp
+     container_name: linkmgr-webapp
+     
   linkmgr:
 
     extends:
@@ -64,6 +70,7 @@ services:
   
     volumes_from:
      - dita-ot
+     - linkmgr-webapp
  
 #
 # GitLab
@@ -76,6 +83,7 @@ services:
   postgresql:
     restart: always
     image: sameersbn/postgresql:9.4-12
+    container_name: postgresql
     environment:
       - DB_USER=gitlab
       - DB_PASS=password
@@ -86,6 +94,7 @@ services:
   redis:
     restart: always
     image: sameersbn/redis:latest
+    container_name: redis
     volumes:
       - /srv/docker/gitlab/redis:/var/lib/redis      
 
@@ -117,6 +126,7 @@ services:
 #      
   gitlab-runner:
     image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -125,9 +135,15 @@ services:
 #
 # Demo content data volume:
 #
+# Using top as the command so the container is always running
+# so we can then copy files out of it (which requires a running
+# container).
+#
 # Defines volume /opt/dita-community/data/Thunderbird
+#
   demo-content:
     image: ditacommunity/demo-content
+    container_name: demo-content
     command: top
       
 #  
