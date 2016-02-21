@@ -110,6 +110,17 @@ services:
     volumes_from:
       - dita-ot
       - linkmgr
+      
+#
+# Define the GitLab runner
+# that will be used to run build jobs;
+#      
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /srv/gitlab-runner/config:/etc/gitlab-runner
 
 #
 # Demo content data volume:

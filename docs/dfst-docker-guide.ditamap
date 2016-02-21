@@ -9,6 +9,7 @@
     <author>W. Eliot Kimber</author>
     <critdates>
       <created date="2016-01"/>
+      <revised modified="2016-02-20"/>
     </critdates>
     <keywords>
       <keyword>Docker</keyword>
@@ -39,6 +40,12 @@
             <navtitle>https://github.com/dita-for-small-teams/dfst-docker</navtitle>
           </topicmeta>
         </keydef>
+        <keydef href="https://github.com/dita-for-small-teams/dita-for-small-teams/releases"
+          keys="website-dfst-github-project-releases" format="html" scope="external">
+          <topicmeta>
+            <navtitle>https://github.com/dita-for-small-teams/dita-for-small-teams/releases</navtitle>
+          </topicmeta>
+        </keydef>
         <keydef href="https://docs.docker.com" keys="website-docker-docs" scope="external"
           format="html"/>
         <keydef href="https://www.docker.com/docker-toolbox" keys="website-docker-toolbox"
@@ -54,12 +61,6 @@
         <keydef href="http://yaml.org" keys="website-yaml-org" format="html" scope="external">
           <topicmeta>
             <navtitle>http://yaml.org</navtitle>
-          </topicmeta>
-        </keydef>
-        <keydef href="https://github.com/dita-for-small-teams/dita-for-small-teams/releases"
-          keys="website-dfst-github-project-releases" format="html" scope="external">
-          <topicmeta>
-            <navtitle>https://github.com/dita-for-small-teams/dita-for-small-teams/releases</navtitle>
           </topicmeta>
         </keydef>
       </topicgroup>
@@ -103,6 +104,7 @@
     </topicgroup>
     <booklists>
       <toc/>
+      <figurelist/>
     </booklists>
     <topicref href="dfst-docker-guide/frontmatter/about-dfst-docker-guide.dita"/>
   </frontmatter>
@@ -142,5 +144,8 @@
         <topicref href="glossary/gloss-yaml.dita" keys="gloss-yaml"/>
       </topicref>
     </topicref>
+    <booklists>
+      <indexlist/>
+    </booklists>
   </backmatter>
 </bookmap>

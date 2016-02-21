@@ -6,15 +6,23 @@
     quickly as possible. </shortdesc>
     <taskbody>
     <prereq>
-      <p>On Windows and OS X you must have the <xref keyref="website-docker-toolbox">Docker
-          Toolbox</xref> installed and running. See the Docker documentation for details on how to
-        run Docker. All Docker commands are run from the Docker Quickstart Terminal </p>
+      <p><note>As of 20 Feb 2016 these instructions reflect a process that is more manual that I
+          want. The intent is to fully automate the configuration of the GitLab server so that you
+          simply need to tell it about your local git repositories and everything is set up
+          automatically. But so far I've not been able to get the GitLab REST API to work for
+          PUT/POST requests, so automatic configuration is currently not working. The instructions
+          below look like a lot but in fact once you do it once you will see that it's pretty quick
+          to set up new repositories and get going.</note>On Windows and OS X you must have the
+          <xref keyref="website-docker-toolbox">Docker Toolbox</xref> installed and running. See the
+        Docker documentation for details on how to run Docker. All Docker commands are run from the
+        Docker Quickstart Terminal </p>
       <p platform="windows">Under Windows, open a Docker Quickstart Terminal window (<image
-          keyref="icon-docker-quickstart" width="50" height="50" id="image_xwr_mpb_bv"/>)</p>
+          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"
+        />)</p>
       <p platform="mac">Under OS X you can use the Docker Quickstart Terminal shortcut (<image
-          keyref="icon-docker-quickstart" width="50" height="50" id="image_o3t_33c_bv"/>) to start a
-        new Docker terminal session. You can also make any terminal window docker-enabled by using
-        this command from the command
+          keyref="icon-docker-quickstart" height="16" id="image_o3t_33c_bv" placement="inline"/>) to
+        start a new Docker terminal session. You can also make any terminal window docker-enabled by
+        using this command from the command
         line:<codeblock>eval $(docker-machine env default)</codeblock>to set the Docker environment
         in your current terminal window. You can add this line to your ~/.profile script so that new
         terminal windows are automatically configured for Docker.</p>
@@ -59,8 +67,8 @@ dfst</codeblock></p>
         </stepresult>
       </step>
       <step>
-        <cmd>Start a Docker Quickstart Terminal (<image keyref="icon-docker-quickstart" width="50"
-            height="50" id="image_rnl_v3c_bv"/>) and navigate to the directory for the DFST
+        <cmd>Start a Docker Quickstart Terminal (<image keyref="icon-docker-quickstart" height="16"
+            id="image_rnl_v3c_bv" placement="inline"/>) and navigate to the directory for the DFST
           package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
@@ -113,7 +121,8 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
           <p>Your browser should open to the GitLab login page:</p>
           <fig id="fig_gwz_yjc_bv">
             <title>GitLab Login Screen</title>
-            <image keyref="screenshot-gitlab-login-01" width="4in" id="image_kkb_bkc_bv"/>
+            <image keyref="screenshot-gitlab-login-01" width="3in" id="image_kkb_bkc_bv"
+              placement="break"/>
           </fig>
           <p>If your browser doesn't open, make sure you have Google Chrome installed.</p>
         </stepresult>
@@ -141,7 +150,8 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
           <p>You should go to the Projects page:</p>
           <fig id="fig_kmj_5lc_bv">
             <title>GitLab Projects Page</title>
-            <image keyref="screenshot-gitlab-projects-01" width="4in" id="image_xcz_vlc_bv">
+            <image keyref="screenshot-gitlab-projects-01" width="3in" id="image_xcz_vlc_bv"
+              placement="break">
               <alt>GitLab projects page</alt>
             </image>
           </fig>
@@ -150,17 +160,18 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
       <step>
         <cmd>Navigate to the Admin user's profile settings:</cmd>
         <info>
-          <p>Click on the user icon (<image keyref="icon-gitlab-user-01" height="50"
-              id="image_vwq_4mc_bv">
+          <p>Click on the user icon (<image keyref="icon-gitlab-user-01" height="20"
+              id="image_vwq_4mc_bv" placement="inline">
               <alt>User icon</alt>
-            </image>), then on "account" (<image keyref="icon-gitlab-gear-01" height="50"
-              id="image_zqh_wmc_bv">
+            </image>), then on "account" (<image keyref="icon-gitlab-gear-01" height="20"
+              id="image_zqh_wmc_bv" placement="inline">
               <alt>Account icon</alt>
             </image>)</p>
           <p>Scroll down to reveal the "Change Username" section:</p>
           <fig id="fig_wvs_hnc_bv">
             <title>GitLab Change Username field</title>
-            <image keyref="screenshot-gitlab-change-username-01" width="3in" id="image_nq2_mnc_bv"/>
+            <image keyref="screenshot-gitlab-change-username-01" width="3in" id="image_nq2_mnc_bv"
+              placement="inline"/>
           </fig>
         </info>
       </step>
