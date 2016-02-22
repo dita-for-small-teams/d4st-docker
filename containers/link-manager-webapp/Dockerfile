@@ -23,7 +23,10 @@ RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
 # container's versions:
 #
 VOLUME ["/repo", "/webapp"]
+# Override the default entry point so we don't start
+# two instances of BaseX:
 ENTRYPOINT /bin/bash
+
 
 #
 # End of Dockerfile
