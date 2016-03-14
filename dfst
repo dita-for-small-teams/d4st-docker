@@ -114,17 +114,18 @@ elif [ "$1" = "linkmgr" ]; then
     r=$("open" "-b" $browserBundleId "${url}")
   fi
   exit $?
-elif [ "$1" = "xgetdemo" ]; then
-  # FIXME: Need to work out how to call docker command from bash
-  echo "Copy the Thunderbird demo git repository to a local directory."
-  targetDir=${2:-"~"}
-  if [ -e "$targetDir/Thunderbird" ]; then
+elif [ "$1" = "addhooks" ]; then
+  echo "Adding custom hooks to GitLab repositories..."
+  $(docker exec gitlab-dfst add-custom-hooks)
+  R=$?
+elif [ "$1" = "getdemo" ]; then
+  targetDir=${2:-${HOME}}
+  echo "Copying the Thunderbird demo git repository to ${targetDir}/Thunderbird..."
+  if [ -d "${targetDir}/Thunderbird" ]; then
      echo "Target directory \"${targetDir}/Thunderbird\" already exists, not copying the data."
+     exit 0
   else
-     imageid=$(docker run -d ditacommunity/demo-content:latest top)
-     $(docker "cp ${imageid}:/opt/dita-community/data/Thunderbird \"${targetDir}\"")
-     $(docker "stop ${imageid}")
-     $(ls "${targetDir}")
+     $(docker cp demo-content:/opt/dita-community/data/Thunderbird \"${targetDir}\")
      exit $?
   fi
 else
@@ -141,6 +142,7 @@ else
   echo " pull - Pull new images"  
   echo " gitlab - Open GitLab Web application"  
   echo " linkmgr - Open DFST Link Manager Web application"  
+  echo " addhooks - Add the git hooks to the GitLab repositories"
   exit 1
 fi
 

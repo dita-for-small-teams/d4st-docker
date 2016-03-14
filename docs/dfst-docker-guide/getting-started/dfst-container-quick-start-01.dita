@@ -80,10 +80,10 @@ bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
         </info>
       </step>
       <step>
-        <cmd>Run the command "<codeph>dfst start</codeph>":</cmd>
+        <cmd>Run the command "<codeph>./dfst start</codeph>":</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst-docker
-$ dfst start
+$ ./dfst start
 Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status.
 Pulling redis (sameersbn/redis:latest)...
 latest: Pulling from sameersbn/redis
@@ -193,22 +193,12 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
           copy it out of it's container to your local machine.</p>
       </stepsection>
       <step>
-        <cmd>In the Docker Quickstart Terminal do the following commands:</cmd>
+        <cmd>In the Docker Quickstart Terminal do the following command</cmd>
         <info>
-          <codeblock>$ docker ps | grep demo</codeblock>
-          <p>This lists details for the demo content container. It should look like this:</p>
-          <p>
-            <codeblock>2c675bf0f308 ditacommunity/demo-content:latest "top" 15 minutes ago Up 15 minutes big_bhaskara</codeblock>
-          </p>
-          <p>But more spread out. The last token on the line is the container name, in this example
-            "big_bhaskara" (yours will likely be different).</p>
-          <p>Now move to the directory you want to add the <filepath>Thunderbird</filepath>
-            directory to:<codeblock>$ cd ~</codeblock></p>
-          <p>Finally, copy the files out of the demo data container:</p>
-          <codeblock>$ docker cp big_bhaskara:/opt/dita-community/data/Thunderbird .</codeblock>
+          <codeblock>$ ./dfst getdemo ~</codeblock>
           <p>This copies the <filepath>Thunderbird</filepath> directory from the container to
-              <filepath>Thunderbird</filepath> under your home directory. You can use any target
-            directory you want.</p>
+              <filepath>Thunderbird</filepath> under your home directory. You can replace "~" with
+            target directory you want.</p>
           <p>Test the copy:</p>
           <codeblock>$ ls ~/Thunderbird
 c_about_defining_payload.dita      r_image_warehouse_2.dita
@@ -248,7 +238,7 @@ c_attribute_parameter_syntax.dita  r_jobconf.dita
       <step>
         <cmd>In a Docker Quickstart Terminal type the command:</cmd>
         <info>
-          <codeblock>$ docker exec gitlab-dfst add-custom-hooks</codeblock>
+          <codeblock>$ ./dfst addhooks</codeblock>
         </info>
         <stepresult>
           <p>The Thunderbird repository in the GitLab server should now be set up with the DFST
