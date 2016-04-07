@@ -49,41 +49,71 @@ if [ -z $1  ] ; then
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
   echo "Docker machine IP address is '$HOSTNAME'"
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "${ACTION}" == "start"  ] ; then
   echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
   # echo docker-compose -f ${DOCKER_FILE}  up -d
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "${ACTION}" == "up"  ] ; then
   echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
   # echo docker-compose -f ${DOCKER_FILE}  up -d
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "$1" = "stop" ]; then
   echo "Stopping DFST Docker containers. The containers can be started with the 'start' command."
   docker-compose -f ${DOCKER_FILE} stop
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "$1" = "kill" ]; then
   echo "Killing the DFST Docker containers. You may need to stop them first."
   docker-compose -f ${DOCKER_FILE} kill
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "$1" = "cleancontainers" ]; then
   echo "Remove all containers "
   docker rm -f $(docker ps -aq)
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "$1" = "cleanimages" ]; then
   echo "Remove all images"
   docker rmi -f $(docker images -q)
   R=$?
+  echo ""
+  echo "Docker images:"
+  docker images
 elif [ "$1" = "cleanall" ]; then
   echo "Remove all images and containers"
   docker rm -f $(docker ps -aq)
   docker rmi -f $(docker images -q)
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
+  echo ""
+  echo "Docker images:"
+  docker images
 elif [ "$1" = "down" ]; then
   echo "Downing the DFST Docker containers."
   docker-compose -f ${DOCKER_FILE} down
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "$1" = "pause" ]; then
   echo "Pausing the DFST Docker containers. You may need to stop them first."
   docker-compose -f ${DOCKER_FILE} pause
@@ -92,6 +122,9 @@ elif [ "$1" = "unpause" ]; then
   echo "Unpausing (resuming) the DFST Docker containers if they were previously paused."
   docker-compose -f ${DOCKER_FILE} unpause
   R=$?
+  echo ""
+  echo "Docker containers:"
+  docker ps
 elif [ "$1" = "pull" ]; then
   echo "Pulling new images..."
   docker-compose -f ${DOCKER_FILE} pull
@@ -143,12 +176,9 @@ else
   echo " gitlab - Open GitLab Web application"  
   echo " linkmgr - Open DFST Link Manager Web application"  
   echo " addhooks - Add the git hooks to the GitLab repositories"
+  echo " getdemo [targetDirectory] - Copy the Thunderbird demo git repository to a local directory"
   exit 1
 fi
-
-echo ""
-echo "Docker containers:"
-docker ps
 
 if [ $R -ne "0" ]
   then

@@ -37,6 +37,8 @@ services:
     extends:
        file: dita-ot/docker-compose.yml  
        service: dita-ot-dfst
+    volumes_from:
+       - web-delivery
  
 #
 # DFST Link Manager
@@ -65,12 +67,12 @@ services:
        - /Users:/Users
 # Uncomment and adjust these lines in order to have the Link Manager
 # use a local copy of the Web app source for development purposes:       
-#       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
-#       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
+       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
+       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
   
     volumes_from:
      - dita-ot
-     - linkmgr-webapp
+# - linkmgr-webapp
  
 #
 # GitLab
@@ -132,6 +134,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /srv/gitlab-runner/config:/etc/gitlab-runner
 
+#
+# Web server for HTML delivery
+#
+
+  web-delivery:
+    extends:
+       file: nginx-dfst/docker-compose.yml  
+       service: nginx-dfst
+    volumes:
+      - /Users/ekimber/temp/webdelivery:/usr/share/nginx/html
+      
 #
 # Demo content data volume:
 #

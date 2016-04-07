@@ -1,0 +1,21 @@
+version: "2"
+#
+# Docker-compose file for
+# the DFST NGINX Web server used to deliver
+# generated deliverables (HTML, PDF, EPUB, etc.)
+# 
+#
+# 
+services:
+  nginx-dfst:
+    hostname: ${HOSTNAME}
+    ports: 
+      - "8080:80"
+    container_name: nginx-dfst
+    volumes: ["/usr/share/nginx/html"] 
+     
+#    image: dfst/nginx-dfst
+    image: nginx
+#
+# End of compose file.
+#  
