@@ -1,0 +1,21 @@
+version: "2"
+#
+# Docker-compose file for
+# the DFST Caddy Web server used to deliver
+# generated deliverables (HTML, PDF, EPUB, etc.)
+# 
+#
+# 
+services:
+  caddy-dfst:
+    hostname: ${HOSTNAME}
+    ports: 
+      - "8080:2015"
+    container_name: caddy-dfst
+    volumes: ["/srv/www"] 
+     
+#    image: dfst/caddy-dfst
+    image: caddy
+#
+# End of compose file.
+#  

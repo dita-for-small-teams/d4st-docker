@@ -20,6 +20,8 @@ version: "2"
 # of 8984 for the Web app and 1984 for the underlying
 # BaseX server (used by the git hooks installed in the
 # GitLab repositories).
+#
+# The Web server is exposed on port 8080.
 # 
 # Placeholder for now, will add appropriate
 # variables later (e.g., ports for Web services,
@@ -140,10 +142,10 @@ services:
 
   web-delivery:
     extends:
-       file: nginx-dfst/docker-compose.yml  
-       service: nginx-dfst
+       file: caddy-dfst/docker-compose.yml  
+       service: caddy-dfst
     volumes:
-      - /Users/ekimber/temp/webdelivery:/usr/share/nginx/html
+      - /Users/ekimber/temp/webdelivery:/var/www
       
 #
 # Demo content data volume:
