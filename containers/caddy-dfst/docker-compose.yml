@@ -14,8 +14,7 @@ services:
     container_name: caddy-dfst
     volumes: ["/srv/www"] 
      
-#    image: dfst/caddy-dfst
-    image: caddy
+    image: dfst/caddy-dfst
 #
 # End of compose file.
 #  

@@ -145,7 +145,7 @@ services:
        file: caddy-dfst/docker-compose.yml  
        service: caddy-dfst
     volumes:
-      - /Users/ekimber/temp/webdelivery:/var/www
+      - /Users/ekimber/temp/webdelivery:/srv/www
       
 #
 # Demo content data volume:
