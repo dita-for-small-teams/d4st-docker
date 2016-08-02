@@ -3,28 +3,38 @@
 # GitLab utility script to help configure the GitLab
 # server 
 #
-PRIVATE_TOKEN=${1-gj2su57CuDNTyUtBqxn2}
-DOCKER_HOST=$(docker-machine ip default) || echo "Command 'docker-machine ip default' failed--is Docker running?"
+PRIVATE_TOKEN="${GITLAB_PRIVATE_TOKEN}"
+# DOCKER_HOST=$(docker-machine ip default) || echo "Command 'docker-machine ip default' failed--is Docker running?"
+DOCKER_HOST=localhost:90
 
-USERNAME=$(whoami)
+USERNAME=$1
+if [ -z "$1" ]; then
+  USERNAME=$(whoami)
+fi
 echo "username=${USERNAME}"
-echo "GitLab host is at $DOCKER_HOST"
-result=$(curl --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "http://${DOCKER_HOST}/api/v3/users?username=$USERNAME")
-echo "result=\"${result}\""
+# echo "Private token=\"${PRIVATE_TOKEN}\""
+# echo "GitLab host is at $DOCKER_HOST"
+result=$(curl -s --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "http://${DOCKER_HOST}/api/v3/users?username=$USERNAME")
+# echo "result=\"${result}\""
 if [ "$result" == "[]" ]; then
    echo "Creating user '${USERNAME}'..."
    url="http://${DOCKER_HOST}/api/v3/users?username=$USERNAME"
    url+="&email=$USERNAME@example.com"
-   url+="&password=$USERNAME"
+   url+="&password=password"
    url+="&name=$USERNAME"
    url+="&can_create_groups=true"
    url+="&confirm=false"
-   echo "url=\"${url}\""
+   # echo "url=\"${url}\""
  
-   result=$(curl -X PUT --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "${url}")
-   echo "result=\"${result}\""   
+   # -s turns off progress, -# uses simple progress bar
+   result=$(curl -s -X POST --header "PRIVATE-TOKEN: ${PRIVATE_TOKEN}" "${url}")
+   # echo "result=\"${result}\""   
+   if [ "$result" != "" ]; then
+      echo "User '${USERNAME}' created."
+   fi
 else
-   echo "User ${USERNAME} already defined."
+   echo "User already exists or not created"
+   # echo "User ${USERNAME} already defined."
 fi 
 #
 # End of script
