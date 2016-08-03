@@ -159,7 +159,7 @@ elif [ "$1" = "getdemo" ]; then
      echo "Target directory \"${targetDir}/Thunderbird\" already exists, not copying the data."
      exit 0
   else
-     $(docker cp demo-content:/opt/dita-community/data/Thunderbird \"${targetDir}\")
+     $(docker cp "demo-content:/opt/dita-community/data/Thunderbird" "${targetDir}")
      exit $?
   fi
 else
