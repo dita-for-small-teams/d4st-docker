@@ -74,7 +74,6 @@ services:
   
     volumes_from:
      - dita-ot
-# - linkmgr-webapp
  
 #
 # GitLab
@@ -93,14 +92,14 @@ services:
       - DB_PASS=password
       - DB_NAME=gitlabhq_production
     volumes:
-      - /srv/docker/gitlab/postgresql:/var/lib/postgresql
+      - /tmp/docker/gitlab/postgresql:/var/lib/postgresql
     
   redis:
     restart: always
     image: sameersbn/redis:latest
     container_name: redis
     volumes:
-      - /srv/docker/gitlab/redis:/var/lib/redis      
+      - /tmp/docker/gitlab/redis:/var/lib/redis      
 
 #
 # The GitLab server provides two services:
@@ -119,7 +118,7 @@ services:
       - GITLAB_SECRETS_DB_KEY_BASE=8WgpQbrcNZtXPzzGL3cgsdL234HmpRsfqWsKJLtqwJJk2VkQS2FFVBwssV3xcnWt
       
     volumes:
-      - /srv/gitlab/git-data:/var/opt/gitlab/git-data
+      - /tmp/gitlab/git-data:/var/opt/gitlab/git-data
     volumes_from:
       - dita-ot
       - linkmgr
@@ -134,7 +133,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /srv/gitlab-runner/config:/etc/gitlab-runner
+      - /tmp/gitlab-runner/config:/etc/gitlab-runner
 
 #
 # Web server for HTML delivery

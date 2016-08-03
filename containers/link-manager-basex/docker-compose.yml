@@ -16,7 +16,7 @@ services:
     container_name: linkmgr-dfst
     # Put the data in the Docker Machine so it
     # persists as long as the machine is preserved.
-    volumes: ["/srv/basex/data:/data"]
+    volumes: ["/tmp/basex/data:/data"]
     ports: 
      - "1984:1984"
      - "8984:8984"

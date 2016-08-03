@@ -34,21 +34,22 @@ done
 
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 DOCKER_FILE=$DIR/containers/docker-compose.yml
-export HOSTNAME=$(docker-machine ip default)
+# export HOSTNAME=$(docker-machine ip default)
 
-if [ -z $HOSTNAME ] ; then
-   echo "Failed to get IP address for docker machine 'default'. Make sure the docker machine is started."
-   exit 1
-fi
-
+#if [ -z $HOSTNAME ] ; then
+#   echo "Failed to get IP address for docker machine 'default'. Make sure the docker machine is started."
+#   exit 1
+#fi
+HOSTNAME=localhost
 
 ACTION=$1
+
 if [ -z $1  ] ; then
   echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
   # echo docker-compose -f ${DOCKER_FILE}  up -d
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
-  echo "Docker machine IP address is '$HOSTNAME'"
+  # echo "Docker machine IP address is '$HOSTNAME'"
   echo ""
   echo "Docker containers:"
   docker ps
@@ -131,7 +132,7 @@ elif [ "$1" = "pull" ]; then
   R=$?
 elif [ "$1" = "gitlab" ]; then
   echo "Open GitLab Web application in ${dfstBrowser}"
-  url="http://$(docker-machine ip default):80"
+  url="http://${HOSTNAME}:80"
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} "${url}"
   else
@@ -140,7 +141,7 @@ elif [ "$1" = "gitlab" ]; then
   exit $?
 elif [ "$1" = "linkmgr" ]; then
   echo "Open DFST Link Manager Web application in ${dfstBrowser}"
-  url="http://$(docker-machine ip default):8984"
+  url="http://${HOSTNAME}:8984"
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} "${url}"
   else

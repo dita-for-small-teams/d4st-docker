@@ -7,6 +7,6 @@ version: "2"
 #
 services:
   dita-ot-dfst:
-    container_name: dita-ot-dfst
+    container_name: dita-ot-dfst-cont
     image: dfst/dita-ot
   
