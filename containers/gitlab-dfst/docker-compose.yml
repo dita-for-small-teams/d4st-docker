@@ -7,13 +7,13 @@ version: "2"
 # it locally.
 services:
   gitlab-dfst:
-    hostname: ${HOSTNAME}
+    # hostname: ${HOSTNAME}
     ports: 
       - "80:80"
       - "443:443"
       - "8022:22"
     container_name: gitlab-dfst
-    volumes: ["/tmp/gitlab:/var/opt/gitlab"]
+    volumes: ["/Users/ekimber/tmp/gitlab:/var/opt/gitlab"]
      
     image: dfst/gitlab-dfst
 #

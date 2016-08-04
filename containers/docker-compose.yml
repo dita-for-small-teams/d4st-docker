@@ -28,6 +28,7 @@ version: "2"
 # host-side mount points).
 
 services:
+
 #
 # DITA OT
 #
@@ -69,8 +70,8 @@ services:
        - /Users:/Users
 # Uncomment and adjust these lines in order to have the Link Manager
 # use a local copy of the Web app source for development purposes:       
-       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
-       - /Users/ekimber/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
+       - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
+       - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
   
     volumes_from:
      - dita-ot
@@ -92,14 +93,14 @@ services:
       - DB_PASS=password
       - DB_NAME=gitlabhq_production
     volumes:
-      - /tmp/docker/gitlab/postgresql:/var/lib/postgresql
+      - ${HOME}/tmp/docker/gitlab/postgresql:/var/lib/postgresql
     
   redis:
     restart: always
     image: sameersbn/redis:latest
     container_name: redis
     volumes:
-      - /tmp/docker/gitlab/redis:/var/lib/redis      
+      - ${HOME}/tmp/docker/gitlab/redis:/var/lib/redis      
 
 #
 # The GitLab server provides two services:
@@ -113,12 +114,11 @@ services:
     extends:
        file: gitlab-dfst/docker-compose.yml
        service: gitlab-dfst
-    hostname: ${HOSTNAME}
     environment:
       - GITLAB_SECRETS_DB_KEY_BASE=8WgpQbrcNZtXPzzGL3cgsdL234HmpRsfqWsKJLtqwJJk2VkQS2FFVBwssV3xcnWt
       
     volumes:
-      - /tmp/gitlab/git-data:/var/opt/gitlab/git-data
+      - ${HOME}/tmp/gitlab/git-data:/var/opt/gitlab/git-data
     volumes_from:
       - dita-ot
       - linkmgr
@@ -133,7 +133,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /tmp/gitlab-runner/config:/etc/gitlab-runner
+      - ${HOME}/tmp/gitlab-runner/config:/etc/gitlab-runner
 
 #
 # Web server for HTML delivery
@@ -144,7 +144,7 @@ services:
        file: caddy-dfst/docker-compose.yml  
        service: caddy-dfst
     volumes:
-      - /Users/ekimber/temp/webdelivery:/srv/www
+      - ${HOME}/tmp/webdelivery:/srv/www
       
 #
 # Demo content data volume:

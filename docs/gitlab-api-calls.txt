@@ -1,0 +1,8 @@
+Create user:
+
+curl -H "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" -X POST "${GLENDPOINT}/users?email=$USER@contrext.com&username=$USER&password=password&name=$USER"
+
+Create project for user:
+
+curl -H "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" -X POST "${GLENDPOINT}/projects/user/2?user_id=2&name=Thunderbird&description=Demo%20project"
+

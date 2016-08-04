@@ -8,7 +8,7 @@ version: "2"
 # 
 services:
   caddy-dfst:
-    hostname: ${HOSTNAME}
+    # hostname: ${HOSTNAME}
     ports: 
       - "8080:2015"
     container_name: caddy-dfst

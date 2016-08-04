@@ -11,9 +11,9 @@ postgresql:
     - DB_PASS=password
     - DB_NAME=gitlabhq_production
   volumes:
-    - /tmp/docker/gitlab/postgresql:/var/lib/postgresql
+    - /Users/ekimber/tmp/docker/gitlab/postgresql:/var/lib/postgresql
 redis:
   restart: always
   image: sameersbn/redis:latest
   volumes:
-    - /tmp/docker/gitlab/redis:/var/lib/redis
+    - /Users/ekimber/tmp/docker/gitlab/redis:/var/lib/redis
