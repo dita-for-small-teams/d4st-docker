@@ -6,27 +6,21 @@
     quickly as possible. </shortdesc>
     <taskbody>
     <prereq>
-      <p><note>As of 20 Feb 2016 these instructions reflect a process that is more manual that I
-          want. The intent is to fully automate the configuration of the GitLab server so that you
-          simply need to tell it about your local git repositories and everything is set up
-          automatically. But so far I've not been able to get the GitLab REST API to work for
-          PUT/POST requests, so automatic configuration is currently not working. The instructions
-          below look like a lot but in fact once you do it once you will see that it's pretty quick
-          to set up new repositories and get going.</note>On Windows and OS X you must have the
-          <xref keyref="website-docker-toolbox">Docker Toolbox</xref> installed and running. See the
-        Docker documentation for details on how to run Docker. All Docker commands are run from the
-        Docker Quickstart Terminal </p>
+      <p>These instructions reflect the use of Docker for Windows or Docker for Mac, which both
+        provide tight integration of Docker with the operating system. The instructions should be
+        the same for Docker on Linux.</p>
+      <p>The DFST system uses git to manage your source code. You must have a git client installed
+        on your machine. Under OS X this should already be the case (test it by typing "git" in a
+        command window). For Windows you can install Git For Windows, which is a free git client. Be
+        sure to include the git bash shell in your installation. For both OS X and Windows the free
+        SourceTree application from Atlassian provides a complete git user interface. For Windows,
+        the free Tortoise Git provides integration of git with Windows Explorer.</p>
       <p platform="windows">Under Windows, open a Docker Quickstart Terminal window (<image
-          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"
-        />)</p>
-      <p platform="mac">Under OS X you can use the Docker Quickstart Terminal shortcut (<image
-          keyref="icon-docker-quickstart" height="16" id="image_o3t_33c_bv" placement="inline"/>) to
-        start a new Docker terminal session. You can also make any terminal window docker-enabled by
-        using this command from the command
-        line:<codeblock>eval $(docker-machine env default)</codeblock>to set the Docker environment
-        in your current terminal window. You can add this line to your ~/.profile script so that new
-        terminal windows are automatically configured for Docker.</p>
-      <note platform="windows">The Microsoft Edge brower's security settings may not allow you to
+          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"/>).
+          <draft-comment author="ekimber">Need to update Windows instructions to reflect Docker for
+          Windows</draft-comment></p>
+      <p platform="mac">Under OS X you can use a normal terminal window.</p>
+      <note platform="windows">The Microsoft Edge browser's security settings may not allow you to
         connect to the Web applications running in the Docker containers. These instructions assume
         you have the Chrome browser installed and Firefox should work fine as well.</note>
       <note platform="windows">The Docker environment is Linux-based, so even under Windows you will
@@ -35,7 +29,9 @@
         slashes ("/") rather than back slashes ("\"). Absolute paths start with
           <filepath>/c</filepath> rather than <filepath>c:\</filepath>. For example, if your user
         directory is <filepath>c:\Users\ekimber</filepath>, in a Docker terminal you would type
-          <filepath>/c/Users/ekimber</filepath>. For OS X users there is no difference.</note>
+          <filepath>/c/Users/ekimber</filepath>. For OS X users there is no difference. These
+        instructions reflect Windows on the assumption that OS X users are sufficiently familiar
+        with the command line.</note>
     </prereq>
         <steps>
       <step>
@@ -52,24 +48,22 @@
       </step>
       <step>
         <cmd>Unzip the DFST release package to somewhere convenient, e.g. <filepath
-            platform="windows">c:\temp</filepath>.</cmd>
+            platform="windows">c:\apps</filepath>.</cmd>
         <stepresult>
           <p>You should get a directory named <filepath>dfst-docker</filepath> with this
-            content:<codeblock>> cd c:\temp\dfst-docker
+            content:<codeblock>> cd c:\apps\dfst-docker
 > dir
 LICENSE
 README.md
 containers
 dfst</codeblock></p>
           <p>The <filepath>dfst</filepath> script is the main script for managing the DFST
-            components through Docker. It is a bash shell script intended to be run in a Docker
-            Quickstart Terminal under Windows or OS X.</p>
+            components through Docker. It is a bash shell script intended to be run in a bash shell.
+            Under Windows you can run it in a git bash shell.</p>
         </stepresult>
       </step>
       <step>
-        <cmd>Start a Docker Quickstart Terminal (<image keyref="icon-docker-quickstart" height="16"
-            id="image_rnl_v3c_bv" placement="inline"/>) and navigate to the directory for the DFST
-          package:</cmd>
+        <cmd>Start a bash shell and navigate to the directory for the DFST package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
 $ cd temp/dfst-docker
@@ -89,7 +83,6 @@ Pulling redis (sameersbn/redis:latest)...
 latest: Pulling from sameersbn/redis
 … lots more messages here ...
 Creating gitlab-dfst
-<b>Docker machine IP address is '192.168.99.100'</b>
 
 Docker containers:
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                  PORTS                                                            NAMES
@@ -107,12 +100,12 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
         </stepresult>
       </step>
       <stepsection>
-        <p>To make GitLab ready to use as a remote git repository you have to first set up the
-          GitLab root user to match your user on the machine you're using. These steps should be
-          automatable but so far I haven't been able to work out how to automate this configuration.
-          Because of the way Docker persists (or doesn't persist) data, you may need to repeat these
-          steps if the main Docker machine is reset, for example, if you reboot your machine. I am
-          working hard on automating this configuration.</p>
+        <p>To use GitLab as a remote git repository you must set up a GitLab user for yourself (or
+          anyone who will be connecting to the GitLab server) and then create GitLab projects
+          corresponding to your local git repositories that you want to use with the DFST system.
+          This requires a one-time task of logging into GitLab as the root user so you can get the
+          magic "private token" required to use the GitLab API. Once you've done this the rest of
+          the user and project setup can be done with the <cmdname>dfst</cmdname> command.</p>
       </stepsection>
       <step>
         <cmd>In the Docker terminal, type the command "<codeph>dfst gitlab</codeph>" to open the
@@ -128,61 +121,53 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
         </stepresult>
       </step>
       <step>
-        <cmd>Log in as root using the password "5iveL!fe"</cmd>
-        <stepresult>
-          <p>You should be taken to the "New password" page.</p>
-        </stepresult>
-      </step>
-      <step>
-        <cmd>Enter "5iveL!fe" as the current password and set the new password to whatever you
-          want.</cmd>
-        <info>You will be using this password to authenticate using git so pick a password you can
-          remember. The password will be reasonably secure as stored in the GitLab container so it
-          should be safe to use your regular password.</info>
-        <stepresult>
-          <p>You should be taken back to the login screen so you can log in with your new
-            password.</p>
-        </stepresult>
-      </step>
-      <step>
-        <cmd>Log in with the new password.</cmd>
-        <stepresult>
-          <p>You should go to the Projects page:</p>
-          <fig id="fig_kmj_5lc_bv">
-            <title>GitLab Projects Page</title>
-            <image keyref="screenshot-gitlab-projects-01" width="3in" id="image_xcz_vlc_bv"
-              placement="break">
-              <alt>GitLab projects page</alt>
-            </image>
-          </fig>
-        </stepresult>
-      </step>
-      <step>
-        <cmd>Navigate to the Admin user's profile settings:</cmd>
+        <cmd>The first time you connect to GitLab you will be asked to set the password for the user
+          "root".</cmd>
         <info>
-          <p>Click on the user icon (<image keyref="icon-gitlab-user-01" height="20"
-              id="image_vwq_4mc_bv" placement="inline">
-              <alt>User icon</alt>
-            </image>), then on "account" (<image keyref="icon-gitlab-gear-01" height="20"
-              id="image_zqh_wmc_bv" placement="inline">
-              <alt>Account icon</alt>
-            </image>)</p>
-          <p>Scroll down to reveal the "Change Username" section:</p>
-          <fig id="fig_wvs_hnc_bv">
-            <title>GitLab Change Username field</title>
-            <image keyref="screenshot-gitlab-change-username-01" width="3in" id="image_nq2_mnc_bv"
-              placement="inline"/>
-          </fig>
+          <p>Choose any password you like as long as you can remember it. You should then be taken
+            to the normal login screen. Log in as user "root" with the password you just set.</p>
+          <p>The password will be reasonably secure as stored in the GitLab container so it should
+            be safe to use your regular password.</p>
+        </info>
+        <stepresult>You should be logged into GitLab as user "root".</stepresult>
+      </step>
+      <step>
+        <cmd>Select "Profile Settings" in the left-hand navigation panel and then select "Account"
+          to get to the account details for user "root"</cmd>
+        <stepresult>
+          <p>You should see a field labeled "Private token" at the top of the page containing a
+            value like "zdPgyhv6rnZfDsqHxqKZ".</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Copy the private token string to the clipboard.</cmd>
+      </step>
+      <step>
+        <cmd>In the bash terminal set the environment variable "GITLAB_PRIVATE_TOKEN" to the value
+          of your private token</cmd>
+        <info>
+          <p>Enter the
+            command:<codeblock>$ export GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ
+$</codeblock></p>
+          <p>Where you replace "zdPgyhv6rnZfDsqHxqKZ" with the value you copied from GitLab.</p>
         </info>
       </step>
       <step>
-        <cmd>Change "root" to whatever user name you use on your machine, e.g. "ekimber" and save
-          the user name.</cmd>
+        <cmd>Verify that you have set the private key correctly by using the command <codeph>dfst
+            test-gitlab</codeph>.</cmd>
         <info>
-          <p>You want to use your username so that when you use git commands everything works as you
-            would expect.</p>
-          <p>This renaming of the root user is a workaround for as yet being unable to automatically
-            configure new users in GitLab.</p>
+          <codeblock>$ ./dfst test-gitlab
+Testing GitLab connection...
+Success: Connected to GitLab remote API using private token.
+$</codeblock>
+        </info>
+      </step>
+      <step>
+        <cmd>Create a GitLab user for yourself by using the command <codeph>dfst
+            make-gitlab-user</codeph>:</cmd>
+        <info>
+          <codeblock>$ dfst make-gitlab-user
+$ </codeblock>
         </info>
       </step>
       <stepsection>
@@ -193,7 +178,7 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
           copy it out of it's container to your local machine.</p>
       </stepsection>
       <step>
-        <cmd>In the Docker Quickstart Terminal do the following command</cmd>
+        <cmd>In the Docker terminal execute the command <codeph>dfst getdemo</codeph>:</cmd>
         <info>
           <codeblock>$ ./dfst getdemo ~</codeblock>
           <p>This copies the <filepath>Thunderbird</filepath> directory from the container to
@@ -208,51 +193,12 @@ c_attribute_parameter_syntax.dita  r_jobconf.dita
 … and many more files...</codeblock>
         </info>
         <stepresult>
-          <p>You now have a copy of the Thunderbird data ready to push to your GitLab server
-            following three more steps.</p>
+          <p>You now have a copy of the Thunderbird data ready to push to your GitLab server once
+            you have created a corresponding GitLab project for the Thunderbird git repository.</p>
         </stepresult>
       </step>
       <step>
-        <cmd>On the GitLab Projects page select the "New projects" button to create a new
-          project.</cmd>
-        <stepresult>The new project page will open.</stepresult>
-      </step>
-      <step>
-        <cmd>In the Project path field type "Thunderbird"</cmd>
-      </step>
-      <step>
-        <cmd>In the Description field type something like "Demo content collection</cmd>
-      </step>
-      <step>
-        <cmd>In the Visibility section select Public</cmd>
-      </step>
-      <step>
-        <cmd>Select "Create project" to create the project</cmd>
-        <stepresult>
-          <p>The new project should be created in GitLab and you should now be at the project's
-            GitLab page.</p>
-          <p>Notice the HTTP field with a URL in it. This is the git URL for this project. You will
-            use this URL to connect your local git repository to this GitLab repository.</p>
-        </stepresult>
-      </step>
-      <step>
-        <cmd>In a Docker Quickstart Terminal type the command:</cmd>
-        <info>
-          <codeblock>$ ./dfst addhooks</codeblock>
-        </info>
-        <stepresult>
-          <p>The Thunderbird repository in the GitLab server should now be set up with the DFST
-            custom hooks needed to connect GitLab to the DFST Link Manager.</p>
-          <p>If you want to verify that this happened you can use this
-            command:<codeblock>$ docker exec -i gitlab-dfst ls /var/opt/gitlab/git-data/repositories/<varname>username</varname>/Thunderbird.git/custom_hooks
-BaseXClient.rb
-post-receive
-$ _</codeblock></p>
-          <p>Where <varname>username</varname> is the user name you set up in GitLab. You should see
-            the two files shown.</p>
-          <p>You must run this command any time you set up a new project in GitLab. It is safe to
-            rerun at any time.</p>
-        </stepresult>
+        <cmd/>
       </step>
       <stepsection>
         <p>You can now connect the local Thunderbird git repository to GitLab and push it to GitLab,

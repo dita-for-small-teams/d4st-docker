@@ -137,7 +137,7 @@ elif [ "$1" = "pull" ]; then
   R=$?
 elif [ "$1" = "gitlab" ]; then
   echo "Open GitLab Web application in ${dfstBrowser}"
-  url="http://${HOSTNAME}:80"
+  url="http://${HOSTNAME}:${GITLAB_PORT}"
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} "${url}"
   else
@@ -146,7 +146,7 @@ elif [ "$1" = "gitlab" ]; then
   exit $?
 elif [ "$1" = "linkmgr" ]; then
   echo "Open DFST Link Manager Web application in ${dfstBrowser}"
-  url="http://${HOSTNAME}:8984"
+  url="http://${HOSTNAME}:${LINKMGR_PORT}"
   if [ "$OSTYPE" = "msys" ]; then
     start ${dfstBrowser} "${url}"
   else
@@ -167,6 +167,28 @@ elif [ "$1" = "getdemo" ]; then
      $(docker cp "demo-content:/opt/dita-community/data/Thunderbird" "${targetDir}")
      exit $?
   fi
+elif [ "$1" = "test-gitlab" ]; then
+  echo "Testing GitLab connection..."
+  if [ -z "${GITLAB_PRIVATE_TOKEN}" ]; then
+     echo "Environment variable 'GITLAB_PRIVATE_TOKEN' not set. You must set this"
+     echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
+     exit 1;
+  fi
+  result=$(curl -s --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" "http://${HOSTNAME}:${GITLAB_PORT}/api/v3/users?username=root")
+  if [[ "$result" =~ "{\"message\":\"401 Unauthorized\"" ]]; then
+     echo "Failure: Did not authenticate using private token \"${GITLAB_PRIVATE_TOKEN}\"."
+     exit 1;
+  elif [[ "$result" =~ "404 Not Found" ]]; then
+     echo "Failure: Host \"${HOSTNAME}:${GITLAB_PORT}\" does not  appear to have GitLab running."
+     exit 1;
+  elif [[ "$result" =~ "[{\"name\":\"Administrator\",\"username\":\"root\"" ]]; then
+     echo "Success: Connected to GitLab remote API using private token."
+     exit 0;
+  else 
+     echo "Failure: Doesn't look like the GitLab connection worked but the failure is not an expected one."
+     echo "Got response \"${result}\""
+     exit 1;
+  fi
 else
   echo "Unrecognized command \"$1\". Available commands are:"
   echo " start - Start the server"  
@@ -183,6 +205,7 @@ else
   echo " linkmgr - Open DFST Link Manager Web application"  
   echo " addhooks - Add the git hooks to the GitLab repositories"
   echo " getdemo [targetDirectory] - Copy the Thunderbird demo git repository to a local directory"
+  echo " test-gitlab - Tests the GitLab remote API connection using the configured private token"
   exit 1
 fi
 

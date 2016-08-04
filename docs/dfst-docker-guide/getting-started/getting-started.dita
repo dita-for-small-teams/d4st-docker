@@ -17,7 +17,10 @@
     <p>The DITA for Small Teams project provides instructions for using a combination of
       off-the-shelf Docker containers and DFST-provided containers to quickly set up a working DITA
       for Small Teams environment on any machine, whether it's your personal laptop, a shared server
-      within your office, or on a cloud managed sevice such as Amazon Web Service (AWS) or Microsoft
-      Azure.</p>
+      within your office, or on a cloud managed service such as Amazon Web Services (AWS) or
+      Microsoft Azure.</p>
+    <p>As of August 2016, Docker provides Docker versions for OS X and Windows that provide tight
+      integration of Docker with the operating system, making it about as easy as it could be to
+      install, configure, and use Docker containers.</p>
  </conbody>
 </concept>
