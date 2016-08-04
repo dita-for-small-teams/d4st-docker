@@ -18,6 +18,11 @@
 # Requires that the docker-compose command be in the
 # path. 
 #
+
+export GITLAB_PORT=90
+export WEBDELIVERY_PORT=80
+export LINKMGR_PORT=8984
+
 if [ "$OSTYPE" = "msys" ]; then
   dfstBrowser=${DFST_BROWSER:-chrome}
 else

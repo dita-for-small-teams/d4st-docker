@@ -10,7 +10,7 @@ services:
   caddy-dfst:
     # hostname: ${HOSTNAME}
     ports: 
-      - "8080:2015"
+      - "${WEBDELIVERY_PORT}:2015"
     container_name: caddy-dfst
     volumes: ["/srv/www"] 
      
