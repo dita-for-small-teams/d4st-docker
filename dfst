@@ -18,6 +18,9 @@
 # Requires that the docker-compose command be in the
 # path. 
 #
+# FIXME: There is a lot of redundancy here but my bash script fu is
+#        weak and I haven't taken the time to work out how to set up
+#        proper functions for the duplicated code.
 
 export GITLAB_PORT=90
 export WEBDELIVERY_PORT=80
@@ -197,6 +200,58 @@ elif [ "$1" = "make-gitlab-user" ]; then
      echo "Got response \"${result}\""
      exit 1;
   fi
+#-------------------------
+# make-gitlab-project
+#-------------------------
+elif [ "$1" = "make-gitlab-project" ]; then
+  if [ -z "${GITLAB_PRIVATE_TOKEN}" ]; then
+     echo "Environment variable 'GITLAB_PRIVATE_TOKEN' not set. You must set this"
+     echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
+     exit 1;
+  fi
+  username=$USER
+  project=${PWD##*/}
+  if [ "$2" != "" ]; then
+     project=$2
+  fi
+  echo "Creating GitLab project \"${project}\" for user ${username}..."
+  result=$(curl -s --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" "http://${HOSTNAME}:${GITLAB_PORT}/api/v3/users?username=${username}")
+  if [ "$result" = "[]" ]; then
+     echo "Failure: Did not find GitLab user with name \"${username}\". Use "
+     echo "         'dfst make-gitlab-user' to create the GitLab user."
+     exit 1;
+  fi
+  userid=$([[ "$result" =~ \"id\":([0-9]+), ]] && echo ${BASH_REMATCH[1]})
+  if [ "$userid" = "" ]; then
+     echo "Failed to get GitLab user ID for user name \"${username}\"."
+     exit 1;
+  fi
+  result=$(curl -s -X POST --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" "http://${HOSTNAME}:${GITLAB_PORT}/api/v3/projects/user/${userid}?userid=${userid}&name=${project}")
+  if [[ "$result" =~ "{\"message\":\"401 Unauthorized\"" ]]; then
+     echo "Failure: Did not authenticate using private token \"${GITLAB_PRIVATE_TOKEN}\"."
+     exit 1;
+  elif [[ "$result" =~ "404 Not Found" ]]; then
+     echo "Failure: Host \"${HOSTNAME}:${GITLAB_PORT}\" does not  appear to have GitLab running."
+     exit 1;
+  elif [[ "$result" =~ "\"name\":[\"has already been taken\"]" ]]; then
+     echo "Looks like the project is already set up in GitLab."
+     exit 0;
+  elif [[ "$result" =~ "{\"name\":\"${username}\",\"username\":\"${username}\"" ]]; then
+     echo "Success: Project \"${project}\" created."
+     result=$(docker exec gitlab-dfst add-custom-hooks)
+     result=$(git init)
+     if [ "$?" -ne "0" ]; then
+        echo "Failed to initialize git repository"
+        exit 1;
+     fi
+     #  http://localhost/ekimber/project04.git
+     result=$(git remote add origin "http://${HOSTNAME}:${GITLAB_PORT}/${username}/${project}.git")
+     exit $result;
+  else 
+     echo "Failure: Doesn't look like the GitLab connection worked but the failure is not an expected one."
+     echo "Got response \"${result}\""
+     exit 1;
+  fi
   
 elif [ "$1" = "test-gitlab" ]; then
   echo "Testing GitLab connection..."
@@ -235,7 +290,18 @@ else
   echo " gitlab - Open GitLab Web application"  
   echo " linkmgr - Open DFST Link Manager Web application"  
   echo " addhooks - Add the git hooks to the GitLab repositories"
-  echo " getdemo [targetDirectory] - Copy the Thunderbird demo git repository to a local directory"
+  echo " getdemo {targetDirectory} - Copy the Thunderbird demo git repository to a local directory"
+  echo ""
+  echo " make-gitlab-user [username [password]]"
+  echo "         Create a GitLab user for the specified user and password."
+  echo "         If username is omitted, uses the current user's name. If "
+  echo "         password is omitted, uses value 'password'"
+  echo ""
+  echo " make-gitlab-project [projectname]"
+  echo "         Create a GitLab project for the current user with the specifed name."
+  echo "         If projectname is ommitted, the name of the current directory is used (e.g.,"
+  echo "         run from within your local git repository)."
+  echo ""
   echo " test-gitlab - Tests the GitLab remote API connection using the configured private token"
   exit 1
 fi
