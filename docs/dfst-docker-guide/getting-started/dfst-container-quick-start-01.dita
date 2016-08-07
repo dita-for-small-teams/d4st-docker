@@ -51,12 +51,12 @@
             platform="windows">c:\apps</filepath>.</cmd>
         <stepresult>
           <p>You should get a directory named <filepath>dfst-docker</filepath> with this
-            content:<codeblock>> cd c:\apps\dfst-docker
-> dir
-LICENSE
+            content:<codeblock>LICENSE
 README.md
+bin
 containers
-dfst</codeblock></p>
+dfst
+docs</codeblock></p>
           <p>The <filepath>dfst</filepath> script is the main script for managing the DFST
             components through Docker. It is a bash shell script intended to be run in a bash shell.
             Under Windows you can run it in a git bash shell.</p>
@@ -66,9 +66,9 @@ dfst</codeblock></p>
         <cmd>Start a bash shell and navigate to the directory for the DFST package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
-$ cd temp/dfst-docker
+$ cd apps/dfst-docker
 
-ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst-docker
+ekimber@WIN-HH0I81E3DAU MINGW64 /c/apps/dfst-docker
 $ ls
 bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
         </info>
@@ -93,10 +93,41 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
 </codeblock>
           <p>The first time you do this Docker has to download all the images for the containers and
             this can take a while. The next time you run it, it will be quick.</p>
+          <p>The exact set of containers may be different depending on the current configuration of
+            the DFST container set.</p>
         </info>
         <stepresult>
           <p>The DFST containers should start. It will take a minute or two for the Web services in
             the containers to start up completely.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>To make things easier later, add the <filepath>dfst</filepath> directory to the PATH
+          environment variable in your command window:</cmd>
+        <info>
+          <codeblock>$ export PATH=$PATH:$PWD</codeblock>
+          <p>The <varname>$PWD</varname> environment variable expands to the current directory, so
+            the <filepath>dfst</filepath> directory should now be in your PATH environment
+            variable.</p>
+          <p>The make this setting permanent you can modify your <filepath>.bash_profile</filepath>
+            (OSX) or <filepath>.bashrc</filepath> (Windows, Linux) file in your home directory to
+            add the <filepath>dfst</filepath> directory to the PATH,
+            e.g.:<codeblock># ~/.bash_profile
+export PATH="$PATH:/Users/ekimber/apps/dfst"</codeblock></p>
+          <p>or, for Windows:<codeblock># ~/.bashrc
+export PATH=$PATH:"c:/apps/dfst"</codeblock></p>
+        </info>
+        <stepresult>
+          <p>You should be able to run the <cmdname>dfst</cmdname> command from any directory. You
+            can test this by using the <cmdname>cd</cmdname> command to move to another directory
+            and then execute the command <codeph>dfst help</codeph>. You should get the listing of
+            available <cmdname>dfst</cmdname> commands.</p>
+          <p>If the <cmdname>dfst</cmdname> command doesn't work, check the value of the
+              <varname>$PATH</varname> environment variable using the <cmdname>echo</cmdname>
+            command:<codeblock>$ echo $PATH
+$ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-small-teams/dfst-docker</codeblock></p>
+          <p>Check the value and make sure it's correct. If it's not correct, try setting it
+            again.</p>
         </stepresult>
       </step>
       <stepsection>
@@ -133,7 +164,7 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
       </step>
       <step>
         <cmd>Select "Profile Settings" in the left-hand navigation panel and then select "Account"
-          to get to the account details for user "root"</cmd>
+          to get to the account details for user "root".</cmd>
         <stepresult>
           <p>You should see a field labeled "Private token" at the top of the page containing a
             value like "zdPgyhv6rnZfDsqHxqKZ".</p>
@@ -144,7 +175,7 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
       </step>
       <step>
         <cmd>In the bash terminal set the environment variable "GITLAB_PRIVATE_TOKEN" to the value
-          of your private token</cmd>
+          of your private token:</cmd>
         <info>
           <p>Enter the
             command:<codeblock>$ export GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ
@@ -168,22 +199,33 @@ $</codeblock>
         <info>
           <codeblock>$ dfst make-gitlab-user
 $ </codeblock>
+          <p>The password is set to "password" for the new user. You can change it if you want using
+            the GitLab administration pages. This password will be needed when you connect your
+            local git repository to gitlab.</p>
+          <p>If you want to set the password when you create the user you can specify the username
+            and password on the <cmdname>dfst</cmdname>
+            <cmdname>make-gitlab-user</cmdname>
+            command:<codeblock>$ dfst make-gitlab-user ekimber swordfish
+$ </codeblock></p>
+          <p>However, this isn't very secure. If you're concerned about the security of the GitLab
+            credentials, use the GitLab Web interface to change the password.</p>
         </info>
       </step>
       <stepsection>
         <p>At this point you should be ready to create new projects in GitLab and connect them to
           your local git repositories on your machine. You can use any git repository you have but
-          for demo purposes the DITA Community DITA Demo content collection, the "Thunderbird"
-          document set, has been included to make it easy to get started. To use it you just need to
-          copy it out of it's container to your local machine.</p>
+          for demo purposes the DITA Community DITA Demo content collection (the "Thunderbird"
+          document set) has been included to make it easy to get started. To use it you just need to
+          copy it out of its container to your local machine.</p>
       </stepsection>
       <step>
-        <cmd>In the Docker terminal execute the command <codeph>dfst getdemo</codeph>:</cmd>
+        <cmd>In the Docker terminal execute the command <codeph>dfst getdemo</codeph>, specifying
+          the directory you want to put the <filepath>Thunderbird</filepath> directory into:</cmd>
         <info>
           <codeblock>$ ./dfst getdemo ~</codeblock>
           <p>This copies the <filepath>Thunderbird</filepath> directory from the container to
               <filepath>Thunderbird</filepath> under your home directory. You can replace "~" with
-            target directory you want.</p>
+            whatever target directory you want.</p>
           <p>Test the copy:</p>
           <codeblock>$ ls ~/Thunderbird
 c_about_defining_payload.dita      r_image_warehouse_2.dita
@@ -198,40 +240,104 @@ c_attribute_parameter_syntax.dita  r_jobconf.dita
         </stepresult>
       </step>
       <step>
-        <cmd/>
-      </step>
-      <stepsection>
-        <p>You can now connect the local Thunderbird git repository to GitLab and push it to GitLab,
-          which should then load it into the DFST Link Manager.</p>
-      </stepsection>
-      <step>
-        <cmd>In a new Docker Quickstart Terminal, do the following commands:</cmd>
+        <cmd>In the command window, navigate into the <filepath>Thunderbird</filepath> directory and
+          execute the command <codeph>dfst make-gitlab-project</codeph>:</cmd>
         <info>
           <codeblock>$ cd ~/Thunderbird
-$ git remote add origin http://192.168.99.100/<varname>username</varname>/Thunderbird.git
-$ git push origin master</codeblock>
-          <p>Where <varname>username</varname> is the GitLab user name you set up earlier, e.g.
-            "ekimber". You can also copy and paste this URL from the GitLab project page.</p>
-          <p>You should be asked to enter your user ID and password. These are the GitLab user ID
-            and password you created earlier.</p>
+$ dfst make-gitlab-project
+Creating GitLab project "Thunderbird" for user ekimber...
+Success: Project "Thunderbird" created.
+$</codeblock>
         </info>
         <stepresult>
-          <p>Nothing will happen for a few seconds to a minute and then you should see a lot of
-            messages about files being added to the Link Manager.  You may see a few errors as well
-            (still working through some issues with git hooks on the GitLab server and the BaseX
-            Ruby client).</p>
+          <p>A GitLab project for the current user and with the same name as the current directory
+            has been created. The command also automatically sets the new GitLab repository as the
+            remote repository named "origin".</p>
+          <p>Verify this by using the <codeph>git remote -v</codeph> command to see that the remote
+            repository has been hooked
+            up:<codeblock>$ git remote -v
+origin	http://localhost:90/ekimber/Thunderbird.git (fetch)
+origin	http://localhost:90/ekimber/Thunderbird.git (push)
+$</codeblock></p>
+          <p>You can also use the GitLab Web interface to verify that the project has been
+            created.</p>
         </stepresult>
       </step>
       <step>
-        <cmd>In your original Docker Quickstart Terminal enter the command "<cmdname>dfst
-            linkmgr</cmdname>" to open the Link Manager Web application in a new browser
-          window.</cmd>
+        <cmd>Push the contents of the Thunderbird repository to the GitLab project:</cmd>
+        <info>
+          <codeblock>$ git push -u origin master
+Counting objects: 132, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (130/130), done.
+Writing objects: 100% (132/132), 675.62 KiB | 0 bytes/s, done.
+Total 132 (delta 13), reused 0 (delta 0)
+remote: Running post-receive...
+remote: getRepoName(): parts=["", "var", "opt", "gitlab", "git-data", "repositories", "ekimber", "thunderbird.git"]
+remote: [1] repoName=thunderbird2.git
+remote: [2] repoName=thunderbird2
+remote: Updating using 4b825dc642cb6eb9a060e54bf8d69288fbee4904, 956a167f798801b837702c6655d2401516f02f24, refs/heads/master
+remote: Added or modified file: "Integrator_admin.ditamap"
+remote:    Adding file "Integrator_admin.ditamap" to database dfst^thunderbird^master...
+remote:    Resource(s) added in 530.15 ms.
+… {lots more messages} … 
+remote: *** Updating fulltext index for database dfst^thunderbird^master
+remote: Post-receive done.
+To http://localhost:90/ekimber/Thunderbird.git
+ * [new branch]      master -> master
+$ </codeblock>
+          <p>The command will take a little while to complete because it's copying all the XML files
+            to the Link Manager database.</p>
+        </info>
+        <stepresult>
+          <p>The Thunderbird files have been pushed to the remote GitLab repository and copied to
+            the DFST Link Manager database. You can use the GitLab Web application to verify that
+            the files are now in GitLab.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>In the bash terminal enter the command "<cmdname>dfst linkmgr</cmdname>" to open the
+          Link Manager Web application in a new browser window.</cmd>
+        <info>The URL for the Link Manager Web application is
+            <filepath>http://localhost:8984</filepath>.</info>
         <stepresult>
           <p>The Link Manager application should open. You should see an entry like
-            "Thunderbird/master" in the list repositories and branches. You can click on the branch
-            to see the files in the branch.</p>
+            "Thunderbird/master" in the list of repositories and branches. You can click on the
+            branch to see the files in the branch.</p>
+          <p>Click on the link to the master branch to access the link manager application for that
+            branch.</p>
+          <p>Observe that the "Root Map" column under DITA Maps shows "?" (question marks). The
+            "Root Map" column indicates whether or not a give map a root map, as determined by
+            whether or not the map is referenced as a submap by any other maps. The question marks
+            indicate that the link management indexes have not yet been updated for the project.</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Click on the "Update Link Management Indexes" link near the top of the page.</cmd>
+        <stepresult>
+          <p>A new tab will open with the text "Updating link management indexes". After a few
+            seconds the message will be replaced with the text "Link management database
+            updated".</p>
+        </stepresult>
+      </step>
+      <step>
+        <cmd>Close the tab with the "Link management database updated" message and return to the
+          page for the Thunderbird/master branch. Refresh the page.</cmd>
+        <stepresult>
+          <p>The Root Map column should now show check marks for four of the maps and nothing for
+            two other maps. This indicates that the link management indexes have been updated.</p>
+          <p>At this point you can explore the Link Manager application.</p>
         </stepresult>
       </step>
     </steps>
+    <result id="result_t1g_htq_ww">
+      <p>You now have a sample DITA-based documentation source repository, the Thunderbird project,
+        set up and connected to the DFST link manager. You can experiment with modifying the source
+        files and committing new versions to GitLab or creating new branches and seeing how those
+        updates and new branches are reflected in the DFST Link Manager.</p>
+      <p>Having followed this process you should be able to quickly add your own documents' git
+        repositories to the DFST GitLab server in order to take advantage of the DFST Link
+        Manager.</p>
+    </result>
     </taskbody>
 </task>

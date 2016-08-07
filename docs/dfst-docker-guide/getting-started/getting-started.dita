@@ -22,5 +22,8 @@
     <p>As of August 2016, Docker provides Docker versions for OS X and Windows that provide tight
       integration of Docker with the operating system, making it about as easy as it could be to
       install, configure, and use Docker containers.</p>
+    <p>These instructions reflect the use of Docker for Mac, Docker for Windows, or Docker Machine
+      running under Linux. You can use the DFST containers with the older Docker Machine approach
+      under Windows or OSX, but it's harder and less convenient.</p>
  </conbody>
 </concept>

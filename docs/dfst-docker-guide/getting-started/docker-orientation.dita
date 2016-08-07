@@ -16,13 +16,10 @@
       called the <term>host</term>, e.g., your laptop or a dedicated server machine, whether within
       your internal corporate network or on a hosting site like Amazon Web Services or Microsoft
       Azure.</p>
-    <p>On Linux hosts the containers run more or less directly on top of the host operating system.
-      This makes a few things easier, such as connecting to local file systems and access the
-      container via the network.</p>
-    <p>On Windows and OS X the containers run inside a separate virtual machine, the <term>docker
-        machine</term>, that then runs the containers. This makes things a little more complicated
-      as regards accessing the containers via the network and mounting local file systems but those
-      things can still be done, it must requires a little more effort.</p>
+    <p>Docker provides tight integration with the Linux, OSX, and Windows operating systems. Docker
+      containers can access files on the local file system and can be accessed through the same
+      network connection as the host computer (that is, Docker-managed services can be accessed at
+      localhost on whatever port you configure them on). </p>
     <p>See the main Docker documentation for details. This topic is here to get you started quickly
       and to provide specific guidance for Windows and OS X users since we expect the DFST system to
       be used mostly by users under Windows or OS X.</p>
