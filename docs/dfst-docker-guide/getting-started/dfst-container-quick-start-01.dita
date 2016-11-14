@@ -10,16 +10,16 @@
         provide tight integration of Docker with the operating system. The instructions should be
         the same for Docker on Linux.</p>
       <p>The DFST system uses git to manage your source code. You must have a git client installed
-        on your machine. Under OS X this should already be the case (test it by typing "git" in a
-        command window). For Windows you can install Git For Windows, which is a free git client. Be
-        sure to include the git bash shell in your installation. For both OS X and Windows the free
-        SourceTree application from Atlassian provides a complete git user interface. For Windows,
-        the free Tortoise Git provides integration of git with Windows Explorer.</p>
+        on your machine. Under macOS this should already be the case (test it by typing "git" in a
+        command window). </p>
+      <p>For Windows you can install Git For Windows, which is a free git client. Be sure to include
+        the git bash shell in your installation. </p>
+      <p>For both macOS and Windows the free SourceTree application from Atlassian provides a
+        complete git user interface. For Windows, the free Tortoise Git provides integration of git
+        with Windows Explorer.</p>
       <p platform="windows">Under Windows, open a Docker Quickstart Terminal window (<image
-          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"/>).
-          <draft-comment author="ekimber">Need to update Windows instructions to reflect Docker for
-          Windows</draft-comment></p>
-      <p platform="mac">Under OS X you can use a normal terminal window.</p>
+          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"/>). </p>
+      <p platform="mac">Under macOS you can use a normal terminal window.</p>
       <note platform="windows">The Microsoft Edge browser's security settings may not allow you to
         connect to the Web applications running in the Docker containers. These instructions assume
         you have the Chrome browser installed and Firefox should work fine as well.</note>
@@ -29,8 +29,8 @@
         slashes ("/") rather than back slashes ("\"). Absolute paths start with
           <filepath>/c</filepath> rather than <filepath>c:\</filepath>. For example, if your user
         directory is <filepath>c:\Users\ekimber</filepath>, in a Docker terminal you would type
-          <filepath>/c/Users/ekimber</filepath>. For OS X users there is no difference. These
-        instructions reflect Windows on the assumption that OS X users are sufficiently familiar
+          <filepath>/c/Users/ekimber</filepath>. For macOS users there is no difference. These
+        instructions reflect Windows on the assumption that macOS users are sufficiently familiar
         with the command line.</note>
     </prereq>
         <steps>
