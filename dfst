@@ -22,9 +22,11 @@
 #        weak and I haven't taken the time to work out how to set up
 #        proper functions for the duplicated code.
 
-export GITLAB_PORT=90
-export WEBDELIVERY_PORT=80
-export LINKMGR_PORT=8984
+if [ ! -f ".env" ]; then
+  export GITLAB_PORT=90
+  export WEBDELIVERY_PORT=80
+  export LINKMGR_PORT=8984
+fi
 
 if [ "$OSTYPE" = "msys" ]; then
   dfstBrowser=${DFST_BROWSER:-chrome}
