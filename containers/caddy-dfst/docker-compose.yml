@@ -4,7 +4,7 @@ version: "2"
 # the DFST Caddy Web server used to deliver
 # generated deliverables (HTML, PDF, EPUB, etc.)
 # 
-#
+# See e.g., https://hub.docker.com/r/abiosoft/caddy/
 # 
 services:
   caddy-dfst:

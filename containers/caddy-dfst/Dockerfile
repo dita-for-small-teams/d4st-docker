@@ -1,7 +1,8 @@
 FROM alpine:3.2
 MAINTAINER Eliot Kimber <ekimber@contrext.com>
+# See e.g., https://hub.docker.com/r/abiosoft/caddy/ for 
 
-LABEL caddy_version="0.8.2" architecture="amd64"
+LABEL caddy_version="0.9.5" architecture="amd64"
 
 RUN apk add --update openssh-client git tar
 
