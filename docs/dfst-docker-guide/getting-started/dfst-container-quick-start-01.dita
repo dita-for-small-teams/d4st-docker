@@ -56,7 +56,8 @@ README.md
 bin
 containers
 dfst
-docs</codeblock></p>
+docs
+dot_env</codeblock></p>
           <p>The <filepath>dfst</filepath> script is the main script for managing the DFST
             components through Docker. It is a bash shell script intended to be run in a bash shell.
             Under Windows you can run it in a git bash shell.</p>
@@ -87,9 +88,11 @@ Creating gitlab-dfst
 Docker containers:
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                  PORTS                                                            NAMES
 7971effdd6cb        dfst/gitlab-dfst              "/assets/wrapper"        3 seconds ago       Up Less than a second   0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:8022->22/tcp   gitlab-dfst
+9693d356371d        dfst/caddy-dfst               "/usr/bin/caddy --..."   13 seconds ago      Up 10 seconds           80/tcp, 443/tcp, 0.0.0.0:80->2015/tcp                            caddy-dfst
 aab650590a70        dfst/link-manager-basex       "/opt/basex/bin/basex"   2 minutes ago       Up 2 minutes            0.0.0.0:1984->1984/tcp, 0.0.0.0:8984->8984/tcp                   linkmgr-dfst
 a280cacb6079        sameersbn/postgresql:9.4-12   "/sbin/entrypoint.sh"    2 minutes ago       Up 2 minutes            5432/tcp                                                         dfstdocker_postgresql_1
-f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 minutes ago       Up 4 minutes            6379/tcp                                                         dfstdocker_redis_1
+f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 minutes ago       Up 4 minutes            6379/tcp
+                                                         dfstdocker_redis_1
 </codeblock>
           <p>The first time you do this Docker has to download all the images for the containers and
             this can take a while. The next time you run it, it will be quick.</p>
@@ -99,6 +102,11 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
         <stepresult>
           <p>The DFST containers should start. It will take a minute or two for the Web services in
             the containers to start up completely.</p>
+          <p>The first time you run the <cmdname>dfst</cmdname> command it creates the file
+              <filepath>dfst/.env</filepath>. This file contains environment settings used by the
+            docker commands. You can edit this file to change the ports used by the different DFST
+            Web services. You will also edit this file to add the GitLab private token in a later
+            step.</p>
         </stepresult>
       </step>
       <step>
@@ -136,7 +144,11 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
           corresponding to your local git repositories that you want to use with the DFST system.
           This requires a one-time task of logging into GitLab as the root user so you can get the
           magic "private token" required to use the GitLab API. Once you've done this the rest of
-          the user and project setup can be done with the <cmdname>dfst</cmdname> command.</p>
+          the user and project setup can be done with the <cmdname>dfst</cmdname>
+            command.<note>There doesn't appear to be a way to install GitLab with a default root
+            password that would then allow automatic fetching of the private token. See <xref
+              href="https://gitlab.com/gitlab-org/gitlab-ce/issues/1980" format="html"
+              scope="external"/>. If somebody knows a solution to this please say so.</note></p>
       </stepsection>
       <step>
         <cmd>In the Docker terminal, type the command "<codeph>dfst gitlab</codeph>" to open the
@@ -174,17 +186,19 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
         <cmd>Copy the private token string to the clipboard.</cmd>
       </step>
       <step>
-        <cmd>In the bash terminal set the environment variable "GITLAB_PRIVATE_TOKEN" to the value
-          of your private token:</cmd>
-        <info>
-          <p>Enter the
-            command:<codeblock>$ export GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ
-$</codeblock></p>
-          <p>Where you replace "zdPgyhv6rnZfDsqHxqKZ" with the value you copied from GitLab.</p>
-        </info>
+        <cmd>Edit the <filepath>docker-dfst/.env</filepath> file, remove the "#" from the
+            <codeph>GITLAB_PRIVATE_TOKEN</codeph> line, and replace "YourPrivateToken" with the
+          value on the clipboard:</cmd>
+        <info>Before:<codeblock>GITLAB_PORT=90
+WEBDELIVERY_PORT=80
+LINKMGR_PORT=8984
+#GITLAB_PRIVATE_TOKEN=YourPrivateToken</codeblock><p>After:<codeblock>GITLAB_PORT=90
+WEBDELIVERY_PORT=80
+LINKMGR_PORT=8984
+GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ</codeblock></p></info>
       </step>
       <step>
-        <cmd>Verify that you have set the private key correctly by using the command <codeph>dfst
+        <cmd>Verify that you have set the private token correctly by using the command <codeph>dfst
             test-gitlab</codeph>.</cmd>
         <info>
           <codeblock>$ ./dfst test-gitlab
@@ -199,9 +213,9 @@ $</codeblock>
         <info>
           <codeblock>$ dfst make-gitlab-user
 $ </codeblock>
-          <p>The password is set to "password" for the new user. You can change it if you want using
-            the GitLab administration pages. This password will be needed when you connect your
-            local git repository to gitlab.</p>
+          <p>The password is set to "password" for the new user. You can change it using the GitLab
+            administration pages. This password will be needed when you connect your local git
+            repository to gitlab.</p>
           <p>If you want to set the password when you create the user you can specify the username
             and password on the <cmdname>dfst</cmdname>
             <cmdname>make-gitlab-user</cmdname>

@@ -9,8 +9,7 @@
     <p>Short version: <ol id="ol_kls_1jy_w5">
         <li>If you haven't already, create your own project to manage your custom container
           definitions and docker-compose files.</li>
-        <li>Copy the <filepath>docker-compose/dfst-build</filepath> and
-            <filepath>docker-compose/dfst-server</filepath> directories into your  project.</li>
+        <li>Copy the <filepath>dfst-docker/containers</filepath> directories into your project.</li>
         <li>Copy the directories under <filepath>containers/</filepath> for the containers you want
           to extend into your own project's <filepath>containers/</filepath> directory.</li>
         <li>Rename the directories under <filepath>containers/</filepath> appropriately.</li>

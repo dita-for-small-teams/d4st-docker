@@ -87,17 +87,19 @@ services:
   postgresql:
     restart: always
     image: sameersbn/postgresql:9.4-12
-    container_name: postgresql
     environment:
       - DB_USER=gitlab
       - DB_PASS=password
       - DB_NAME=gitlabhq_production
+      - DB_EXTENSION=pg_trgm
     volumes:
       - ${HOME}/tmp/docker/gitlab/postgresql:/var/lib/postgresql
     
   redis:
     restart: always
     image: sameersbn/redis:latest
+    command:
+    - --loglevel warning
     container_name: redis
     volumes:
       - ${HOME}/tmp/docker/gitlab/redis:/var/lib/redis      
@@ -114,11 +116,19 @@ services:
     extends:
        file: gitlab-dfst/docker-compose.yml
        service: gitlab-dfst
+
+    depends_on:
+      - redis
+      - postgresql
+      
     environment:
-      - GITLAB_SECRETS_DB_KEY_BASE=8WgpQbrcNZtXPzzGL3cgsdL234HmpRsfqWsKJLtqwJJk2VkQS2FFVBwssV3xcnWt
+      - GITLAB_SECRETS_DB_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
+      - GITLAB_SECRETS_SECRET_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
+      - GITLAB_SECRETS_OTP_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
       
     volumes:
       - ${HOME}/tmp/gitlab/git-data:/var/opt/gitlab/git-data
+      
     volumes_from:
       - dita-ot
       - linkmgr

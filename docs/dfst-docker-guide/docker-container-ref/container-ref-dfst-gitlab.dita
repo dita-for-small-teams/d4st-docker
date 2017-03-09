@@ -16,19 +16,18 @@
       <dl>
         <dlentry>
           <dt>URL</dt>
-          <dd><xref href="https://hub.docker.com/r/gitlab/gitlab-ce/" format="html" scope="external"
-              >https://hub.docker.com/r/gitlab/gitlab-ce/</xref></dd>
+          <dd><xref keyref="docker-hub-gitlab"/></dd>
         </dlentry>
         <dlentry>
           <dt>container name</dt>
-          <dd>dfst/gitlab</dd>
+          <dd>dfst/gitlab-dfst</dd>
         </dlentry>
       </dl>
     </section>
     <section spectitle="Usage">
       <p>A typical run specification
         is:<codeblock>docker run  -d \
-    --name gitlab \
+    --name gitlab-dfst \
     --hostname $(docker-machine ip default) \
     --publish 443:443 --publish 80:80 --publish 8022:22 \
     --volume /srv/gitlab/config:/etc/gitlab \
@@ -47,8 +46,8 @@
         the host computer.</note>
     </section>
     <section spectitle="Configuration Details">
-      <p>The default DFST setup uses the configuration as specified in the GitLab Docker container
-        documentation.</p>
+      <p>The default DFST setup uses the configuration as specified in the Sameersbn GitLab Docker
+        container documentation.</p>
     </section>
   </refbody>
 </reference>

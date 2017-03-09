@@ -1,15 +1,12 @@
-FROM gitlab/gitlab-ce
-# Copied from the base GitLab Docker file
-# (https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/docker/Dockerfile):
-# Wrapper to handle signal, trigger runit and reconfigure GitLab
+# GitLab image configured for use in the DITA for Small Teams
+# system. Adds custom git hooks to the base image.
 #
-# Set up configuration scripts and
-# custom hooks
-#
+# Using the sameersbn version because it's better documented
+# and generally better organized than the office gitlab-ce 
+# container.
+FROM sameersbn/gitlab
+MAINTAINER Eliot Kimber "ekimber@contrext.com"
 COPY admin-scripts /var/opt/dfst/bin/
-RUN apt-get install -y unzip && \
-    cd /var/opt/dfst/bin && \
-    chmod a+x *
 RUN cd /var/opt/dfst && \
     wget https://github.com/dita-for-small-teams/dfst-git-commit-hooks/archive/develop.zip && \
     unzip develop.zip && \

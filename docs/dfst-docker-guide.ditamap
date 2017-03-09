@@ -116,8 +116,6 @@
     keys="extending-dfst-system">
     <topicref href="dfst-docker-guide/extending/building_the_dfst_containers.dita"
       keys="building-dfst-containers"/>
-    <topicref href="dfst-docker-guide/extending/configuring_your_own_containers.dita"
-      keys="configuring-your-own-containers"/>
   </chapter>
   <chapter
     href="dfst-docker-guide/system-description/chapter-dfst-container-system-description.dita"
