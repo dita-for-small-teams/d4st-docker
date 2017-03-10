@@ -1,0 +1,42 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en-us"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>DITA for Small Teams Tools</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="schema.DC" href="http://purl.org/dc/terms/"><meta name="DC.Type" content="topic"><meta name="description" content="What tools to use for small-team DITA management."><meta name="DC.Format" content="XHTML"><meta name="DC.Identifier" content="topic_ahw_l2s_2p"><script type="text/javascript">var d4p = {"relativePath":"..\/","dev":false,"debug":false,"draft":false,"nextTopicHref":"topics\/tools-git.html","previousTopicHref":"topics\/dita-for-small-teams.html","ext":".html","root":false,"topic":{"chunked":""},"map":{"title":"DITA For Small Teams","chunked":false},"search":{"minlength":2},"l":{"searchPageHeading":"Search Results","close":"Close"}}</script><link rel="stylesheet" type="text/css" media="screen, projection" href="../themes/dita-d4p-classic/css/style.css"><link rel="stylesheet" type="text/css" media="screen, projection, print" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><script type="text/javascript">
+      
+        d4p.cssGridPath = d4p.dev ? 'html5-themes/modules/960-Responsive-Grid/css/' : 'themes/dita-d4p-classic/css/';
+        var ADAPT_CONFIG = {
+          // Where is your CSS?
+          path: d4p.relativePath + d4p.cssGridPath,
+          
+          // false = Only run once, when page first loads.
+          // true = Change on window resize and page tilt.
+          dynamic: true,
+          
+          // Optional callback... myCallback(i, width)
+          callback: doc_resize,
+          
+          // First range entry is the minimum.
+          // Last range entry is the maximum.
+          // Separate ranges by "to" keyword.
+          range: [
+             // small (size-0)
+            '0px    to 760px  = mobile.css',
+             // medium (size-1, size-2)
+            '760px  to 980px  = 720.css',
+            '980px  to 1270px = 960.css',
+             // large (size-3, size-5)
+            '1270px to 1600px = 1200.css',
+            '1600px to 1940px = 1560.css',
+             // extra large (size-6)
+            '1940px to 2540px = 1920.css',
+            '2540px           = 2520.css'
+          ]
+        };
+
+        function doc_resize(i, width)
+        {
+          d4p.setBodyClassfunction(i, width);
+        }
+
+
+        
+      </script><script type="text/javascript" src="../themes/dita-d4p-classic/js/script.js"></script></head><body class="en-us dita-d4p-classic centered navigation-default"><div id="d4h5-main-container" class="container_12" role="application"><header role="banner" aria-labelledby="publication-title" class="hide-for-small"><div class="grid_8"><h1 id="publication-title">DITA For Small Teams</h1></div><section class="grid_4 search-box"><form id="search" role="search"><div class="form-group"><input id="search-text" type="text" autocomplete="off" class="form-control" placeholder="Search"></div></form></section><secion class="clearfix"></secion></header><div id="d4h5-section-container" class="grid_12"><nav id="local-navigation" class="grid_4 alpha omega" role="navigation" aria-label="Main navigation"><div id="nav-content"><ul><li><a href="../index.html">Table of Contents</a></li><li class="collapsible active"><a href="dita-for-small-teams.html">DITA For Small Teams</a><ul><li class="collapsible active"><a href="dfst-tools.html" class=" selected">DITA for Small Teams Tools</a><ul><li><a href="tools-git.html">git: Distributed and Shared Access to Content</a></li><li><a href="tools-basex.html">BaseX: Enabling Search and Link Management</a></li><li><a href="tools-exist-db.html">eXist-db: Enabling Search and Link Management</a></li><li><a href="tools-dita-ot.html">DITA Open Toolkit: General DITA Publishing and Data Processing</a></li></ul></li></ul></li></ul></div></nav><div id="d4h5-main-content" class="grid_8 alpha omega"><article><nav id="content-toolbar" class="toolbar hide-for-small"></nav><section id="page"><div><a id="topic_ahw_l2s_2p" class="anchor"></a> <h1 class="title topictitle1">DITA for Small Teams Tools</h1> <div class="body"><p class="shortdesc">What tools to use for small-team DITA management.</p><p class="p">For each of the functional areas there are several tools to choose from and the tools you choose may depend as much on what you already have available or what you're already familiar with. The tools presented here represent one possible set.</p> <div class="p">The base DFST tool set is:<ul class="ul" id="topic_ahw_l2s_2p__ul_zkr_1fs_2p"><li class="li">For distributed and shared access to versioned content: A version control system like git, Subversion, or Mercurial. This document recommends git if you need to make a choice. Git, in particular, has features that make distributed collaboration easier and there are many free services, such as <a data-keyref="github-site" class="xref external" href="http://github.com">GitHub</a>, GitLab, and <a data-keyref="bitbucket-site" class="xref external" href="https://bitbucket.org">BitBucket</a>, that provide free or low-cost git repositories along with other collaboration features, such as issue trackers and wikis. It is also easy to set up a central shared git repository within an organization.</li> <li class="li">Deliverable production: A continuous integration (<dfn class="term">CI</dfn>) system like Jenkins, Hudson, or Travis CI for automating the production of deliverables when updates are committed to the content repository. This document uses Travis CI. The Docker configuration uses GitLab’s continuous integration facility.<p class="p">As for git, there are free and low-cost services like <a data-keyref="travis-ci" class="xref external" href="https://travis-ci.org">Travis CI</a> that provide CI servers or you can quickly set up a continuous integration server on an internal machine. For more robust systems you can use services like Amazon Web Services or Microsoft Azure to set up private servers in the cloud. Production can use the DITA Open Toolkit, ditac, or any other DITA production tools that can be run on the server you're using (which means that Windows-only tools can be a problem unless you set up your own Windows server).</p></li> <li class="li">Authoring: oXygenXML, XMetal, or Adobe Framemaker. None of these are free but they all offer excellent DITA feature support. This document uses oXygenXML as the editor. In addition, a number of Web-based editors, including FontoXML and Xeditor as well as oXygenXML’s Web version can be compelling options.</li> <li class="li">Link management: An XML-aware database like eXist-db, BaseX, or MarkLogic to make it easy to search across your content using XQuery. This document uses BaseX because it is open source and easy to install and use. However, any similar XQuery database should work with the link management queries provided here.<p class="p">Note that the XML database is used only to enable search and link management. It is not being used as the primary source repository. That's because it does not provide the version control and repository distribution features of a complete version control system like git or Subversion. So the XML database is really just a search optimization strategy. It's use is, of course, optional and if you're not doing a lot of reuse or have huge amounts of content, it may not be necessary. But the support provided by the DITA for Small Teams project makes it relatively easy to set up and use.</p><p class="p">The DITA for Small Teams project includes a Web application that provides basic DITA-specific search and link management features. It also provides git commit hooks for automatically copying your DITA content from your version-controlled authoring repository into the XQuery database.</p></li></ul></div></div><footer id="topicsNPLinks"><div id="footer_previous"><a href="../topics/dita-for-small-teams.html" class="previous" rel="internal">DITA For Small Teams</a></div><div id="footer_next"><a href="../topics/tools-git.html" class="next" rel="internal">git: Distributed and Shared Access to Content</a></div></footer></div></section></article><div class="clear"></div></div><div class="clearfix"></div></div><div class="clearfix"></div><div id="footer-container" class="grid_12"></div></div></body></html>
