@@ -4,7 +4,7 @@
 # Using the sameersbn version because it's better documented
 # and generally better organized than the office gitlab-ce 
 # container.
-FROM sameersbn/gitlab
+FROM sameersbn/gitlab:8.16.6
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 COPY admin-scripts /var/opt/dfst/bin/
 RUN cd /var/opt/dfst && \
@@ -14,8 +14,8 @@ RUN cd /var/opt/dfst && \
     mv dfst-git-commit-hooks-develop/server-side custom_hooks     
 
 ENV PATH ${PATH}:/var/opt/dfst/bin
-
-CMD ["/assets/wrapper"]
+ENTRYPOINT ["/sbin/entrypoint.sh"]
+CMD ["app:start"]
 #
 # End of Docker file
 #
