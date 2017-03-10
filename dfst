@@ -40,12 +40,14 @@ if [ -f $DOTENV ]; then
 else
   # echo "No .env file, using default environment settings."
   export GITLAB_PORT=90
+  export GITLAB_SSH_PORT=9022
   export WEBDELIVERY_PORT=80
   export LINKMGR_PORT=8984
   
   echo "Creating docker-compose environment file \"$DFST_DIR/.env\"..."
   touch $DOTENV
   echo "GITLAB_PORT=$GITLAB_PORT" >> "$DOTENV"
+  echo "GITLAB_SSH_PORT=$GITLAB_SSH_PORT" >> "$DOTENV"
   echo "WEBDELIVERY_PORT=$WEBDELIVERY_PORT" >> "$DOTENV"
   echo "LINKMGR_PORT=$LINKMGR_PORT" >> "$DOTENV"
   echo "#GITLAB_PRIVATE_TOKEN=${GITLAB_PRIVATE_TOKEN:-YourPrivateToken}" >> "$DOTENV"
