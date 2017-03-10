@@ -278,7 +278,8 @@ $</codeblock></p>
         </stepresult>
       </step>
       <step>
-        <cmd>Push the contents of the Thunderbird repository to the GitLab project:</cmd>
+        <cmd>Push the contents of the Thunderbird repository to the GitLab project using the command
+              <codeph><cmdname>git push</cmdname> -u origin master</codeph>:</cmd>
         <info>
           <codeblock>$ git push -u origin master
 Counting objects: 132, done.
@@ -329,9 +330,9 @@ $ </codeblock>
       <step>
         <cmd>Click on the "Update Link Management Indexes" link near the top of the page.</cmd>
         <stepresult>
-          <p>A new tab will open with the text "Updating link management indexes". After a few
-            seconds the message will be replaced with the text "Link management database
-            updated".</p>
+          <p>A new tab will open with the text "Updating link management indexes". After a some time
+            (should not be more than a minute on a reasonably-fast machine) the message will be
+            replaced with the text "Link management database updated".</p>
         </stepresult>
       </step>
       <step>
