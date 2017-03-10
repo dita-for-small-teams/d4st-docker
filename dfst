@@ -170,6 +170,11 @@ elif [ "$1" = "pull" ]; then
   echo "Pulling new images..."
   docker-compose -f ${DOCKER_FILE} pull
   R=$?
+elif [ "$1" = "log-gitlab" ]; then
+  echo "Viewing GitLab container log. Use ctrl-c to quit logging."
+  docker-compose -f ${DOCKER_FILE} logs -f gitlab-dfst
+  R=$?
+  exit 0
 elif [ "$1" = "gitlab" ]; then
   echo "Open GitLab Web application in ${dfstBrowser}"
   url="http://${HOSTNAME}:${GITLAB_PORT}"
@@ -320,6 +325,7 @@ else
   echo " unpause - Resumes the server the server"  
   echo " pull - Pull new images"  
   echo " gitlab - Open GitLab Web application"  
+  echo " log-gitlab - View the running GitLab server logs"   
   echo " linkmgr - Open DFST Link Manager Web application"  
   echo " addhooks - Add the git hooks to the GitLab repositories"
   echo " getdemo {targetDirectory} - Copy the Thunderbird demo git repository to a local directory"
