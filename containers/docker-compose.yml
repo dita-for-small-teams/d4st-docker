@@ -21,11 +21,8 @@ version: "2"
 # BaseX server (used by the git hooks installed in the
 # GitLab repositories).
 #
-# The Web server is exposed on port 8080.
+# The Web server is exposed on port 80.
 # 
-# Placeholder for now, will add appropriate
-# variables later (e.g., ports for Web services,
-# host-side mount points).
 
 services:
 
@@ -55,26 +52,30 @@ services:
 # DTDs or other grammar files.
 #  
   linkmgr-webapp:
-     extends:
-       file: link-manager-webapp/docker-compose.yml
-       service: linkmgr-basex-webapp
-     container_name: linkmgr-webapp
+    image: dfst/link-manager-webapp
+    container_name: linkmgr-dfst-webapp
+    volumes: ["/repo", "/webapp"]
      
+#
+# Link Manager server:
+#    
   linkmgr:
+    image: dfst/link-manager-basex
+    container_name: linkmgr-dfst
+    ports: 
+     - "1984:1984"
+     - "${LINKMGR_PORT}:8984"
 
-    extends:
-      file: link-manager-basex/docker-compose.yml
-      service: linkmgr-basex
+    depends_on:
+      - linkmgr-webapp
 
     volumes:
+       - "${HOME}/tmp/basex/data:/data"
        - /Users:/Users
-# Uncomment and adjust these lines in order to have the Link Manager
-# use a local copy of the Web app source for development purposes:       
-       - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
-       - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
   
     volumes_from:
      - dita-ot
+     - linkmgr-webapp
  
 #
 # GitLab
@@ -93,13 +94,13 @@ services:
     command:
     - --loglevel warning
     volumes:
-    - /Users/ekimber/temp/gitlab-sameersbn/data/redis:/var/lib/redis:Z
+    - ${HOME}/tmp/gitlab/data/redis:/var/lib/redis:Z
 
   postgresql:
     restart: always
     image: sameersbn/postgresql:9.6-2
     volumes:
-    - /Users/ekimber/temp/gitlab-sameersbn/data/postgresql:/var/lib/postgresql:Z
+    - ${HOME}/tmp/gitlab/data/postgresql:/var/lib/postgresql:Z
     environment:
     - DB_USER=gitlab
     - DB_PASS=password

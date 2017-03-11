@@ -14,9 +14,13 @@ MAINTAINER Eliot Kimber "ekimber@contrext.com"
 RUN wget https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/develop.zip && \
   unzip develop.zip && \
   rm develop.zip
-RUN mkdir /webapp && mkdir /webapp/static && mkdir /repo 
+RUN mkdir /webapp && \
+    mkdir /webapp/static && \
+    mkdir /webapp/dba && \
+    mkdir /repo 
 RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
     cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
+    cp -r dfst-linkmgmt-basex-develop/modules/dba /webapp/dba/modules && \
     cp -r dfst-linkmgmt-basex-develop/modules/* /repo
 
 # 
