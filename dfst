@@ -85,6 +85,13 @@ DOCKER_FILE=$DIR/containers/docker-compose.yml
 #fi
 HOSTNAME=localhost
 
+# macOS/Linux convention:
+username="$USER"
+if [ "$username" = "" ]; then
+  # Windows git bash convention
+  username="$USERNAME"
+fi
+
 ACTION=$1
 
 if [ -z $1  ] ; then
@@ -216,14 +223,16 @@ elif [ "$1" = "make-gitlab-user" ]; then
      echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
      exit 1;
   fi
-  username="$USER"
+  
+  # username is set to current user's name earlier.
   password="password"
-  if [ "$2" != "" ]; then
-     username=$2
+  if [[ $# -eq 3 ]]; then
+     username="$2"
+     password="$3"
+  elif [[ $# -eq 2 ]]; then
+     username="$2"
   fi
-  if [ "$3" != "" ]; then
-     password=$3
-  fi
+
   echo "Creating GitLab user \"${username}\"..."
   result=$(curl -s -X POST --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" "http://${HOSTNAME}:${GITLAB_PORT}/api/v3/users?username=${username}&email=${username}@example.com&password=${password}&name=${username}")
   if [[ "$result" =~ "{\"message\":\"401 Unauthorized\"" ]]; then
