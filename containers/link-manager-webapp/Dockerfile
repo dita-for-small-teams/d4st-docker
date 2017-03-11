@@ -1,4 +1,4 @@
-FROM dfst/basexhttp-base:latest
+FROM java:8
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 #
 # Container for the DFST BaseX-based Link Manager web
@@ -14,6 +14,7 @@ MAINTAINER Eliot Kimber "ekimber@contrext.com"
 RUN wget https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/develop.zip && \
   unzip develop.zip && \
   rm develop.zip
+RUN mkdir /webapp && mkdir /webapp/static && mkdir /repo 
 RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
     cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
     cp -r dfst-linkmgmt-basex-develop/modules/* /repo
@@ -23,10 +24,6 @@ RUN cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
 # container's versions:
 #
 VOLUME ["/repo", "/webapp"]
-# Override the default entry point so we don't start
-# two instances of BaseX:
-ENTRYPOINT /bin/bash
-
 
 #
 # End of Dockerfile
