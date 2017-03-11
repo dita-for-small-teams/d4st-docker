@@ -34,6 +34,9 @@ if [ -f $DOTENV ]; then
    do
       # echo "$line"
       if [[ "$line" != "#"* ]]; then
+        # Handle Windows \r\n line endings, e.g., .env file
+        # was edited with WordPad.
+        line=$(echo "$line" | tr -d '\015') 
         export "$line"
       fi
    done < "$DOTENV"
