@@ -108,7 +108,8 @@ services:
 
   gitlab-dfst:
     restart: always
-    image: sameersbn/gitlab:8.16.6
+    # image: sameersbn/gitlab:8.16.6
+    image: dfst/gitlab-dfst
     container_name: gitlab-dfst
     depends_on:
       - redis

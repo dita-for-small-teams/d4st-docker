@@ -18,7 +18,11 @@
         complete git user interface. For Windows, the free Tortoise Git provides integration of git
         with Windows Explorer.</p>
       <p platform="windows">Under Windows, open a Docker Quickstart Terminal window (<image
-          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"/>). </p>
+          keyref="icon-docker-quickstart" height="16" id="image_xwr_mpb_bv" placement="inline"/>) or
+        a Git for Windows shell (both provide a Linux-style command environment).</p>
+      <note>Under Windows you will need to use the Docker settings to share your
+          <filepath>C</filepath> drive, which is not shared by default. Container startup will fail
+        with a message indicating that you need to do this if you forget.</note>
       <p platform="mac">Under macOS you can use a normal terminal window.</p>
       <note platform="windows">The Microsoft Edge browser's security settings may not allow you to
         connect to the Web applications running in the Docker containers. These instructions assume
