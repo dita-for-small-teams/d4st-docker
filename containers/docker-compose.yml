@@ -288,9 +288,9 @@ services:
 # Oxygen Web Author server
 #
 
-  oxwebauthor:
+  oxywebauthor:
      extends:
-        file: oxygen-web-author/docker-compose.yml
+        file: oxywebauthor-dfst/docker-compose.yml
         service: oxywebauthor-dfst
       
 #  
