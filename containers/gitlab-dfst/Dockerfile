@@ -4,7 +4,7 @@
 # Using the sameersbn version because it's better documented
 # and generally better organized than the office gitlab-ce 
 # container.
-FROM sameersbn/gitlab:8.16.6
+FROM sameersbn/gitlab:8.17.0
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 COPY admin-scripts /var/opt/dfst/bin/
 RUN cd /var/opt/dfst && \
