@@ -283,6 +283,15 @@ services:
     image: ditacommunity/demo-content
     container_name: demo-content
     command: top
+
+#
+# Oxygen Web Author server
+#
+
+  oxwebauthor:
+     extends:
+        file: oxygen-web-author/docker-compose.yml
+        service: oxywebauthor-dfst
       
 #  
 # End of compose file.

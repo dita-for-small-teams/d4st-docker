@@ -1,0 +1,19 @@
+version: "2"
+#
+# Docker-compose file for
+# the DFST Oxygen Web Author (OxWebAuthor) server application
+# 
+# Sets up the Web Author application in a Tomcat
+# server.
+# 
+services:
+  oxywebauthor-dfst:
+    # hostname: ${HOSTNAME}
+    ports: 
+      - "${OXYWEBAUTHOR_PORT}:8080"
+    container_name: oxywebauthor-dfst
+     
+    image: dfst/oxywebauthor-dfst
+#
+# End of compose file.
+#  
