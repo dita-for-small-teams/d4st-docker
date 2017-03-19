@@ -35,7 +35,7 @@ services:
 #
   dita-ot:
     extends:
-       file: dita-ot/docker-compose.yml  
+       file: containers/dita-ot/docker-compose.yml  
        service: dita-ot-dfst
     volumes_from:
        - web-delivery
@@ -109,23 +109,25 @@ services:
 
   gitlab-dfst:
     restart: always
-    # image: sameersbn/gitlab:8.16.6
+    # image: sameersbn/gitlab:8.17.3
     image: dfst/gitlab-dfst
     container_name: gitlab-dfst
     depends_on:
       - redis
       - postgresql
        
-    volumes:
-      - ${HOME}/tmp/gitlab/git-data:/var/opt/gitlab/git-data
-
     ports:
       - "${GITLAB_PORT}:80"
       - "${GITLAB_SSH_PORT}:22"
+      
+    volumes:
+      - ${HOME}/tmp/gitlab/git-data:/var/opt/gitlab/git-data:Z
+
     environment:
       - GITLAB_SECRETS_DB_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
       - GITLAB_SECRETS_SECRET_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
       - GITLAB_SECRETS_OTP_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
+      
       - DEBUG=false
   
       - DB_ADAPTER=postgresql
@@ -148,9 +150,6 @@ services:
       - GITLAB_PORT=${GITLAB_PORT}
       - GITLAB_SSH_PORT=${GITLAB_SSH_PORT}
       - GITLAB_RELATIVE_URL_ROOT=
-      - GITLAB_SECRETS_DB_KEY_BASE=long-and-random-alphanumeric-string
-      - GITLAB_SECRETS_SECRET_KEY_BASE=long-and-random-alphanumeric-string
-      - GITLAB_SECRETS_OTP_KEY_BASE=long-and-random-alphanumeric-string
   
       - GITLAB_ROOT_PASSWORD=
       - GITLAB_ROOT_EMAIL=
@@ -251,13 +250,13 @@ services:
 # Define the GitLab runner
 # that will be used to run build jobs;
 #      
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-    container_name: gitlab-runner
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${HOME}/tmp/gitlab-runner/config:/etc/gitlab-runner
+#  gitlab-runner:
+#    image: gitlab/gitlab-runner:latest
+#    container_name: gitlab-runner
+#    restart: always
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - ${HOME}/tmp/gitlab-runner/config:/etc/gitlab-runner
 
 #
 # Web server for HTML delivery
@@ -265,7 +264,7 @@ services:
 
   web-delivery:
     extends:
-       file: caddy-dfst/docker-compose.yml  
+       file: containers/caddy-dfst/docker-compose.yml  
        service: caddy-dfst
     volumes:
       - ${HOME}/tmp/webdelivery:/srv/www
@@ -290,7 +289,7 @@ services:
 
   oxywebauthor:
      extends:
-        file: oxywebauthor-dfst/docker-compose.yml
+        file: containers/oxywebauthor-dfst/docker-compose.yml
         service: oxywebauthor-dfst
       
 #  
