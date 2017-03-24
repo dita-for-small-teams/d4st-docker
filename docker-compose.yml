@@ -24,6 +24,9 @@ version: "2"
 # The Web server is exposed on port 80.
 # 
 
+volumes:
+  git-data:
+
 services:
 
 #
@@ -121,7 +124,8 @@ services:
       - "${GITLAB_SSH_PORT}:22"
       
     volumes:
-      - ${HOME}/tmp/gitlab/git-data:/var/opt/gitlab/git-data:Z
+      # Create a named volume rather than a local mount:
+      - git-data:/home/git/data:Z
 
     environment:
       - GITLAB_SECRETS_DB_KEY_BASE=S8ZRV6kN43LQ2sQVmVfTlM32jLzj8FFLf6L6WzxtjwqnXkZlzpc5tc3C7cXbgrqt
