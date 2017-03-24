@@ -8,7 +8,7 @@
 # custom hooks at project creation.
 #
 masterCustomHooksDir = "/var/opt/dfst/custom_hooks"
-repodir = "/var/opt/gitlab/git-data/repositories"
+repodir = "/home/git/data/repositories"
 Dir.chdir(repodir)
 Dir['**/*.git'].each do |dir|
     # puts "dir=#{dir}"
