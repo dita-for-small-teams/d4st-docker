@@ -11,7 +11,9 @@
         the same for Docker on Linux.</p>
       <p>The DFST system uses git to manage your source code. You must have a git client installed
         on your machine. Under macOS this should already be the case (test it by typing "git" in a
-        command window). </p>
+        command window). The built-in version of git may be older than you want, in which case you
+        can use homebrew to install a newer version of git (see <xref keyref="website-homebrew"
+        />).</p>
       <p>For Windows you can install Git For Windows, which is a free git client. Be sure to include
         the git bash shell in your installation. </p>
       <p>For both macOS and Windows the free SourceTree application from Atlassian provides a
@@ -68,7 +70,8 @@ dot_env</codeblock></p>
         </stepresult>
       </step>
       <step>
-        <cmd>Start a bash shell and navigate to the directory for the DFST package:</cmd>
+        <cmd>Start a bash shell (under Windows, a git command window, which provides a bash shell)
+          and navigate to the directory for the DFST package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
 $ cd apps/dfst-docker
@@ -99,7 +102,7 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
                                                          dfstdocker_redis_1
 </codeblock>
           <p>The first time you do this Docker has to download all the images for the containers and
-            this can take a while. The next time you run it, it will be quick.</p>
+            this can take a while.The next time you run it, it will be quick.</p>
           <p>The exact set of containers may be different depending on the current configuration of
             the DFST container set.</p>
         </info>
@@ -111,6 +114,9 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
             docker commands. You can edit this file to change the ports used by the different DFST
             Web services. You will also edit this file to add the GitLab private token in a later
             step.</p>
+          <p>The first time you run GitLab it has to do quite a lot of setup and that may take
+            several minutes to complete. You can use the command <cmdname>dfst log-gitlab</cmdname>
+            to see what it's doing and monitor it's startup progress.</p>
         </stepresult>
       </step>
       <step>
