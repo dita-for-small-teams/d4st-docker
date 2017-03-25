@@ -15,6 +15,11 @@ RUN wget https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/dev
   unzip develop.zip && \
   rm develop.zip
 
+RUN ls dfst-linkmgmt-basex-develop/webapp/
+# NOTE: Not including the WEB-INF directory that it is source webapp/ 
+# Also: have to copy the modules/ directory into the /webapp/dba/modules directory
+# because of some funky references that I can't change (part of base BaseX 
+# distribution). This is a workaround for getting a better fix.
 RUN apt-get install unzip && \
   wget -O /tmp/BaseX.zip http://files.basex.org/releases/BaseX-latest.zip && \ 
   unzip /tmp/BaseX.zip -d /opt/ && \
@@ -22,10 +27,16 @@ RUN apt-get install unzip && \
   mv /opt/basex/data / && \
   mv /opt/basex/repo / && \
   mv /opt/basex/webapp / && \
+  mkdir /webapp/dba/modules/modules && \
+  cp /webapp/dba/modules/*.xqm /webapp/dba/modules/modules/ && \
   cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
   cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
-  cp -r dfst-linkmgmt-basex-develop/modules/dba /webapp/dba/modules && \
   cp -r dfst-linkmgmt-basex-develop/modules/* /repo
+  
+#
+# 
+#   
+# RUN \ 
 
     
 
