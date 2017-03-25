@@ -49,8 +49,8 @@ RUN wget -O bin/BaseXClient.rb https://github.com/BaseXdb/basex/raw/master/basex
   chmod a+x bin/*.rb && \
   ls -al bin
 
-#RUN echo ".basex:"
-#RUN cat .basex
+RUN echo ".basex:"
+RUN cat .basex
 
 # Expose port.
 
