@@ -268,11 +268,10 @@ $ </codeblock></p>
             whatever target directory you want.</p>
           <p>Test the copy:</p>
           <codeblock>$ ls ~/Thunderbird
-c_about_defining_payload.dita      r_image_warehouse_2.dita
-c_architecture_combined.dita       r_interface_drops.dita
-c_architecture_overview.dita       r_interface-bypass-group-is-in-active-mode.dita
-c_attribute_parameter_syntax.dita  r_jobconf.dita
-… and many more files...</codeblock>
+Integrator_admin.ditamap		ditavals				master_control_jp.ditamap
+Integrator_admin_jp.ditamap	    en				      proposal_template.ditamap
+User_Guide-reuse-only.ditamap	  jp				      proposal_template_jp.ditamap
+User_Guide-reuse-only_jp.ditamap      master_control.ditamap</codeblock>
         </info>
         <stepresult>
           <p>You now have a copy of the Thunderbird data ready to push to your GitLab server once
