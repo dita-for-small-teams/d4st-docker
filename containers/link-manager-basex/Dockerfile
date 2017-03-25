@@ -20,6 +20,7 @@ RUN ls dfst-linkmgmt-basex-develop/webapp/
 # Also: have to copy the modules/ directory into the /webapp/dba/modules directory
 # because of some funky references that I can't change (part of base BaseX 
 # distribution). This is a workaround for getting a better fix.
+COPY basex/dot_basex /tmp/.basex
 RUN apt-get install unzip && \
   wget -O /tmp/BaseX.zip http://files.basex.org/releases/BaseX-latest.zip && \ 
   unzip /tmp/BaseX.zip -d /opt/ && \
@@ -31,7 +32,8 @@ RUN apt-get install unzip && \
   cp /webapp/dba/modules/*.xqm /webapp/dba/modules/modules/ && \
   cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
   cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
-  cp -r dfst-linkmgmt-basex-develop/modules/* /repo
+  cp -r dfst-linkmgmt-basex-develop/modules/* /repo && \
+  cp /tmp/.basex .
   
 #
 # 
@@ -47,9 +49,9 @@ RUN wget -O bin/BaseXClient.rb https://github.com/BaseXdb/basex/raw/master/basex
   chmod a+x bin/*.rb && \
   ls -al bin
 
-COPY basex/dot_basex /opt/basex/dot_basex
+#RUN echo ".basex:"
+#RUN cat .basex
 
-RUN cat /opt/basex/dot_basex >> .basex && rm /opt/basex/dot_basex
 # Expose port.
 
 EXPOSE 8984
