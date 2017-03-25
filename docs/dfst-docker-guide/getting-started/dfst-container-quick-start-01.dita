@@ -54,16 +54,14 @@
       </step>
       <step>
         <cmd>Unzip the DFST release package to somewhere convenient, e.g. <filepath
-            platform="windows">c:\apps</filepath>.</cmd>
+            platform="windows">c:\apps</filepath> or <filepath>~/apps</filepath>. This is where the
+            <cmdname>dfst</cmdname> command will live.</cmd>
         <stepresult>
           <p>You should get a directory named <filepath>dfst-docker</filepath> with this
             content:<codeblock>LICENSE
 README.md
-bin
 containers
-dfst
-docs
-dot_env</codeblock></p>
+dfst</codeblock></p>
           <p>The <filepath>dfst</filepath> script is the main script for managing the DFST
             components through Docker. It is a bash shell script intended to be run in a bash shell.
             Under Windows you can run it in a git bash shell.</p>
@@ -79,6 +77,20 @@ $ cd apps/dfst-docker
 ekimber@WIN-HH0I81E3DAU MINGW64 /c/apps/dfst-docker
 $ ls
 bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
+        </info>
+      </step>
+      <step>
+        <cmd>Run the command "<codeph>chmod a+x dfst</codeph>" to make the <cmdname>dfst</cmdname>
+          script executable.</cmd>
+        <info>
+          <p>You can check this by doing "<codeph>ls -al dfst</codeph>" to see what the permissions
+            are. You should see "x"s in the
+            permissions:<codeblock>$ ls -al dfst
+-rwxr-xr-x  1 ekimber  staff  13437 Mar 19 15:39 dfst
+$ </codeblock></p>
+          <p>Unfortunately, there doesn't appear to be a way to preserve the executable flag in the
+            Zip file. If anyone knows a way to get around this that doesn't require an actual
+            installer, please speak up.</p>
         </info>
       </step>
       <step>
@@ -102,7 +114,7 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
                                                          dfstdocker_redis_1
 </codeblock>
           <p>The first time you do this Docker has to download all the images for the containers and
-            this can take a while.The next time you run it, it will be quick.</p>
+            this can take a while. The next time you run it, it will be quick.</p>
           <p>The exact set of containers may be different depending on the current configuration of
             the DFST container set.</p>
         </info>
@@ -117,6 +129,11 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
           <p>The first time you run GitLab it has to do quite a lot of setup and that may take
             several minutes to complete. You can use the command <cmdname>dfst log-gitlab</cmdname>
             to see what it's doing and monitor it's startup progress.</p>
+          <p>If you get messages about containers not starting because their ports are taken, for
+            example because you already have something running on port 80 or port 8080 (default
+            ports for many applications), you can edit the <filepath>.env</filepath> file that the
+              <cmdname>dfst</cmdname> command created the first time you ran it. See step <xref
+              href="#Untitled9/edit-dot-env" format="dita"/>.</p>
         </stepresult>
       </step>
       <step>
@@ -195,10 +212,9 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
       <step>
         <cmd>Copy the private token string to the clipboard.</cmd>
       </step>
-      <step>
-        <cmd>Edit the <filepath>docker-dfst/.env</filepath> file, remove the "#" from the
-            <codeph>GITLAB_PRIVATE_TOKEN</codeph> line, and replace "YourPrivateToken" with the
-          value on the clipboard:</cmd>
+      <step id="edit-dot-env">
+        <cmd>Edit the <filepath>docker-dfst/.env</filepath> file and replace "YourPrivateToken" with
+          the value on the clipboard:</cmd>
         <info>Before:<codeblock>GITLAB_PORT=90
 WEBDELIVERY_PORT=80
 LINKMGR_PORT=8984

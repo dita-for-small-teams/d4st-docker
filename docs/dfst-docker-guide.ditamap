@@ -63,6 +63,11 @@
             <navtitle>http://yaml.org</navtitle>
           </topicmeta>
         </keydef>
+        <keydef href="https://brew.sh" keys="website-homebrew" format="sh" scope="external">
+          <topicmeta>
+            <navtitle>https://brew.sh</navtitle>
+          </topicmeta>
+        </keydef>
       </topicgroup>
       <topicgroup>
         <topicmeta>
