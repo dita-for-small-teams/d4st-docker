@@ -26,6 +26,9 @@ version: "2"
 
 volumes:
   git-data:
+  redis:
+  postgress:
+  basex-data:
 
 services:
 
@@ -67,7 +70,7 @@ services:
       - OXYWEBAUTHOR_PORT
       
     volumes:
-       - "${HOME}/tmp/basex/data:/data"
+       - basex-data:/data"
        - /Users:/Users
   
     volumes_from:
@@ -90,13 +93,13 @@ services:
     command:
     - --loglevel warning
     volumes:
-    - ${HOME}/tmp/gitlab/data/redis:/var/lib/redis:Z
+    - redis:/var/lib/redis:Z
 
   postgresql:
     restart: always
     image: sameersbn/postgresql:9.6-2
     volumes:
-    - ${HOME}/tmp/gitlab/data/postgresql:/var/lib/postgresql:Z
+    - postgress:/var/lib/postgresql:Z
     environment:
     - DB_USER=gitlab
     - DB_PASS=password
