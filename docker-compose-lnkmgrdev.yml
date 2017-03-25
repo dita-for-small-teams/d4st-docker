@@ -57,14 +57,6 @@ services:
 # It gets files from the git server and depends on
 # the DITA Open Toolkit to resolve references to 
 # DTDs or other grammar files.
-#  
-  linkmgr-webapp:
-    image: dfst/link-manager-webapp
-    container_name: linkmgr-dfst-webapp
-    volumes:
-    - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
-    - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
-     
 #
 # Link Manager server:
 #    
@@ -75,16 +67,15 @@ services:
      - "1984:1984"
      - "${LINKMGR_PORT}:8984"
 
-    depends_on:
-      - linkmgr-webapp
-
     volumes:
-       - "${HOME}/tmp/basex/data:/data"
-       - /Users:/Users
+      - "${HOME}/tmp/basex/data:/data"
+      - /Users:/Users
+      # Use local development versions rather than what's in the container:
+      - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/modules:/repo
+      - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/webapp:/webapp
   
     volumes_from:
      - dita-ot
-     - linkmgr-webapp
  
 #
 # GitLab
