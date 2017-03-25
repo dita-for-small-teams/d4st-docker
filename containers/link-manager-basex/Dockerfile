@@ -16,11 +16,11 @@ RUN wget https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/dev
   rm develop.zip
 
 RUN ls dfst-linkmgmt-basex-develop/webapp/
-# NOTE: Not including the WEB-INF directory that it is source webapp/ 
+# NOTE: Not including the WEB-INF directory that is in source webapp/ 
 # Also: have to copy the modules/ directory into the /webapp/dba/modules directory
 # because of some funky references that I can't change (part of base BaseX 
 # distribution). This is a workaround for getting a better fix.
-COPY basex/dot_basex /tmp/.basex
+COPY basex/dot_basex /tmp/dot_basex
 RUN apt-get install unzip && \
   wget -O /tmp/BaseX.zip http://files.basex.org/releases/BaseX-latest.zip && \ 
   unzip /tmp/BaseX.zip -d /opt/ && \
@@ -33,14 +33,8 @@ RUN apt-get install unzip && \
   cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
   cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
   cp -r dfst-linkmgmt-basex-develop/modules/* /repo && \
-  cp /tmp/.basex .
-  
-#
-# 
-#   
-# RUN \ 
-
-    
+  cp /tmp/dot_basex /opt/basex/.basex
+      
 
 # Get the BaseX Ruby client and add it to the bin/ directory so we have it handy 
 # if we need it (but note that the GitLab container also gets its own copy of this
