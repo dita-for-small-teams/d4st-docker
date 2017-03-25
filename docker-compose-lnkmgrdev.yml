@@ -67,6 +67,11 @@ services:
      - "1984:1984"
      - "${LINKMGR_PORT}:8984"
 
+    environment:
+      - USER
+      - USERNAME
+      - OXWEBAUTHOR_PORT
+
     volumes:
       - "${HOME}/tmp/basex/data:/data"
       - /Users:/Users
