@@ -1,64 +1,45 @@
-FROM java:8
+FROM basex/dba
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 
-ENV HOME /opt/basex
-ENV PATH $HOME/bin:$PATH
+# ENV HOME /opt/basex
+# ENV PATH $HOME/bin:$PATH
+ENV WEBAPPDIR /srv/BaseXWeb
+ENV REPODIR /srv/BaseXRepo
 
-# Define working directory.
-WORKDIR /opt/basex
+USER root
 
 #
 # Get the Link Manager web application source:
 #
 
-RUN wget https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/develop.zip && \
-  unzip develop.zip && \
-  rm develop.zip
-
-RUN ls dfst-linkmgmt-basex-develop/webapp/
-# NOTE: Not including the WEB-INF directory that is in source webapp/ 
-# Also: have to copy the modules/ directory into the /webapp/dba/modules directory
-# because of some funky references that I can't change (part of base BaseX 
-# distribution). This is a workaround for getting a better fix.
-COPY basex/dot_basex /tmp/dot_basex
-RUN apt-get install unzip && \
-  wget -O /tmp/BaseX.zip http://files.basex.org/releases/BaseX-latest.zip && \ 
-  unzip /tmp/BaseX.zip -d /opt/ && \
-  rm /tmp/BaseX.zip && \
-  mv /opt/basex/data / && \
-  mv /opt/basex/repo / && \
-  mv /opt/basex/webapp / && \
-  mkdir /webapp/dba/modules/modules && \
-  cp /webapp/dba/modules/*.xqm /webapp/dba/modules/modules/ && \
-  cp dfst-linkmgmt-basex-develop/webapp/*.xqm /webapp/ && \
-  cp -r dfst-linkmgmt-basex-develop/webapp/static/* /webapp/static/ && \
-  cp -r dfst-linkmgmt-basex-develop/modules/* /repo && \
-  cp /tmp/dot_basex /opt/basex/.basex
+RUN wget -O /tmp/develop.zip https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/develop.zip && \
+    unzip /tmp/develop.zip -d /tmp && \    
+    rm /tmp/develop.zip && \     
+    cp /tmp/dfst-linkmgmt-basex-develop/webapp/*.xqm ${WEBAPPDIR}/  && \    
+    cp -r /tmp/dfst-linkmgmt-basex-develop/webapp/static/* ${WEBAPPDIR}/static/  && \ 
+    cp -r /tmp/dfst-linkmgmt-basex-develop/modules/* ${REPODIR}  && \  
+    mkdir -p ${WEBAPPDIR}/dba/modules/modules && \  
+    cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/ && \  
+    cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/modules/
+# mkdir     ${WEBAPPDIR}/static/ && \
       
+# COPY basex/dot_basex /srv/.basex
+#RUN echo "/srv/.basex:"
+#RUN cat /srv/.basex
 
 # Get the BaseX Ruby client and add it to the bin/ directory so we have it handy 
 # if we need it (but note that the GitLab container also gets its own copy of this
 # file and stores it with the post-receive git hook there).
-RUN wget -O bin/BaseXClient.rb https://github.com/BaseXdb/basex/raw/master/basex-api/src/main/ruby/BaseXClient.rb && \
-  chmod a+x bin/*.rb && \
-  ls -al bin
+#RUN wget -O ${HOME}/bin/BaseXClient.rb https://github.com/BaseXdb/basex/raw/master/basex-api/src/main/ruby/BaseXClient.rb && \
+#  chmod a+x ${HOME}/bin/*.rb && \
+#  ls -al bin
 
-RUN echo ".basex:"
-RUN cat .basex
+# ports are defined basex/basexhttp base container.
 
-# Expose port.
+USER basex
 
-EXPOSE 8984
-EXPOSE 1984
-
-#
-# Define the volumes used by the server:
-#
-
-VOLUME ["/data"]
-
-# Define default command.
-ENTRYPOINT ["/opt/basex/bin/basexhttp", "-d"]
+# Specify -d to start in the background:
+# ENTRYPOINT ["/opt/basex/bin/basexhttp", "-d"]
 
 #
 # End of Dockerfile
