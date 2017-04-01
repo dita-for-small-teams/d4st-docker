@@ -66,11 +66,11 @@ else
 fi
 
 if [ "$OSTYPE" = "msys" ]; then
-  dfstBrowser=${DFST_BROWSER:-chrome}
+  d4stBrowser=${DFST_BROWSER:-chrome}
 else
   # For OS X the browser value is the application bundle name, e.g. "Google Chrome" for Chrome.
-  dfstBrowser=${DFST_BROWSER:-Safari}
-  browserBundleId=$(lsappinfo info -only bundleid "${dfstBrowser}" | cut -d '"' -f4)
+  d4stBrowser=${DFST_BROWSER:-Safari}
+  browserBundleId=$(lsappinfo info -only bundleid "${d4stBrowser}" | cut -d '"' -f4)
 fi
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -180,30 +180,30 @@ elif [ "$1" = "pull" ]; then
   R=$?
 elif [ "$1" = "log-gitlab" ]; then
   echo "Viewing GitLab container log. Use ctrl-c to quit logging."
-  docker-compose -f ${DOCKER_FILE} logs -f gitlab-dfst
+  docker-compose -f ${DOCKER_FILE} logs -f gitlab-d4st
   R=$?
   exit 0
 elif [ "$1" = "gitlab" ]; then
-  echo "Open GitLab Web application in ${dfstBrowser}"
+  echo "Open GitLab Web application in ${d4stBrowser}"
   url="http://${HOSTNAME}:${GITLAB_PORT}"
   if [ "$OSTYPE" = "msys" ]; then
-    start ${dfstBrowser} "${url}"
+    start ${d4stBrowser} "${url}"
   else
     r=$("open" "-b" $browserBundleId "${url}")
   fi
   exit $?
 elif [ "$1" = "linkmgr" ]; then
-  echo "Open DFST Link Manager Web application in ${dfstBrowser}"
+  echo "Open DFST Link Manager Web application in ${d4stBrowser}"
   url="http://${HOSTNAME}:${LINKMGR_PORT}"
   if [ "$OSTYPE" = "msys" ]; then
-    start ${dfstBrowser} "${url}"
+    start ${d4stBrowser} "${url}"
   else
     r=$("open" "-b" $browserBundleId "${url}")
   fi
   exit $?
 elif [ "$1" = "addhooks" ]; then
   echo "Adding custom hooks to GitLab repositories..."
-  $(docker exec gitlab-dfst add-custom-hooks)
+  $(docker exec gitlab-d4st add-custom-hooks)
   R=$?
 elif [ "$1" = "getdemo" ]; then
   targetDir=${2:-${HOME}}
@@ -264,7 +264,7 @@ elif [ "$1" = "make-gitlab-project" ]; then
   result=$(curl -s --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" "http://${HOSTNAME}:${GITLAB_PORT}/api/v3/users?username=${username}")
   if [ "$result" = "[]" ]; then
      echo "Failure: Did not find GitLab user with name \"${username}\". Use "
-     echo "         'dfst make-gitlab-user' to create the GitLab user."
+     echo "         'd4st make-gitlab-user' to create the GitLab user."
      exit 1;
   fi
   userid=$([[ "$result" =~ \"id\":([0-9]+), ]] && echo ${BASH_REMATCH[1]})
@@ -284,7 +284,7 @@ elif [ "$1" = "make-gitlab-project" ]; then
      exit 0;
   elif [[ "$result" =~ "{\"name\":\"${username}\",\"username\":\"${username}\"" ]]; then
      echo "Success: Project \"${project}\" created."
-     result=$(docker exec gitlab-dfst add-custom-hooks)
+     result=$(docker exec gitlab-d4st add-custom-hooks)
      result=$(git init)
      if [ "$?" -ne "0" ]; then
         echo "Failed to initialize git repository"

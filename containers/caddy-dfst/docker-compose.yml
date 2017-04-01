@@ -7,14 +7,14 @@ version: "2"
 # See e.g., https://hub.docker.com/r/abiosoft/caddy/
 # 
 services:
-  caddy-dfst:
+  caddy-d4st:
     # hostname: ${HOSTNAME}
     ports: 
       - "${WEBDELIVERY_PORT}:2015"
-    container_name: caddy-dfst
+    container_name: caddy-d4st
     volumes: ["/srv/www"] 
      
-    image: dfst/caddy-dfst
+    image: d4st/caddy-d4st
 #
 # End of compose file.
 #  

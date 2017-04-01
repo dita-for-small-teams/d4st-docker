@@ -34,9 +34,9 @@
       <p>To run a container you use the <codeph>docker run</codeph> command from the command
         line:<codeblock>$ docker run <varname>container-image-name</varname></codeblock></p>
       <p>Where <varname>container-image-name</varname> is the name of the container image you want
-        to run, e.g. "dfst/dita-ot". Images have tags, with the default tag being "latest". You can
+        to run, e.g. "d4st/dita-ot". Images have tags, with the default tag being "latest". You can
         specify the tag as <codeph>:<varname>tagname</varname></codeph> after the image
-        name:<codeblock>$ docker run dfst/dita-ot:1.8.5</codeblock></p>
+        name:<codeblock>$ docker run d4st/dita-ot:1.8.5</codeblock></p>
       <p>The first time you run a container Docker will look for the image locally and if it doesn't
         find it will try to download it from the Docker Hub, which is a public repository of Docker
         images. All the DFST images and the images they depend on are available through the Docker
@@ -44,32 +44,32 @@
       <p>If you need to get an image directly you use the <codeph>docker pull</codeph>
         command:<codeblock>$ docker pull <varname>container-image-name</varname></codeblock></p>
       <p>As for the <codeph>docker run</codeph> command, you can specify a tag if you
-        want:<codeblock>$ docker pull dfst/dita-ot:1.8.5</codeblock></p>
+        want:<codeblock>$ docker pull d4st/dita-ot:1.8.5</codeblock></p>
       <p>The <codeph>docker run</codeph> command has many parameters you can specify the configure
         the container when you run it. Use <codeph>docker run help</codeph> to get details or see
         the <xref keyref="website-docker-docs">Docker documentation</xref>.</p>
       <p>What happens when you run a container depends on how the container is configured and how
         you run it.</p>
       <p>If a container is intended to provide a continuously-running server, like the
-        dfst/link-manager-basex or gitlab/gitlab-ce containers, then when you start it the container
+        d4st/link-manager-basex or gitlab/gitlab-ce containers, then when you start it the container
         stays running until you stop it. Internally container is just a normal Linux system running
         the server, whatever it is. You can use the <codeph>docker exec</codeph> command to access
         the container and run other commands inside the container or otherwise inspect what's
         happening inside it.</p>
-      <p>If the container does not provide a server, as is the case with the dfst/dita-ot container,
+      <p>If the container does not provide a server, as is the case with the d4st/dita-ot container,
         then when you run it it will start and then stop. The container will still be available
         within the Docker machine but it won't be active. Other containers can use its published
         volumes (directories) but it won't be doing anything. For these containers you can use the
           <parmname>-it</parmname> parameters to the <codeph>docker run</codeph> command to start an
         interactive shell within the container,
-        e.g.:<codeblock>$ docker run -it dfst/dita-ot
+        e.g.:<codeblock>$ docker run -it d4st/dita-ot
 dita-ot@d0a0800202ba:~/DITA-OT$ </codeblock></p>
       <p>You now have a command shell within the container where you can issue normal Linux
         commands. The initial environment you find in the container is determined by the container's
         configuration as determined by whoever set up the container.</p>
       <p>When you start a container it gets a unique numeric ID assigned to to it, the
           <term>container ID</term>. You can also give your container a name when you run
-        it:<codeblock>$ docker run <b>--name=dita-ot</b> -it dfst/dita-ot</codeblock></p>
+        it:<codeblock>$ docker run <b>--name=dita-ot</b> -it d4st/dita-ot</codeblock></p>
       <p>You can then use that name anywhere a container ID is
         expected:<codeblock>$ docker exec -it dita-ot /bin/bash</codeblock></p>
       <p>This command starts a new bash shell within the dita-ot container. The

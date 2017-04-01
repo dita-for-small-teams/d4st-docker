@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept id="extending_the_dfst_container_set">
+<concept id="extending_the_d4st_container_set">
  <title>Extending the DFST Container Set</title>
  <shortdesc>You can use the DFST containers and Composer script as a basis for creating your own
     containers tailored to your own needs</shortdesc>
@@ -18,6 +18,6 @@
         <li>Manage the containers in a private container repository</li>
       </ul></p>
     <p>The DFST containers are defined and managed in GitHub in the DFST <xref
-        keyref="website-dfst-github-containers-project">docker containers project</xref>.</p>
+        keyref="website-d4st-github-containers-project">docker containers project</xref>.</p>
  </conbody>
 </concept>

@@ -7,7 +7,7 @@
 # lack of general way to statically configure
 # custom hooks at project creation.
 #
-masterCustomHooksDir = "/var/opt/dfst/custom_hooks"
+masterCustomHooksDir = "/var/opt/d4st/custom_hooks"
 repodir = "/home/git/data/repositories"
 Dir.chdir(repodir)
 Dir['**/*.git'].each do |dir|

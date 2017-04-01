@@ -42,7 +42,7 @@ services:
   dita-ot:
     extends:
        file: containers/dita-ot/docker-compose.yml  
-       service: dita-ot-dfst
+       service: dita-ot-d4st
     volumes_from:
        - web-delivery
  
@@ -58,8 +58,8 @@ services:
 # Link Manager server:
 #    
   linkmgr:
-    image: dfst/link-manager-basex
-    container_name: linkmgr-dfst
+    image: d4st/link-manager-basex
+    container_name: linkmgr-d4st
     ports: 
      - "1984:1984"
      - "${LINKMGR_PORT}:8984"
@@ -106,11 +106,11 @@ services:
     - DB_NAME=gitlabhq_production
     - DB_EXTENSION=pg_trgm
 
-  gitlab-dfst:
+  gitlab-d4st:
     restart: always
     # image: sameersbn/gitlab:8.17.3
-    image: dfst/gitlab-dfst
-    container_name: gitlab-dfst
+    image: d4st/gitlab-d4st
+    container_name: gitlab-d4st
     depends_on:
       - redis
       - postgresql
@@ -264,8 +264,8 @@ services:
 
   web-delivery:
     extends:
-       file: containers/caddy-dfst/docker-compose.yml  
-       service: caddy-dfst
+       file: containers/caddy-d4st/docker-compose.yml  
+       service: caddy-d4st
     volumes:
       - ${HOME}/tmp/webdelivery:/srv/www
       
@@ -289,8 +289,8 @@ services:
 
   oxywebauthor:
      extends:
-        file: containers/oxywebauthor-dfst/docker-compose.yml
-        service: oxywebauthor-dfst
+        file: containers/oxywebauthor-d4st/docker-compose.yml
+        service: oxywebauthor-d4st
       
 #  
 # End of compose file.

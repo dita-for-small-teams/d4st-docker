@@ -5,7 +5,7 @@
 # XML catalog resolution.
 # NOTE: the CATFILE location depends on runnning
 #       BaseX container with volumes from the dita-ot
-#       container, e.g., run --volumes-from dfst/dita-ot ...
+#       container, e.g., run --volumes-from d4st/dita-ot ...
 
 # General Options
 DEBUG = false

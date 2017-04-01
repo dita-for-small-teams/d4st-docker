@@ -6,7 +6,7 @@ version: "2"
 # a persistent server.
 #
 services:
-  dita-ot-dfst:
-    container_name: dita-ot-dfst-cont
-    image: dfst/dita-ot
+  dita-ot-d4st:
+    container_name: dita-ot-d4st-cont
+    image: d4st/dita-ot
   
