@@ -8,10 +8,10 @@ FROM sameersbn/gitlab:latest
 MAINTAINER Eliot Kimber "ekimber@contrext.com"
 COPY admin-scripts /var/opt/d4st/bin/
 RUN cd /var/opt/d4st && \
-    wget https://github.com/dita-for-small-teams/d4st-git-commit-hooks/archive/develop.zip && \
+    wget https://github.com/dita-for-small-teams/dfst-git-commit-hooks/archive/develop.zip && \
     unzip develop.zip && \
     rm develop.zip && \
-    mv d4st-git-commit-hooks-develop/server-side custom_hooks && \
+    mv dfst-git-commit-hooks-develop/server-side custom_hooks && \
     cd /var/opt/d4st/bin && \
     chmod a+x * 
     

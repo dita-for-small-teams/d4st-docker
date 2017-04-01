@@ -12,15 +12,15 @@ USER root
 # Get the Link Manager web application source:
 #
 
-RUN wget -O /tmp/develop.zip https://github.com/dita-for-small-teams/d4st-linkmgmt-basex/archive/develop.zip && \
+RUN wget -O /tmp/develop.zip https://github.com/dita-for-small-teams/dfst-linkmgmt-basex/archive/develop.zip && \
     unzip /tmp/develop.zip -d /tmp && \    
     rm /tmp/develop.zip && \     
-    cp /tmp/d4st-linkmgmt-basex-develop/webapp/*.xqm ${WEBAPPDIR}/  && \    
-    cp -r /tmp/d4st-linkmgmt-basex-develop/webapp/static/* ${WEBAPPDIR}/static/  && \ 
-    cp -r /tmp/d4st-linkmgmt-basex-develop/modules/* ${REPODIR}  && \  
+    cp /tmp/dfst-linkmgmt-basex-develop/webapp/*.xqm ${WEBAPPDIR}/  && \    
+    cp -r /tmp/dfst-linkmgmt-basex-develop/webapp/static/* ${WEBAPPDIR}/static/  && \ 
+    cp -r /tmp/dfst-linkmgmt-basex-develop/modules/* ${REPODIR}  && \  
     mkdir -p ${WEBAPPDIR}/dba/modules/modules && \  
-    cp /tmp/d4st-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/ && \  
-    cp /tmp/d4st-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/modules/
+    cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/ && \  
+    cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/modules/
       
 COPY basex/dot_basex  /srv/.basex 
 RUN chown basex /srv/.basex && \
