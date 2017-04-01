@@ -30,7 +30,7 @@
         connect to the Web applications running in the Docker containers. These instructions assume
         you have the Chrome browser installed and Firefox should work fine as well.</note>
       <note platform="windows">The Docker environment is Linux-based, so even under Windows you will
-        be using a Linux command line to use the <cmdname>dfst</cmdname> command or use the
+        be using a Linux command line to use the <cmdname>d4st</cmdname> command or use the
           <cmdname>docker</cmdname> command directly. In this environment all file paths use forward
         slashes ("/") rather than back slashes ("\"). Absolute paths start with
           <filepath>/c</filepath> rather than <filepath>c:\</filepath>. For example, if your user
@@ -41,12 +41,12 @@
     </prereq>
         <steps>
       <step>
-        <cmd>Download the DITA for Small Teams <filepath>dfst-docker</filepath> Zip package from the
+        <cmd>Download the DITA for Small Teams <filepath>d4st-docker</filepath> Zip package from the
           dita-for-small-teams project releases area:</cmd>
         <info>
-          <p>Go to <xref keyref="website-dfst-github-project-releases"/> and download the latest
+          <p>Go to <xref keyref="website-d4st-github-project-releases"/> and download the latest
             release. The Zip file will be named
-                <filepath>dfst-docker-<varname>v</varname>-<varname>r</varname>-<varname>m</varname>.zip</filepath>,
+                <filepath>d4st-docker-<varname>v</varname>-<varname>r</varname>-<varname>m</varname>.zip</filepath>,
             where
               <filepath><varname>v</varname>-<varname>r</varname>-<varname>m</varname></filepath> is
             the version, release, and modification number, e.g. "1-1-0" for release 1.1.0.</p>
@@ -55,14 +55,14 @@
       <step>
         <cmd>Unzip the DFST release package to somewhere convenient, e.g. <filepath
             platform="windows">c:\apps</filepath> or <filepath>~/apps</filepath>. This is where the
-            <cmdname>dfst</cmdname> command will live.</cmd>
+            <cmdname>d4st</cmdname> command will live.</cmd>
         <stepresult>
-          <p>You should get a directory named <filepath>dfst-docker</filepath> with this
+          <p>You should get a directory named <filepath>d4st-docker</filepath> with this
             content:<codeblock>LICENSE
 README.md
 containers
-dfst</codeblock></p>
-          <p>The <filepath>dfst</filepath> script is the main script for managing the DFST
+d4st</codeblock></p>
+          <p>The <filepath>d4st</filepath> script is the main script for managing the DFST
             components through Docker. It is a bash shell script intended to be run in a bash shell.
             Under Windows you can run it in a git bash shell.</p>
         </stepresult>
@@ -72,21 +72,21 @@ dfst</codeblock></p>
           and navigate to the directory for the DFST package:</cmd>
         <info>
           <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c
-$ cd apps/dfst-docker
+$ cd apps/d4st-docker
 
-ekimber@WIN-HH0I81E3DAU MINGW64 /c/apps/dfst-docker
+ekimber@WIN-HH0I81E3DAU MINGW64 /c/apps/d4st-docker
 $ ls
-bin/  containers/  dfst  docs/  LICENSE  README.md</codeblock>
+bin/  containers/  d4st  docs/  LICENSE  README.md</codeblock>
         </info>
       </step>
       <step>
-        <cmd>Run the command "<codeph>chmod a+x dfst</codeph>" to make the <cmdname>dfst</cmdname>
+        <cmd>Run the command "<codeph>chmod a+x d4st</codeph>" to make the <cmdname>d4st</cmdname>
           script executable.</cmd>
         <info>
-          <p>You can check this by doing "<codeph>ls -al dfst</codeph>" to see what the permissions
+          <p>You can check this by doing "<codeph>ls -al d4st</codeph>" to see what the permissions
             are. You should see "x"s in the
-            permissions:<codeblock>$ ls -al dfst
--rwxr-xr-x  1 ekimber  staff  13437 Mar 19 15:39 dfst
+            permissions:<codeblock>$ ls -al d4st
+-rwxr-xr-x  1 ekimber  staff  13437 Mar 19 15:39 d4st
 $ </codeblock></p>
           <p>Unfortunately, there doesn't appear to be a way to preserve the executable flag in the
             Zip file. If anyone knows a way to get around this that doesn't require an actual
@@ -94,24 +94,24 @@ $ </codeblock></p>
         </info>
       </step>
       <step>
-        <cmd>Run the command "<codeph>./dfst start</codeph>":</cmd>
+        <cmd>Run the command "<codeph>./d4st start</codeph>":</cmd>
         <info>
-          <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/dfst-docker
-$ ./dfst start
+          <codeblock>ekimber@WIN-HH0I81E3DAU MINGW64 /c/temp/d4st-docker
+$ ./d4st start
 Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status.
 Pulling redis (sameersbn/redis:latest)...
 latest: Pulling from sameersbn/redis
 … lots more messages here ...
-Creating gitlab-dfst
+Creating gitlab-d4st
 
 Docker containers:
 CONTAINER ID        IMAGE                         COMMAND                  CREATED             STATUS                  PORTS                                                            NAMES
-7971effdd6cb        dfst/gitlab-dfst              "/assets/wrapper"        3 seconds ago       Up Less than a second   0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:8022->22/tcp   gitlab-dfst
-9693d356371d        dfst/caddy-dfst               "/usr/bin/caddy --..."   13 seconds ago      Up 10 seconds           80/tcp, 443/tcp, 0.0.0.0:80->2015/tcp                            caddy-dfst
-aab650590a70        dfst/link-manager-basex       "/opt/basex/bin/basex"   2 minutes ago       Up 2 minutes            0.0.0.0:1984->1984/tcp, 0.0.0.0:8984->8984/tcp                   linkmgr-dfst
-a280cacb6079        sameersbn/postgresql:9.4-12   "/sbin/entrypoint.sh"    2 minutes ago       Up 2 minutes            5432/tcp                                                         dfstdocker_postgresql_1
+7971effdd6cb        d4st/gitlab-d4st              "/assets/wrapper"        3 seconds ago       Up Less than a second   0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 0.0.0.0:8022->22/tcp   gitlab-d4st
+9693d356371d        d4st/caddy-d4st               "/usr/bin/caddy --..."   13 seconds ago      Up 10 seconds           80/tcp, 443/tcp, 0.0.0.0:80->2015/tcp                            caddy-d4st
+aab650590a70        d4st/link-manager-basex       "/opt/basex/bin/basex"   2 minutes ago       Up 2 minutes            0.0.0.0:1984->1984/tcp, 0.0.0.0:8984->8984/tcp                   linkmgr-d4st
+a280cacb6079        sameersbn/postgresql:9.4-12   "/sbin/entrypoint.sh"    2 minutes ago       Up 2 minutes            5432/tcp                                                         d4stdocker_postgresql_1
 f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 minutes ago       Up 4 minutes            6379/tcp
-                                                         dfstdocker_redis_1
+                                                         d4stdocker_redis_1
 </codeblock>
           <p>The first time you do this Docker has to download all the images for the containers and
             this can take a while. The next time you run it, it will be quick.</p>
@@ -121,46 +121,46 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
         <stepresult>
           <p>The DFST containers should start. It will take a minute or two for the Web services in
             the containers to start up completely.</p>
-          <p>The first time you run the <cmdname>dfst</cmdname> command it creates the file
-              <filepath>dfst/.env</filepath>. This file contains environment settings used by the
+          <p>The first time you run the <cmdname>d4st</cmdname> command it creates the file
+              <filepath>d4st/.env</filepath>. This file contains environment settings used by the
             docker commands. You can edit this file to change the ports used by the different DFST
             Web services. You will also edit this file to add the GitLab private token in a later
             step.</p>
           <p>The first time you run GitLab it has to do quite a lot of setup and that may take
-            several minutes to complete. You can use the command <cmdname>dfst log-gitlab</cmdname>
+            several minutes to complete. You can use the command <cmdname>d4st log-gitlab</cmdname>
             to see what it's doing and monitor it's startup progress.</p>
           <p>If you get messages about containers not starting because their ports are taken, for
             example because you already have something running on port 80 or port 8080 (default
             ports for many applications), you can edit the <filepath>.env</filepath> file that the
-              <cmdname>dfst</cmdname> command created the first time you ran it. See step <xref
+              <cmdname>d4st</cmdname> command created the first time you ran it. See step <xref
               href="#Untitled9/edit-dot-env" format="dita"/>.</p>
         </stepresult>
       </step>
       <step>
-        <cmd>To make things easier later, add the <filepath>dfst</filepath> directory to the PATH
+        <cmd>To make things easier later, add the <filepath>d4st</filepath> directory to the PATH
           environment variable in your command window:</cmd>
         <info>
           <codeblock>$ export PATH=$PATH:$PWD</codeblock>
           <p>The <varname>$PWD</varname> environment variable expands to the current directory, so
-            the <filepath>dfst</filepath> directory should now be in your PATH environment
+            the <filepath>d4st</filepath> directory should now be in your PATH environment
             variable.</p>
           <p>The make this setting permanent you can modify your <filepath>.bash_profile</filepath>
             (OSX) or <filepath>.bashrc</filepath> (Windows, Linux) file in your home directory to
-            add the <filepath>dfst</filepath> directory to the PATH,
+            add the <filepath>d4st</filepath> directory to the PATH,
             e.g.:<codeblock># ~/.bash_profile
-export PATH="$PATH:/Users/ekimber/apps/dfst"</codeblock></p>
+export PATH="$PATH:/Users/ekimber/apps/d4st"</codeblock></p>
           <p>or, for Windows:<codeblock># ~/.bashrc
-export PATH=$PATH:"c:/apps/dfst"</codeblock></p>
+export PATH=$PATH:"c:/apps/d4st"</codeblock></p>
         </info>
         <stepresult>
-          <p>You should be able to run the <cmdname>dfst</cmdname> command from any directory. You
+          <p>You should be able to run the <cmdname>d4st</cmdname> command from any directory. You
             can test this by using the <cmdname>cd</cmdname> command to move to another directory
-            and then execute the command <codeph>dfst help</codeph>. You should get the listing of
-            available <cmdname>dfst</cmdname> commands.</p>
-          <p>If the <cmdname>dfst</cmdname> command doesn't work, check the value of the
+            and then execute the command <codeph>d4st help</codeph>. You should get the listing of
+            available <cmdname>d4st</cmdname> commands.</p>
+          <p>If the <cmdname>d4st</cmdname> command doesn't work, check the value of the
               <varname>$PATH</varname> environment variable using the <cmdname>echo</cmdname>
             command:<codeblock>$ echo $PATH
-$ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-small-teams/dfst-docker</codeblock></p>
+$ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-small-teams/d4st-docker</codeblock></p>
           <p>Check the value and make sure it's correct. If it's not correct, try setting it
             again.</p>
         </stepresult>
@@ -171,14 +171,14 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
           corresponding to your local git repositories that you want to use with the DFST system.
           This requires a one-time task of logging into GitLab as the root user so you can get the
           magic "private token" required to use the GitLab API. Once you've done this the rest of
-          the user and project setup can be done with the <cmdname>dfst</cmdname>
+          the user and project setup can be done with the <cmdname>d4st</cmdname>
             command.<note>There doesn't appear to be a way to install GitLab with a default root
             password that would then allow automatic fetching of the private token. See <xref
               href="https://gitlab.com/gitlab-org/gitlab-ce/issues/1980" format="html"
               scope="external"/>. If somebody knows a solution to this please say so.</note></p>
       </stepsection>
       <step>
-        <cmd>In the Docker terminal, type the command "<codeph>dfst gitlab</codeph>" to open the
+        <cmd>In the Docker terminal, type the command "<codeph>d4st gitlab</codeph>" to open the
           GitLab Web application.</cmd>
         <stepresult>
           <p>Your browser should open to the GitLab login page:</p>
@@ -213,7 +213,7 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
         <cmd>Copy the private token string to the clipboard.</cmd>
       </step>
       <step id="edit-dot-env">
-        <cmd>Edit the <filepath>docker-dfst/.env</filepath> file and replace "YourPrivateToken" with
+        <cmd>Edit the <filepath>docker-d4st/.env</filepath> file and replace "YourPrivateToken" with
           the value on the clipboard:</cmd>
         <info>Before:<codeblock>GITLAB_PORT=90
 WEBDELIVERY_PORT=80
@@ -224,28 +224,28 @@ LINKMGR_PORT=8984
 GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ</codeblock></p></info>
       </step>
       <step>
-        <cmd>Verify that you have set the private token correctly by using the command <codeph>dfst
+        <cmd>Verify that you have set the private token correctly by using the command <codeph>d4st
             test-gitlab</codeph>.</cmd>
         <info>
-          <codeblock>$ ./dfst test-gitlab
+          <codeblock>$ ./d4st test-gitlab
 Testing GitLab connection...
 Success: Connected to GitLab remote API using private token.
 $</codeblock>
         </info>
       </step>
       <step>
-        <cmd>Create a GitLab user for yourself by using the command <codeph>dfst
+        <cmd>Create a GitLab user for yourself by using the command <codeph>d4st
             make-gitlab-user</codeph>:</cmd>
         <info>
-          <codeblock>$ dfst make-gitlab-user
+          <codeblock>$ d4st make-gitlab-user
 $ </codeblock>
           <p>The password is set to "password" for the new user. You can change it using the GitLab
             administration pages. This password will be needed when you connect your local git
             repository to gitlab.</p>
           <p>If you want to set the password when you create the user you can specify the username
-            and password on the <cmdname>dfst</cmdname>
+            and password on the <cmdname>d4st</cmdname>
             <cmdname>make-gitlab-user</cmdname>
-            command:<codeblock>$ dfst make-gitlab-user ekimber swordfish
+            command:<codeblock>$ d4st make-gitlab-user ekimber swordfish
 $ </codeblock></p>
           <p>However, this isn't very secure. If you're concerned about the security of the GitLab
             credentials, use the GitLab Web interface to change the password.</p>
@@ -259,10 +259,10 @@ $ </codeblock></p>
           copy it out of its container to your local machine.</p>
       </stepsection>
       <step>
-        <cmd>In the Docker terminal execute the command <codeph>dfst getdemo</codeph>, specifying
+        <cmd>In the Docker terminal execute the command <codeph>d4st getdemo</codeph>, specifying
           the directory you want to put the <filepath>Thunderbird</filepath> directory into:</cmd>
         <info>
-          <codeblock>$ ./dfst getdemo ~</codeblock>
+          <codeblock>$ ./d4st getdemo ~</codeblock>
           <p>This copies the <filepath>Thunderbird</filepath> directory from the container to
               <filepath>Thunderbird</filepath> under your home directory. You can replace "~" with
             whatever target directory you want.</p>
@@ -280,10 +280,10 @@ User_Guide-reuse-only_jp.ditamap      master_control.ditamap</codeblock>
       </step>
       <step>
         <cmd>In the command window, navigate into the <filepath>Thunderbird</filepath> directory and
-          execute the command <codeph>dfst make-gitlab-project</codeph>:</cmd>
+          execute the command <codeph>d4st make-gitlab-project</codeph>:</cmd>
         <info>
           <codeblock>$ cd ~/Thunderbird
-$ dfst make-gitlab-project
+$ d4st make-gitlab-project
 Creating GitLab project "Thunderbird" for user ekimber...
 Success: Project "Thunderbird" created.
 $</codeblock>
@@ -318,10 +318,10 @@ remote: [1] repoName=thunderbird2.git
 remote: [2] repoName=thunderbird2
 remote: Updating using 4b825dc642cb6eb9a060e54bf8d69288fbee4904, 956a167f798801b837702c6655d2401516f02f24, refs/heads/master
 remote: Added or modified file: "Integrator_admin.ditamap"
-remote:    Adding file "Integrator_admin.ditamap" to database dfst^thunderbird^master...
+remote:    Adding file "Integrator_admin.ditamap" to database d4st^thunderbird^master...
 remote:    Resource(s) added in 530.15 ms.
 … {lots more messages} … 
-remote: *** Updating fulltext index for database dfst^thunderbird^master
+remote: *** Updating fulltext index for database d4st^thunderbird^master
 remote: Post-receive done.
 To http://localhost:90/ekimber/Thunderbird.git
  * [new branch]      master -> master
@@ -336,7 +336,7 @@ $ </codeblock>
         </stepresult>
       </step>
       <step>
-        <cmd>In the bash terminal enter the command "<cmdname>dfst linkmgr</cmdname>" to open the
+        <cmd>In the bash terminal enter the command "<cmdname>d4st linkmgr</cmdname>" to open the
           Link Manager Web application in a new browser window.</cmd>
         <info>The URL for the Link Manager Web application is
             <filepath>http://localhost:8984</filepath>.</info>

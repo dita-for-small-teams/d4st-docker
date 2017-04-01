@@ -3,9 +3,9 @@
 <reference id="container-ref-gitlab">
   <title>DFST GitLab Docker Container</title>
   <titlealts>
-    <navtitle>dfst/gitlab</navtitle>
+    <navtitle>d4st/gitlab</navtitle>
   </titlealts>
-  <shortdesc>The dfst/gitlab container provides a fully-featured instance of the GitLab git server
+  <shortdesc>The d4st/gitlab container provides a fully-featured instance of the GitLab git server
     and GitLab continous Integration (CI) server.</shortdesc>
   <refbody>
     <section>
@@ -20,20 +20,20 @@
         </dlentry>
         <dlentry>
           <dt>container name</dt>
-          <dd>dfst/gitlab-dfst</dd>
+          <dd>d4st/gitlab-d4st</dd>
         </dlentry>
       </dl>
     </section>
     <section spectitle="Usage">
       <p>A typical run specification
         is:<codeblock>docker run  -d \
-    --name gitlab-dfst \
+    --name gitlab-d4st \
     --hostname $(docker-machine ip default) \
     --publish 443:443 --publish 80:80 --publish 8022:22 \
     --volume /srv/gitlab/config:/etc/gitlab \
     --volume /srv/gitlab/logs:/var/log/gitlab \
     --volume /srv/gitlab/data:/var/opt/gitlab \
-        dfst/gitlab</codeblock></p>
+        d4st/gitlab</codeblock></p>
       <p>This runs the server in the background (<parmname>-d</parmname>), names the running
         container "gitlab", tells it that it's host name is the IP address associated with the
         docker machine, binds the server ports to host ports (note that the SSH port is bound to

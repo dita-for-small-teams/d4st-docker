@@ -2,7 +2,7 @@
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
 <reference id="container-ref-link-manager-basex">
   <title>DFST Link Manager BaseX Docker Container</title>
-  <shortdesc>The dfst/link-manager-basex container provides a BaseX HTTP server configured with the
+  <shortdesc>The d4st/link-manager-basex container provides a BaseX HTTP server configured with the
     DITA for Small Teams Link Manager application.</shortdesc>
   <refbody>
     <section>
@@ -10,23 +10,23 @@
         depends on the DITA Open Toolkit, provided by a separate container running on the same
         Docker machine, to provide the XML entity resolution catalogs needed to parse DITA documents
         added to the database, either manually or through the DFST git hooks.</p>
-      <p>See <xref keyref="container-ref-dfst-dita-ot"/>.</p>
+      <p>See <xref keyref="container-ref-d4st-dita-ot"/>.</p>
     </section>
     <section spectitle="Container Details">
       <dl>
         <dlentry>
           <dt>URL</dt>
-          <dd><xref href="https://hub.docker.com/r/dfst/link-manager-basex/" format="html"
-              scope="external">https://hub.docker.com/r/dfst/link-manager-basex/</xref></dd>
+          <dd><xref href="https://hub.docker.com/r/d4st/link-manager-basex/" format="html"
+              scope="external">https://hub.docker.com/r/d4st/link-manager-basex/</xref></dd>
         </dlentry>
         <dlentry>
           <dt>container name</dt>
-          <dd>dfst/link-manager-basex</dd>
+          <dd>d4st/link-manager-basex</dd>
         </dlentry>
       </dl>
     </section>
     <section spectitle="Usage">
-      <p>To run the container in isolation you must first run the dfst/dita-ot container so that the
+      <p>To run the container in isolation you must first run the d4st/dita-ot container so that the
         Link Manager has access to the DITA Open Toolkit's catalogs. You should also mount a local
         directory as the <filepath>/data</filepath> volume so that data will be saved locally
         (otherwise your databases will be lost when the container is removed).</p>
@@ -35,7 +35,7 @@
     --volumes-from dita-ot \
     --name=linkmgr \
     -v /Users/ekimber/temp/data:/data  \
-    dfst/link-manager-basex</codeblock></p>
+    d4st/link-manager-basex</codeblock></p>
       <p>The parameters are:<parml>
           <plentry>
             <pt>--rm</pt>
@@ -63,7 +63,7 @@
             <pt>--volumes-from dita-ot</pt>
             <pd>This makes the shared volumes from the dita-ot container available to this
               container. The value "dita-ot" is the name specified on the
-                <parmname>--name</parmname> parameter when you started the dfst/dita-ot
+                <parmname>--name</parmname> parameter when you started the d4st/dita-ot
               container.</pd>
           </plentry>
           <plentry>
@@ -85,13 +85,13 @@
               </note></pd>
           </plentry>
           <plentry>
-            <pt>dfst/link-manager-basex</pt>
+            <pt>d4st/link-manager-basex</pt>
             <pd>This is the name of the container to run. If the container is not already on your
               system Docker will pull it down from the Docker hub, using the default tag "latest",
               which is normally what you want. If you want a specific tag you can specify it as
                   <codeph>:<varname>tagname</varname></codeph> after the container name.<p>If you
                 need to update your local copy you can use <codeph>docker pull
-                  dfst/link-manager-basex</codeph> to get the latest version.</p></pd>
+                  d4st/link-manager-basex</codeph> to get the latest version.</p></pd>
           </plentry>
         </parml>
       </p>
@@ -103,7 +103,7 @@
 DTD = true
 SKIPCORRUPT = true
 CHOP = false</codeblock></p>
-      <p>The <parmname>CATFILE</parmname> value refers to the volume used from the dfst/dita-ot
+      <p>The <parmname>CATFILE</parmname> value refers to the volume used from the d4st/dita-ot
         container via the <parmname>--volumes-from</parmname> parameter explained above.</p>
     </section>
   </refbody>

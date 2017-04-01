@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-<concept id="chapter-dfst-container-system-description">
+<concept id="chapter-d4st-container-system-description">
  <title>DFST Container System Description</title>
  <shortdesc>The DFST container system is composed from a set of Docker containers where each
     container provides a separate component of the complete DFST system.</shortdesc>

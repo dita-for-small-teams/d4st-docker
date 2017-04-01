@@ -12,7 +12,7 @@
           a default volume mapping. You may want to change it. At a minimum you need to know what
           the volume mapping is so you can apply appropriate backup policies.</li>
         <li>Network details: The IP addresses and ports for each of the container-provided services.
-          The DFST containers are run within the same DFST-specific Docker network (named "dfst").
+          The DFST containers are run within the same DFST-specific Docker network (named "d4st").
           You need to know what IP address this network is exposed as on the Host machine. For
           distributed environments there may be additional network configuration required on the
           host machine to enable connection from other machines with appropriate security. For
