@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_qd2_gt4_t5">
- <title>Getting Started With DFST Docker</title>
+ <title>Getting Started With D4ST Docker</title>
   <titlealts>
     <navtitle>Getting Started</navtitle>
   </titlealts>
- <shortdesc>The DITA for Small Teams Docker containers make it easy to set up a complete DFST
+ <shortdesc>The DITA for Small Teams Docker containers make it easy to set up a complete D4ST
     environment on any machine using the Docker container technology.</shortdesc>
  <conbody>
   <p>Docker containers are packages that contain software applications that can be run on any
@@ -15,7 +15,7 @@
       of effort. Docker containers may also contain just data to be used by other containers or to
       be copied to host machines.</p>
     <p>The DITA for Small Teams project provides instructions for using a combination of
-      off-the-shelf Docker containers and DFST-provided containers to quickly set up a working DITA
+      off-the-shelf Docker containers and D4ST-provided containers to quickly set up a working DITA
       for Small Teams environment on any machine, whether it's your personal laptop, a shared server
       within your office, or on a cloud managed service such as Amazon Web Services (AWS) or
       Microsoft Azure.</p>
@@ -23,7 +23,7 @@
       integration of Docker with the operating system, making it about as easy as it could be to
       install, configure, and use Docker containers.</p>
     <p>These instructions reflect the use of Docker for Mac, Docker for Windows, or Docker Machine
-      running under Linux. You can use the DFST containers with the older Docker Machine approach
+      running under Linux. You can use the D4ST containers with the older Docker Machine approach
       under Windows or OSX, but it's harder and less convenient.</p>
  </conbody>
 </concept>

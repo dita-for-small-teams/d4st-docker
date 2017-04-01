@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
 <reference id="container-ref-link-manager-basex">
-  <title>DFST DITA Open Toolkit Docker Container</title>
+  <title>D4ST DITA Open Toolkit Docker Container</title>
   <titlealts>
     <navtitle>d4st/dita-ot</navtitle>
   </titlealts>

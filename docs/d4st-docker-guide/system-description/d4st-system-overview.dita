@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="concept_gvg_11d_55">
- <title>DFST System Overview</title>
+ <title>D4ST System Overview</title>
  <shortdesc>System Overview</shortdesc>
  <conbody>
   <p>A DITA for Small Teams system consists of four main components:<ol id="ol_wph_d1d_55">
@@ -10,16 +10,16 @@
         <li>A continuous integration server for automating production of output from the document
           source. Typical choices include Jenkins, Hudson, Bamboo, and GitLab. </li>
         <li>A link management server that maintains and provides access to the link nature of the
-          DITA content. At the moment the DFST Link Management application is the only open-source
+          DITA content. At the moment the D4ST Link Management application is the only open-source
           instance available. Link management is one of the key distinguishing features of most
           DITA-aware component content management systems (CCMS).</li>
         <li>An authoring tool by which authors can create and modify DITA source documents. There
           are many choices here, including oXygenXML, XMetal, FrameMaker, and a growing set of
           Web-based editors including FontoXML and XEditor.</li>
       </ol></p>
-    <p>In addition, if localization is a requirement, a DFST system can also include a translation
+    <p>In addition, if localization is a requirement, a D4ST system can also include a translation
       management system like XTM or Fluenta.</p>
-    <p>The DFST container set provides the first three of the above components:<ul
+    <p>The D4ST container set provides the first three of the above components:<ul
         id="ul_e2y_mfd_55">
         <li>A container running a GitLab server provides both a central git repository server and a
           continuous integration server. GitLab was chosen in part because it provides both the
@@ -28,7 +28,7 @@
             repository. Thus the git server must be able to connected over HTTP to the Link
             Management server. Having all the components within the same Docker environment makes
             this easy.</p></li>
-        <li>A container running the DFST Link Manager, which uses the BaseX XQuery database. The
+        <li>A container running the D4ST Link Manager, which uses the BaseX XQuery database. The
           Link Manager provides a Web application for authors to see and explore the link nature of
           their content and a REST API other applications, such as editors and production tools, can
           use to access the link details of the content.</li>
@@ -50,10 +50,10 @@
       copying the files from the GitLab container to a local file system as a backup. Note that file
       systems within containers will be maintained as long as the container is not removed from the
       host machine.</p>
-    <p>Users interact with the DFST containers as follows:<ul id="ul_qsn_nhd_55">
+    <p>Users interact with the D4ST containers as follows:<ul id="ul_qsn_nhd_55">
         <li>Authors create local git clones from the GitLab git server of the git repositories they
           contribute to. This is normal git interaction and is no different from using a git service
-          like GitHub or Bitbucket. Authors simply need to know how to connect to the DFST GitLab
+          like GitHub or Bitbucket. Authors simply need to know how to connect to the D4ST GitLab
           server, just as they would any other shared git server.</li>
         <li>Authors work locally, create branches, etc., pushing their updates to the GitLab
           repository as appropriate. Whenever they push the git hooks on the GitLab server will

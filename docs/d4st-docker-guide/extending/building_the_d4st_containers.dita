@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="building_the_d4st_containers">
- <title>Building the DFST Containers</title>
- <shortdesc>The base DFST containers are built automatically by the Docker hub site but you can
+ <title>Building the D4ST Containers</title>
+ <shortdesc>The base D4ST containers are built automatically by the Docker hub site but you can
     build containers directly using the <cmdname>docker build</cmdname> command.</shortdesc>
  <conbody>
     <p>To build a container locally use the <cmdname>docker build</cmdname> command and specify the
@@ -37,7 +37,7 @@ $ </codeblock></p>
       links to the Dockerfile in that repository. Whenever you push a new version to the git
       repository Docker Hub will automatically build a new image. You can also configure the
       automated build to use git branch names as image tags. You can look at the configurations for
-      the DFST containers as an example of how to set up automated builds.</p>
+      the D4ST containers as an example of how to set up automated builds.</p>
     <p>If you can't make your images public and your enterprise does not provide it's own internal
       Docker hub or equivalent, you can set up Docker compose files to build images. See the Docker
       compose documentation for details.</p>

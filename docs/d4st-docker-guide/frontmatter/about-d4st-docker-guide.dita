@@ -8,13 +8,13 @@
     <p>Docker is a relatively new (as of early 2016) for managing software in platform-independent
       "containers" that can be more easily managed than traditional virtual machine images or simply
       installing various software components directly on a host machine.</p>
-    <p>The goal of the DFST container approach is to provide a easy-to-provision, easy-to-update,
+    <p>The goal of the D4ST container approach is to provide a easy-to-provision, easy-to-update,
       easy-to-use instance of a DITA for Small Teams collection of system components. The container
       approach allows the same set of components to be used by a single user on a single machine or
       by multiple users with access to a shared server somewhere (within an enterprise or in the
       cloud).</p>
-    <p>This publication is intended both for people who just want to the use the DFST components and
-      people who want to contribute to this project or use the DFST components as a base for their
+    <p>This publication is intended both for people who just want to the use the D4ST components and
+      people who want to contribute to this project or use the D4ST components as a base for their
       own custom solution.</p>
     <p>This publication does not cover the details of the Docker technology. Please see the Docker
       documentation for instructions on installing the Docker tools needed to get and run

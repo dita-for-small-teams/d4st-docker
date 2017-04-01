@@ -3,7 +3,7 @@
 <bookmap>
     <booktitle>
       <booklibrary>DITA for Small Teams</booklibrary>
-        <mainbooktitle>DFST Docker Usage Guide</mainbooktitle>
+        <mainbooktitle>D4ST Docker Usage Guide</mainbooktitle>
     </booktitle>
   <bookmeta>
     <author>W. Eliot Kimber</author>
@@ -14,7 +14,7 @@
     <keywords>
       <keyword>Docker</keyword>
       <keyword>DITA</keyword>
-      <keyword>DFST</keyword>
+      <keyword>D4ST</keyword>
       <keyword>container</keyword>
       <keyword>content management</keyword>
       <keyword>component content management</keyword>

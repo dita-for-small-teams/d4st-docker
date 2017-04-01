@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
 <reference id="container-ref-gitlab">
-  <title>DFST GitLab Docker Container</title>
+  <title>D4ST GitLab Docker Container</title>
   <titlealts>
     <navtitle>d4st/gitlab</navtitle>
   </titlealts>
@@ -9,7 +9,7 @@
     and GitLab continous Integration (CI) server.</shortdesc>
   <refbody>
     <section>
-      <p>The GitLab container provides two essential components of a DFST system: a remote
+      <p>The GitLab container provides two essential components of a D4ST system: a remote
         versioning repository (git in this case) and a continuous integration (CI) server.</p>
     </section>
     <section spectitle="Container Details">
@@ -46,7 +46,7 @@
         the host computer.</note>
     </section>
     <section spectitle="Configuration Details">
-      <p>The default DFST setup uses the configuration as specified in the Sameersbn GitLab Docker
+      <p>The default D4ST setup uses the configuration as specified in the Sameersbn GitLab Docker
         container documentation.</p>
     </section>
   </refbody>

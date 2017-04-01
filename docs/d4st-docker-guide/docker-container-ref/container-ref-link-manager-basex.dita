@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
 <reference id="container-ref-link-manager-basex">
-  <title>DFST Link Manager BaseX Docker Container</title>
+  <title>D4ST Link Manager BaseX Docker Container</title>
   <shortdesc>The d4st/link-manager-basex container provides a BaseX HTTP server configured with the
     DITA for Small Teams Link Manager application.</shortdesc>
   <refbody>
@@ -9,7 +9,7 @@
       <p>The container runs the BaseX HTTP server with the Link Manager Web application deployed. It
         depends on the DITA Open Toolkit, provided by a separate container running on the same
         Docker machine, to provide the XML entity resolution catalogs needed to parse DITA documents
-        added to the database, either manually or through the DFST git hooks.</p>
+        added to the database, either manually or through the D4ST git hooks.</p>
       <p>See <xref keyref="container-ref-d4st-dita-ot"/>.</p>
     </section>
     <section spectitle="Container Details">
