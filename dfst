@@ -256,7 +256,6 @@ elif [ "$1" = "make-gitlab-project" ]; then
      echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
      exit 1;
   fi
-  username=$USER
   project=${PWD##*/}
   if [ "$2" != "" ]; then
      project=$2
