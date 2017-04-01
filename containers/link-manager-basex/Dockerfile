@@ -22,12 +22,12 @@ RUN wget -O /tmp/develop.zip https://github.com/dita-for-small-teams/dfst-linkmg
     cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/ && \  
     cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/modules/
       
-# COPY basex/dot_basex  /srv/.basex 
-#RUN chown basex /srv/.basex && \
-#    ls -al /srv
-#RUN echo "/srv/.basex:"
-#RUN cat /srv/.basex
+COPY basex/dot_basex  /srv/dot_basex 
+RUN touch /srv/.basex && \
+    chown basex /srv/.basex
 
+ENV JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,address=9000,suspend=n"
+EXPOSE 9000
 # Get the BaseX Ruby client and add it to the bin/ directory so we have it handy 
 # if we need it (but note that the GitLab container also gets its own copy of this
 # file and stores it with the post-receive git hook there).
