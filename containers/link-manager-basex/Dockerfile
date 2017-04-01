@@ -22,9 +22,9 @@ RUN wget -O /tmp/develop.zip https://github.com/dita-for-small-teams/dfst-linkmg
     cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/ && \  
     cp /tmp/dfst-linkmgmt-basex-develop/modules/dba/*.xqm ${WEBAPPDIR}/dba/modules/modules/
       
-COPY basex/dot_basex  /srv/.basex 
-RUN chown basex /srv/.basex && \
-    ls -al /srv
+# COPY basex/dot_basex  /srv/.basex 
+#RUN chown basex /srv/.basex && \
+#    ls -al /srv
 #RUN echo "/srv/.basex:"
 #RUN cat /srv/.basex
 
