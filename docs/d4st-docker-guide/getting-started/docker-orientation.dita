@@ -21,12 +21,12 @@
       network connection as the host computer (that is, Docker-managed services can be accessed at
       localhost on whatever port you configure them on). </p>
     <p>See the main Docker documentation for details. This topic is here to get you started quickly
-      and to provide specific guidance for Windows and OS X users since we expect the DFST system to
+      and to provide specific guidance for Windows and OS X users since we expect the D4ST system to
       be used mostly by users under Windows or OS X.</p>
     <p>For OS X and Windows, Docker provides a separate application, Kitematic, that provides a user
       interface for working with the Docker system. It's main value is under OS X where it provides
       the service of creating new properly-configured terminal windows. Otherwise it's not that
-      interesting, at least in the context of the DFST Docker containers.</p>
+      interesting, at least in the context of the D4ST Docker containers.</p>
   </conbody>
   <concept id="concept_eyr_yg3_v5">
     <title>Running Docker Containers</title>
@@ -39,7 +39,7 @@
         name:<codeblock>$ docker run d4st/dita-ot:1.8.5</codeblock></p>
       <p>The first time you run a container Docker will look for the image locally and if it doesn't
         find it will try to download it from the Docker Hub, which is a public repository of Docker
-        images. All the DFST images and the images they depend on are available through the Docker
+        images. All the D4ST images and the images they depend on are available through the Docker
         Hub.</p>
       <p>If you need to get an image directly you use the <codeph>docker pull</codeph>
         command:<codeblock>$ docker pull <varname>container-image-name</varname></codeblock></p>

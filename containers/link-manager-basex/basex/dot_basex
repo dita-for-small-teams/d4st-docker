@@ -1,4 +1,4 @@
-# BaseX options for the DFST Link Management 
+# BaseX options for the D4ST Link Management 
 # application. Sets up BaseX to enable import
 # of DTD-based DITA documents. Requires
 # a properly-configured DITA Open Toolkit to provide

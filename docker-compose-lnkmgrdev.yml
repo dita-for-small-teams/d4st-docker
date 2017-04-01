@@ -5,7 +5,7 @@ version: "2"
 # development. It's not intended to be run in production.
 
 #
-# DITA For Small Teams (DFST) Docker compose
+# DITA For Small Teams (D4ST) Docker compose
 # run configuration file. Will run all the 
 # containers with appropriate default settings. 
 #
@@ -15,7 +15,7 @@ version: "2"
 #
 # It runs the DITA OT container, the gitlab 
 # server (for shared git access and continuous
-# integration), and the DFST Link Manager application.
+# integration), and the D4ST Link Manager application.
 #
 # Gitlab is exposed on the default ports 80 and 443
 # for HTTP/HTTPS access and 8022 for SSH
@@ -48,7 +48,7 @@ services:
        - web-delivery
  
 #
-# DFST Link Manager
+# D4ST Link Manager
 #
 # The Link Manager provides link-related information
 # for use by authors via an interactive Web app

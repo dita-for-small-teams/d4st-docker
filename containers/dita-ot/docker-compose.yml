@@ -1,7 +1,7 @@
 version: "2"
 #
 # Docker-compose  file for
-# the DITA OT DFST container.
+# the DITA OT D4ST container.
 # The container does not run as
 # a persistent server.
 #

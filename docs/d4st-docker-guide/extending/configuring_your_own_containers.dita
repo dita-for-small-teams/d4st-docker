@@ -2,7 +2,7 @@
 <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
 <concept id="configuring_your_own_containers">
  <title>Configuring Your Own Containers</title>
- <shortdesc>You can configure your own versions of the DFST containers through custom
+ <shortdesc>You can configure your own versions of the D4ST containers through custom
     docker-compose.yml files.</shortdesc>
  <conbody>
   <p>Full version of this topic TBD. </p>

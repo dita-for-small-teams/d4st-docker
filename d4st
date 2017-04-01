@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# OS X shell script to run the DFST Docker containers via
+# OS X shell script to run the D4ST Docker containers via
 # docker-compose.
 #
 # Commands:
@@ -22,9 +22,9 @@
 #        weak and I haven't taken the time to work out how to set up
 #        proper functions for the duplicated code.
 
-DFST_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+D4ST_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-DOTENV="$DFST_DIR/.env"
+DOTENV="$D4ST_DIR/.env"
 # echo "DOTENV=\"$DOTENV\""
 
 if [ -f $DOTENV ]; then
@@ -49,7 +49,7 @@ else
   export WEBDELIVERY_PORT=80
   export OXYWEBAUTHOR_PORT=8080
   
-  echo "Creating docker-compose environment file \"$DFST_DIR/.env\"..."
+  echo "Creating docker-compose environment file \"$D4ST_DIR/.env\"..."
   touch $DOTENV
   echo "BASEXAPI_PORT=$BASEXAPI_PORT" >> "$DOTENV"
   echo "GITLAB_PORT=$GITLAB_PORT" >> "$DOTENV"
@@ -66,10 +66,10 @@ else
 fi
 
 if [ "$OSTYPE" = "msys" ]; then
-  d4stBrowser=${DFST_BROWSER:-chrome}
+  d4stBrowser=${D4ST_BROWSER:-chrome}
 else
   # For OS X the browser value is the application bundle name, e.g. "Google Chrome" for Chrome.
-  d4stBrowser=${DFST_BROWSER:-Safari}
+  d4stBrowser=${D4ST_BROWSER:-Safari}
   browserBundleId=$(lsappinfo info -only bundleid "${d4stBrowser}" | cut -d '"' -f4)
 fi
 SOURCE="${BASH_SOURCE[0]}"
@@ -93,7 +93,7 @@ fi
 ACTION=$1
 
 if [ -z $1  ] ; then
-  echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
+  echo "Starting D4ST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
   # echo docker-compose -f ${DOCKER_FILE}  up -d
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
@@ -102,7 +102,7 @@ if [ -z $1  ] ; then
   echo "Docker containers:"
   docker ps
 elif [ "${ACTION}" == "start"  ] ; then
-  echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
+  echo "Starting D4ST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
   # echo docker-compose -f ${DOCKER_FILE}  up -d
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
@@ -110,7 +110,7 @@ elif [ "${ACTION}" == "start"  ] ; then
   echo "Docker containers:"
   docker ps
 elif [ "${ACTION}" == "up"  ] ; then
-  echo "Starting DFST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
+  echo "Starting D4ST Docker containers in the background. Use docker-compose commands or Kitematic to view the status."
   # echo docker-compose -f ${DOCKER_FILE}  up -d
   docker-compose -f ${DOCKER_FILE}  up -d
   R=$?
@@ -118,14 +118,14 @@ elif [ "${ACTION}" == "up"  ] ; then
   echo "Docker containers:"
   docker ps
 elif [ "$1" = "stop" ]; then
-  echo "Stopping DFST Docker containers. The containers can be started with the 'start' command."
+  echo "Stopping D4ST Docker containers. The containers can be started with the 'start' command."
   docker-compose -f ${DOCKER_FILE} stop
   R=$?
   echo ""
   echo "Docker containers:"
   docker ps
 elif [ "$1" = "kill" ]; then
-  echo "Killing the DFST Docker containers. You may need to stop them first."
+  echo "Killing the D4ST Docker containers. You may need to stop them first."
   docker-compose -f ${DOCKER_FILE} kill
   R=$?
   echo ""
@@ -157,18 +157,18 @@ elif [ "$1" = "cleanall" ]; then
   echo "Docker images:"
   docker images
 elif [ "$1" = "down" ]; then
-  echo "Downing the DFST Docker containers."
+  echo "Downing the D4ST Docker containers."
   docker-compose -f ${DOCKER_FILE} down
   R=$?
   echo ""
   echo "Docker containers:"
   docker ps
 elif [ "$1" = "pause" ]; then
-  echo "Pausing the DFST Docker containers. You may need to stop them first."
+  echo "Pausing the D4ST Docker containers. You may need to stop them first."
   docker-compose -f ${DOCKER_FILE} pause
   R=$?
 elif [ "$1" = "unpause" ]; then
-  echo "Unpausing (resuming) the DFST Docker containers if they were previously paused."
+  echo "Unpausing (resuming) the D4ST Docker containers if they were previously paused."
   docker-compose -f ${DOCKER_FILE} unpause
   R=$?
   echo ""
@@ -193,7 +193,7 @@ elif [ "$1" = "gitlab" ]; then
   fi
   exit $?
 elif [ "$1" = "linkmgr" ]; then
-  echo "Open DFST Link Manager Web application in ${d4stBrowser}"
+  echo "Open D4ST Link Manager Web application in ${d4stBrowser}"
   url="http://${HOSTNAME}:${LINKMGR_PORT}"
   if [ "$OSTYPE" = "msys" ]; then
     start ${d4stBrowser} "${url}"
@@ -218,7 +218,7 @@ elif [ "$1" = "getdemo" ]; then
 elif [ "$1" = "make-gitlab-user" ]; then
   if [ -z "${GITLAB_PRIVATE_TOKEN}" ]; then
      echo "Environment variable 'GITLAB_PRIVATE_TOKEN' not set. You must set this"
-     echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
+     echo "variable to the GitLab private token for your GitLab server. See D4ST documentation."
      exit 1;
   fi
   
@@ -253,7 +253,7 @@ elif [ "$1" = "make-gitlab-user" ]; then
 elif [ "$1" = "make-gitlab-project" ]; then
   if [ -z "${GITLAB_PRIVATE_TOKEN}" ]; then
      echo "Environment variable 'GITLAB_PRIVATE_TOKEN' not set. You must set this"
-     echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
+     echo "variable to the GitLab private token for your GitLab server. See D4ST documentation."
      exit 1;
   fi
   project=${PWD##*/}
@@ -303,7 +303,7 @@ elif [ "$1" = "test-gitlab" ]; then
   echo "Testing GitLab connection..."
   if [ -z "${GITLAB_PRIVATE_TOKEN}" ]; then
      echo "Environment variable 'GITLAB_PRIVATE_TOKEN' not set. You must set this"
-     echo "variable to the GitLab private token for your GitLab server. See DFST documentation."
+     echo "variable to the GitLab private token for your GitLab server. See D4ST documentation."
      exit 1;
   fi
   result=$(curl -s --header "PRIVATE-TOKEN: ${GITLAB_PRIVATE_TOKEN}" "http://${HOSTNAME}:${GITLAB_PORT}/api/v3/users?username=root")
@@ -335,7 +335,7 @@ else
   echo " pull - Pull new images"  
   echo " gitlab - Open GitLab Web application"  
   echo " log-gitlab - View the running GitLab server logs"   
-  echo " linkmgr - Open DFST Link Manager Web application"  
+  echo " linkmgr - Open D4ST Link Manager Web application"  
   echo " addhooks - Add the git hooks to the GitLab repositories"
   echo " getdemo {targetDirectory} - Copy the Thunderbird demo git repository to a local directory"
   echo ""

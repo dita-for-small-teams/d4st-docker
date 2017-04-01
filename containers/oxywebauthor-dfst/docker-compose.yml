@@ -1,7 +1,7 @@
 version: "2"
 #
 # Docker-compose file for
-# the DFST Oxygen Web Author (OxWebAuthor) server application
+# the D4ST Oxygen Web Author (OxWebAuthor) server application
 # 
 # Sets up the Web Author application in a Tomcat
 # server.

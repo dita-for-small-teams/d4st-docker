@@ -1,7 +1,7 @@
 version: "2"
 #
 # Docker-compose file for
-# the DFST Caddy Web server used to deliver
+# the D4ST Caddy Web server used to deliver
 # generated deliverables (HTML, PDF, EPUB, etc.)
 # 
 # See e.g., https://hub.docker.com/r/abiosoft/caddy/
