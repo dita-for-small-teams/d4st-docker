@@ -70,7 +70,7 @@ services:
       - OXYWEBAUTHOR_PORT
       
     volumes:
-       - basex-data:/data"
+       - basex-data:/data
        - /Users:/Users
   
     volumes_from:

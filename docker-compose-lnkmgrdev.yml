@@ -30,6 +30,9 @@ version: "2"
 
 volumes:
   git-data:
+  redis:
+  postgress:
+  basex-data:
 
 services:
 
@@ -54,9 +57,7 @@ services:
 # for use by authors via an interactive Web app
 # or other applications via REST API.
 #
-# It gets files from the git server and depends on
-# the DITA Open Toolkit to resolve references to 
-# DTDs or other grammar files.
+     
 #
 # Link Manager server:
 #    
@@ -70,14 +71,14 @@ services:
     environment:
       - USER
       - USERNAME
-      - OXWEBAUTHOR_PORT
-
+      - OXYWEBAUTHOR_PORT
+      
     volumes:
-      - "${HOME}/tmp/basex/data:/data"
+      - basex-data:/data
       - /Users:/Users
       # Use local development versions rather than what's in the container:
-      - ${HOME}/workspace-d4st/d4st-linkmgmt-basex/modules:/repo
-      - ${HOME}/workspace-d4st/d4st-linkmgmt-basex/webapp:/webapp
+      - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/modules:/srv/BaseXRepo
+      - ${HOME}/workspace-dfst/dfst-linkmgmt-basex/webapp:/srv/BaseXWeb
   
     volumes_from:
      - dita-ot
@@ -99,13 +100,13 @@ services:
     command:
     - --loglevel warning
     volumes:
-    - ${HOME}/tmp/gitlab/data/redis:/var/lib/redis:Z
+    - redis:/var/lib/redis:Z
 
   postgresql:
     restart: always
     image: sameersbn/postgresql:9.6-2
     volumes:
-    - ${HOME}/tmp/gitlab/data/postgresql:/var/lib/postgresql:Z
+    - postgress:/var/lib/postgresql:Z
     environment:
     - DB_USER=gitlab
     - DB_PASS=password
