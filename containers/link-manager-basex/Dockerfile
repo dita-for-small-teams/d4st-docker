@@ -5,6 +5,7 @@ MAINTAINER Eliot Kimber "ekimber@contrext.com"
 # ENV PATH $HOME/bin:$PATH
 ENV WEBAPPDIR /srv/BaseXWeb
 ENV REPODIR /srv/BaseXRepo
+ENV BASEX_JVM="-Dorg.basex.CHOP=false -Dorg.basex.CATFILE=/opt/dita-ot/DITA-OT/catalog-dita.xml -Dorg.basex.DTD=true -Dorg.basex.SKIPCORRUPT=true"
 
 USER root
 
@@ -25,17 +26,10 @@ RUN wget -O /tmp/develop.zip https://github.com/dita-for-small-teams/dfst-linkmg
 COPY basex/dot_basex  /srv/.basex 
 RUN chown basex /srv/.basex
 
-ENV JAVA_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,address=9000,suspend=n"
-EXPOSE 9000
-# Get the BaseX Ruby client and add it to the bin/ directory so we have it handy 
-# if we need it (but note that the GitLab container also gets its own copy of this
-# file and stores it with the post-receive git hook there).
-#RUN wget -O ${HOME}/bin/BaseXClient.rb https://github.com/BaseXdb/basex/raw/master/basex-api/src/main/ruby/BaseXClient.rb && \
-#  chmod a+x ${HOME}/bin/*.rb && \
-#  ls -al bin
 
 # ports are defined basex/basexhttp base container.
-
+# Switch to the basex user so the BaseX server will start
+# correctly:
 USER basex
 
 # Specify -d to start in the background:
