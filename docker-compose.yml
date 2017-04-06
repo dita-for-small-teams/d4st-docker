@@ -29,6 +29,8 @@ volumes:
   redis:
   postgress:
   basex-data:
+  dita-ot-data:
+  dita-ot-out:
 
 services:
 
@@ -43,6 +45,9 @@ services:
     extends:
        file: containers/dita-ot/docker-compose.yml  
        service: dita-ot-d4st
+    volumes:
+       - dita-ot-data:/opt/dita-ot/data:Z
+       - dita-ot-out:/opt/dita-ot/out:Z
     volumes_from:
        - web-delivery
  
@@ -70,7 +75,7 @@ services:
       - OXYWEBAUTHOR_PORT
       
     volumes:
-       - basex-data:/data
+       - basex-data:/srv/BaseXData
        - /Users:/Users
   
     volumes_from:
