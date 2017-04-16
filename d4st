@@ -67,6 +67,8 @@ fi
 
 if [ "$OSTYPE" = "msys" ]; then
   d4stBrowser=${D4ST_BROWSER:-chrome}
+elif [[ "$OSTYPE" =~ "linux" ]]; then
+  d4stBrowser=${D4ST_BROWSER:-chrome} 
 else
   # For OS X the browser value is the application bundle name, e.g. "Google Chrome" for Chrome.
   d4stBrowser=${D4ST_BROWSER:-Safari}

@@ -34,11 +34,21 @@ Mako:bash_completion.d ekimber$ d4st
 
 ### Windows git bash shell
 
-TBD
+Not entirely sure how to set this up permanently but if you simply source `bash_ompletion.d/d4st.bash-completion` it should take effect:
+
+```
+$ cd ~/apps/d4st  (Or wherever you installed d4st)
+$ source bash_ompletion.d/d4st.bash-completion
+```
+
+You may need to have the directory containing the d4st script in your PATH.
 
 ### Windows bash (Windows Linux Subsystem)
 
-TBD
+Looks like the current d4st script doesn't currently work under the Windows bash shell. 
+But the installation for 
+the completion script is the same as for Linux.
+
 
 ### Linux
 
@@ -46,7 +56,7 @@ To install the completion file link the `d4st.bash-completion` file to  /etc/bas
 
 ```
 $ cd d4st/bash_completion.d
-$ ln -s $PWD/d4st.bash-completion /etc/bash_completion.d/d4st
+$ sudo ln -s $PWD/d4st.bash-completion /etc/bash_completion.d/d4st
 ```
 
 
