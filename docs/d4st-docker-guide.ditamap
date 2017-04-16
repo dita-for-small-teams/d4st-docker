@@ -68,6 +68,13 @@
             <navtitle>https://brew.sh</navtitle>
           </topicmeta>
         </keydef>
+        <keydef href="http://davidalger.com/development/bash-completion-on-os-x-with-brew/"
+          keys="website-command-completion-macos" format="html" scope="external">
+          <topicmeta>
+            <navtitle>http://davidalger.com/development/bash-completion-on-os-x-with-brew/
+            </navtitle>
+          </topicmeta>
+        </keydef>
       </topicgroup>
       <topicgroup>
         <topicmeta>
@@ -116,6 +123,7 @@
   <chapter keys="getting-started" href="d4st-docker-guide/getting-started/getting-started.dita">
     <topicref href="d4st-docker-guide/getting-started/d4st-container-quick-start-01.dita"
       keys="d4st-container-quick-start"/>
+    <topicref href="d4st-docker-guide/getting-started/setup-command-completion.xml"/>
   </chapter>
   <chapter href="d4st-docker-guide/extending/extending_the_d4st_docker_system.dita"
     keys="extending-d4st-system">

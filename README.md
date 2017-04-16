@@ -34,11 +34,11 @@ Mako:bash_completion.d ekimber$ d4st
 
 ### Windows git bash shell
 
-Not entirely sure how to set this up permanently but if you simply source `bash_ompletion.d/d4st.bash-completion` it should take effect:
+Not entirely sure how to set this up permanently but if you simply source `bash_completion.d/d4st.bash-completion` it should take effect:
 
 ```
 $ cd ~/apps/d4st  (Or wherever you installed d4st)
-$ source bash_ompletion.d/d4st.bash-completion
+$ source bash_completion.d/d4st.bash-completion
 ```
 
 You may need to have the directory containing the d4st script in your PATH.
