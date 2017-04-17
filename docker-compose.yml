@@ -31,6 +31,7 @@ volumes:
   basex-data:
   dita-ot-data:
   dita-ot-out:
+  gitlabrunner-config:
 
 services:
 
@@ -151,8 +152,9 @@ services:
       - GITLAB_HTTPS=false
       - SSL_SELF_SIGNED=false
   
-      - GITLAB_HOST=localhost
-      - GITLAB_PORT=${GITLAB_PORT}
+      - GITLAB_HOST=gitlab-d4st
+      # Using 80 instead of ${GITLAB_PORT} so within-docker connections will work.
+      - GITLAB_PORT=80
       - GITLAB_SSH_PORT=${GITLAB_SSH_PORT}
       - GITLAB_RELATIVE_URL_ROOT=
   
@@ -255,13 +257,15 @@ services:
 # Define the GitLab runner
 # that will be used to run build jobs;
 #      
-#  gitlab-runner:
-#    image: gitlab/gitlab-runner:latest
-#    container_name: gitlab-runner
-#    restart: always
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - ${HOME}/tmp/gitlab-runner/config:/etc/gitlab-runner
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    restart: always
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - gitlabrunner-config:/etc/gitlab-runner
+    volumes_from:
+     - dita-ot
 
 #
 # Web server for HTML delivery
