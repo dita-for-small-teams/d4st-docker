@@ -292,8 +292,14 @@ elif [ "$1" = "make-gitlab-project" ]; then
         echo "Failed to initialize git repository"
         exit 1;
      fi
+     remotes=$(git remote | grep origin)
+     remote="origin"
+     if [[ $remotes =~ "origin" ]]; then 
+        remote="gitlab"
+     fi
+     echo "*** remote=\"${remote}\""
      #  http://localhost/ekimber/project04.git
-     result=$(git remote add origin "http://${HOSTNAME}:${GITLAB_PORT}/${username}/${project}.git")
+     result=$(git remote add ${remote} "http://${HOSTNAME}:${GITLAB_PORT}/${username}/${project}.git")
      exit $result;
   else 
      echo "Failure: Doesn't look like the GitLab connection worked but the failure is not an expected one."
