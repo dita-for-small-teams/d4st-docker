@@ -6,7 +6,7 @@
     quickly as possible. </shortdesc>
     <taskbody>
     <prereq>
-      <p>These instructions reflect the use of Docker for Windows or Docker for Mac, which both
+      <p>These instructions reflect the use of Docker for Windows or Docker for Mac, both of which
         provide tight integration of Docker with the operating system. The instructions should be
         the same for Docker on Linux.</p>
       <p>The D4ST system uses git to manage your source code. You must have a git client installed
@@ -24,7 +24,8 @@
         a Git for Windows shell (both provide a Linux-style command environment).</p>
       <note>Under Windows you will need to use the Docker settings to share your
           <filepath>C</filepath> drive, which is not shared by default. Container startup will fail
-        with a message indicating that you need to do this if you forget.</note>
+        with a message indicating that you need to do this if you forget. Newer versions of Docker
+        for Windows may prompt you to share the C drive when you start containers.</note>
       <p platform="mac">Under macOS you can use a normal terminal window.</p>
       <note platform="windows">The Microsoft Edge browser's security settings may not allow you to
         connect to the Web applications running in the Docker containers. These instructions assume
@@ -144,13 +145,13 @@ f15cb9d8c17a        sameersbn/redis:latest        "/sbin/entrypoint.sh"    4 min
           <p>The <varname>$PWD</varname> environment variable expands to the current directory, so
             the <filepath>d4st</filepath> directory should now be in your PATH environment
             variable.</p>
-          <p>The make this setting permanent you can modify your <filepath>.bash_profile</filepath>
+          <p>To make this setting permanent you can modify your <filepath>.bash_profile</filepath>
             (OSX) or <filepath>.bashrc</filepath> (Windows, Linux) file in your home directory to
             add the <filepath>d4st</filepath> directory to the PATH,
             e.g.:<codeblock># ~/.bash_profile
 export PATH="$PATH:/Users/ekimber/apps/d4st"</codeblock></p>
           <p>or, for Windows:<codeblock># ~/.bashrc
-export PATH=$PATH:"c:/apps/d4st"</codeblock></p>
+export PATH=$PATH:"/c/apps/d4st"</codeblock></p>
         </info>
         <stepresult>
           <p>You should be able to run the <cmdname>d4st</cmdname> command from any directory. You
@@ -202,8 +203,10 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
         <stepresult>You should be logged into GitLab as user "root".</stepresult>
       </step>
       <step>
-        <cmd>Select "Profile Settings" in the left-hand navigation panel and then select "Account"
-          to get to the account details for user "root".</cmd>
+        <cmd>Select "Settings" in the drop-down menu under your user avatar in the upper-right
+          corner (the avatar will be a generated pattern).  From the list of options along the top
+          of the User Settings page, select "Account" to get to the account details for user
+          "root".</cmd>
         <stepresult>
           <p>You should see a field labeled "Private token" at the top of the page containing a
             value like "zdPgyhv6rnZfDsqHxqKZ".</p>
@@ -218,10 +221,10 @@ $ /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/ekimber/apps/dita-for-smal
         <info>Before:<codeblock>GITLAB_PORT=90
 WEBDELIVERY_PORT=80
 LINKMGR_PORT=8984
-#GITLAB_PRIVATE_TOKEN=YourPrivateToken</codeblock><p>After:<codeblock>GITLAB_PORT=90
+<b>GITLAB_PRIVATE_TOKEN=YourPrivateToken</b></codeblock><p>After:<codeblock>GITLAB_PORT=90
 WEBDELIVERY_PORT=80
 LINKMGR_PORT=8984
-GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ</codeblock></p></info>
+<b>GITLAB_PRIVATE_TOKEN=zdPgyhv6rnZfDsqHxqKZ</b></codeblock></p></info>
       </step>
       <step>
         <cmd>Verify that you have set the private token correctly by using the command <codeph>d4st
@@ -286,12 +289,15 @@ User_Guide-reuse-only_jp.ditamap      master_control.ditamap</codeblock>
 $ d4st make-gitlab-project
 Creating GitLab project "Thunderbird" for user ekimber...
 Success: Project "Thunderbird" created.
+*** remote="origin"
 $</codeblock>
         </info>
         <stepresult>
           <p>A GitLab project for the current user and with the same name as the current directory
             has been created. The command also automatically sets the new GitLab repository as the
-            remote repository named "origin".</p>
+            remote repository named "origin". If the directory you're creating the project for
+            already has an associated remote named "origin" it will use the name "gitlab" for the
+            GitLab remote.</p>
           <p>Verify this by using the <codeph>git remote -v</codeph> command to see that the remote
             repository has been hooked
             up:<codeblock>$ git remote -v
@@ -304,7 +310,10 @@ $</codeblock></p>
       </step>
       <step>
         <cmd>Push the contents of the Thunderbird repository to the GitLab project using the command
-              <codeph><cmdname>git push</cmdname> -u origin master</codeph>:</cmd>
+              <codeph><cmdname>git push</cmdname> -u origin master</codeph>. The git command will
+          ask you for your gitlab user ID and password if you haven't done this before. (Git has
+          different options for storing credentials so after you've done this once it should
+          remember your user ID and password.)</cmd>
         <info>
           <codeblock>$ git push -u origin master
 Counting objects: 132, done.
@@ -355,7 +364,7 @@ $ </codeblock>
       <step>
         <cmd>Click on the "Update Link Management Indexes" link near the top of the page.</cmd>
         <stepresult>
-          <p>A new tab will open with the text "Updating link management indexes". After a some time
+          <p>A new tab will open with the text "Updating link management indexes". After some time
             (should not be more than a minute on a reasonably-fast machine) the message will be
             replaced with the text "Link management database updated".</p>
         </stepresult>
@@ -369,12 +378,43 @@ $ </codeblock>
           <p>At this point you can explore the Link Manager application.</p>
         </stepresult>
       </step>
+    <stepsection>
+    <p>You now have a sample DITA-based documentation source repository, the Thunderbird
+          project, set up and connected to the D4ST link manager. You can experiment with modifying
+          the source files and committing new versions to GitLab or creating new branches and seeing
+          how those updates and new branches are reflected in the D4ST Link Manager.</p>
+        <p>The D4ST Docker setup includes a local oXygenXML Web Author server that integrates with
+          GitLab. The D4ST Link Manager includes "edit" links from each file to oXygenXML Web
+          Author, providing built-in editing support out of the box. Note that the license for
+          oXygenXML Web Author is a demo license and should not be used for production work. Context
+          Syncro Soft to acquire a Web Author license.</p>
+      </stepsection>
+      <step>
+        <cmd>To test editing with oXygenXML Web Author go to the D4ST Link Manager, navigate to page
+          for a repository and branch (you should already be there if you haven't done anything
+          after the previous step), and click the "edit" link next to any file.</cmd>
+        <stepresult>The oXygenXML Web Author page will open and attempt to open the file you
+          selected from the GitLab repository.<p>The first time you do this you will need to create
+            an oXygenXML Web Author administrative user, e.g. "admin" with a password of "admin".
+            Because this server is running locally there's no need for greater security.</p><p>Once
+            you create the admin user it will attempt to open an editor for the file you selected.
+            The first time you do this you'll need to provide your GitLab user name and password
+            (your personal one, not the GitLib root user).</p></stepresult>
+      </step>
+      <step>
+        <cmd>Make a change to the title of the map or topic and click on the git icon (<image
+            keyref="icon-oxygen-git-01" id="image_rwf_xvw_jbb">
+      <alt>Oxygen Web Author commit to git icon</alt>
+          </image>) to commit your changes to GitLab.</cmd>
+        <stepresult>
+          <p>Your changes should be committed to GitLab.</p>
+      <p>If you refresh the Link Manager view for the branch you just committed to it should
+            reflect the change you committed. You can also preview the file to verify that the
+            changes are there.</p>
+        </stepresult>
+      </step>
     </steps>
     <result id="result_t1g_htq_ww">
-      <p>You now have a sample DITA-based documentation source repository, the Thunderbird project,
-        set up and connected to the D4ST link manager. You can experiment with modifying the source
-        files and committing new versions to GitLab or creating new branches and seeing how those
-        updates and new branches are reflected in the D4ST Link Manager.</p>
       <p>Having followed this process you should be able to quickly add your own documents' git
         repositories to the D4ST GitLab server in order to take advantage of the D4ST Link
         Manager.</p>

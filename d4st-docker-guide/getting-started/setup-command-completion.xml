@@ -40,7 +40,7 @@ Mako:bash_completion.d ekimber$ d4st</codeblock></p>
   <concept id="concept_hrh_3vc_pz">
     <title>Command Completion Setup: Windows git bash shell</title>
     <conbody>
-      <p>Not entirely what the best way to this up permanently is, one solution is to create or
+      <p>Not entirely sure what the best way to this up permanently is. One solution is to create or
         update your <filepath>~/.bash_profile</filepath> to source the
           <filepath>d4st.bash-completion</filepath> file so that your
           <filepath>~/.bash_profile</filepath> looks like
