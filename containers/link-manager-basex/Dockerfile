@@ -27,7 +27,7 @@ COPY basex/dot_basex  /srv/.basex
 RUN chown basex /srv/.basex
 
 
-# ports are defined basex/basexhttp base container.
+# ports are defined in the basex/basexhttp base container.
 # Switch to the basex user so the BaseX server will start
 # correctly:
 USER basex

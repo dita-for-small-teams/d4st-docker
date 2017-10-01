@@ -106,6 +106,12 @@
             <navtitle>GitLab gear icon</navtitle>
           </topicmeta>
         </keydef>
+        <keydef href="d4st-docker-guide/getting-started/media/oxygen-git-icon-01.png"
+          keys="icon-oxygen-git-01" format="png">
+          <topicmeta>
+            <navtitle>GitLab gear icon</navtitle>
+          </topicmeta>
+        </keydef>
       </topicgroup>
       <keydef href="d4st-docker-guide/getting-started/media/gitlab-web-change-username-01.png"
         keys="screenshot-gitlab-change-username-01" format="png">
